@@ -1,0 +1,44 @@
+{
+	"schemaVersion": 1,
+	"id": "${modId}",
+	"version": "${version}",
+	"name": "${modName}",
+	"description": "${modDescription}",
+	"authors": [
+		"${authors}"
+	],
+	"contributors": [
+		"${contributors}"
+	],
+	"contact": {
+		"homepage": "${homepage}",
+		"issues": "${issues}",
+		"sources": "${sources}"
+	},
+	"license": "${license}",
+	"icon": "assets/${modId}/icon.png",
+	"depends": {
+		"minecraft": ">=${mc}",
+		"fabric-api": ">=${fapi}"
+	},
+	"suggests": {
+	},
+	"entrypoints": {
+		"main": [
+			"dev.dannytaylor.dtaf2026.common.Main"
+		],
+		"client": [
+			"dev.dannytaylor.dtaf2026.client.ClientMain"
+		],
+		"modmenu": [
+			"dev.dannytaylor.dtaf2026.client.modmenu.ModMenu"
+		]
+	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"dannytaylor.donate": "https://dannytaylor.dev/donate"
+			}
+		}
+	}
+}
