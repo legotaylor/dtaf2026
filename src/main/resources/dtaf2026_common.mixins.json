@@ -3,6 +3,7 @@
 	"package": "dev.dannytaylor.dtaf2026.common.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
+		"entity.PlayerEntityMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

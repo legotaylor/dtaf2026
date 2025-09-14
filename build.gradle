@@ -41,10 +41,8 @@ dependencies {
 	modImplementation libs.fl
 	modImplementation libs.fapi
 	modImplementation libs.modmenu
-	modImplementation libs.sodium
 	modImplementation libs.kaleido
 	include libs.kaleido
-	modCompileOnly libs.iris
 }
 
 processResources {
