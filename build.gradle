@@ -9,6 +9,15 @@ plugins {
 version = "$modVersion+$branchName"
 base.archivesName = project.slug
 
+loom {
+	mods {
+		"${modId}" {
+			sourceSet("main")
+		}
+	}
+	accessWidenerPath = file("src/main/resources/${modId}.accesswidener")
+}
+
 repositories {
 	maven { url 'https://maven.terraformersmc.com/releases/' }
 	exclusiveContent {

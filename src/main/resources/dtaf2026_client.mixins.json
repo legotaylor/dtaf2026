@@ -1,0 +1,12 @@
+{
+	"required": true,
+	"package": "dev.dannytaylor.dtaf2026.client.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"client": [
+		"gui.LogoDrawerMixin",
+		"gui.SplashTextRendererMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

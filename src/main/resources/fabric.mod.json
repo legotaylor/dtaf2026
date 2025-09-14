@@ -28,10 +28,10 @@
 			"dev.dannytaylor.dtaf2026.common.Main"
 		],
 		"client": [
-			"dev.dannytaylor.dtaf2026.client.ClientMain"
+			"dev.dannytaylor.${modId}.client.ClientMain"
 		],
 		"modmenu": [
-			"dev.dannytaylor.dtaf2026.client.modmenu.ModMenu"
+			"dev.dannytaylor.${modId}.client.modmenu.ModMenu"
 		]
 	},
 	"custom": {
@@ -40,5 +40,10 @@
 				"dannytaylor.donate": "https://dannytaylor.dev/donate"
 			}
 		}
-	}
+	},
+	"mixins": [
+		"${modId}_client.mixins.json",
+		"${modId}_common.mixins.json"
+	],
+	"accessWidener" : "${modId}.accesswidener"
 }
