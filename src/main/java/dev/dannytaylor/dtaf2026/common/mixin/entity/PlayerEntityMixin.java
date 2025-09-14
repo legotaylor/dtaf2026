@@ -7,7 +7,10 @@
 
 package dev.dannytaylor.dtaf2026.common.mixin.entity;
 
+import net.minecraft.block.BedBlock;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,29 +18,48 @@ import net.minecraft.network.packet.s2c.play.PositionFlag;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.*;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.EndPlatformFeature;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Set;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
+	@Shadow
+	public abstract void tick();
+
+	@Shadow
+	private int sleepTimer;
+
 	protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
 		super(entityType, world);
 	}
 
-	@Override
-	public void sleep(BlockPos pos) {
-		if (this.hasVehicle()) this.stopRiding();
-		this.setVelocity(Vec3d.ZERO);
-		this.velocityDirty = true;
-		this.teleportTo(createTeleportTarget(World.END, (PlayerEntity) (Object) this));
+	@Inject(method = "tick", at = @At("RETURN"))
+	private void dtaf2026$tick(CallbackInfo ci) {
+		if (this.isSleeping() && this.sleepTimer >= 100) {
+			// Reset block before teleporting.
+			this.getSleepingPosition().filter((blockPos) -> {
+				ChunkPos chunkPos = this.getWorld().getChunk(blockPos).getPos();
+				return this.getWorld().isChunkLoaded(chunkPos.x, chunkPos.z);
+			}).ifPresent((blockPos) -> {
+				BlockState blockState = this.getWorld().getBlockState(blockPos);
+				if (blockState.getBlock() instanceof BedBlock) this.getWorld().setBlockState(blockPos, blockState.with(BedBlock.OCCUPIED, false), 3);
+			});
+			this.setPose(EntityPose.STANDING);
+			this.clearSleepingPosition();
+
+			// Teleport to dimension once fully asleep.
+			this.teleportTo(createTeleportTarget(World.END, (PlayerEntity) (Object) this));
+		}
 	}
 
 	@Unique
