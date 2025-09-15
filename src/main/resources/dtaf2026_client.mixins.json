@@ -3,8 +3,17 @@
 	"package": "dev.dannytaylor.dtaf2026.client.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
+		"dimension.DimensionEffectsMixin",
+		"dimension.SkyRenderingMixin",
+		"dimension.WorldRendererMixin",
+		"gui.AccessibilityOnboardingScreenMixin",
+		"gui.ClientPlayNetworkHandlerMixin",
+		"gui.DownloadingTerrainScreenMixin",
+		"gui.DownloadingTerrainScreenMixin$WorldEntryReasonMixin",
+		"gui.IntegratedServerLoaderMixin",
 		"gui.LogoDrawerMixin",
-		"gui.SplashTextRendererMixin"
+		"gui.SplashTextRendererMixin",
+		"gui.TitleScreenMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

@@ -1,1 +1,2 @@
 accessWidener v2 named
+accessible method net/minecraft/client/render/SkyRendering renderMoon (IFLnet/minecraft/client/render/VertexConsumerProvider;Lnet/minecraft/client/util/math/MatrixStack;)V

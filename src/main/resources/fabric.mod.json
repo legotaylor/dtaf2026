@@ -25,13 +25,13 @@
 	},
 	"entrypoints": {
 		"main": [
-			"dev.dannytaylor.dtaf2026.common.Main"
+			"dev.dannytaylor.${modId}.common.Main"
 		],
 		"client": [
 			"dev.dannytaylor.${modId}.client.ClientMain"
 		],
 		"modmenu": [
-			"dev.dannytaylor.${modId}.client.modmenu.ModMenu"
+			"dev.dannytaylor.${modId}.client.compatibility.ModMenu"
 		]
 	},
 	"custom": {
@@ -43,7 +43,8 @@
 	},
 	"mixins": [
 		"${modId}_client.mixins.json",
-		"${modId}_common.mixins.json"
+		"${modId}_common.mixins.json",
+		"${modId}_iris.mixins.json"
 	],
 	"accessWidener" : "${modId}.accesswidener"
 }

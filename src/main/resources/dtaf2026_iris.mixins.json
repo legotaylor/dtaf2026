@@ -1,0 +1,14 @@
+{
+    "required": true,
+    "package": "dev.dannytaylor.dtaf2026.iris.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "plugin": "dev.dannytaylor.dtaf2026.iris.IrisMixinPlugin",
+    "client": [
+        "ProgramIdMixin",
+        "ShaderKeyMixin",
+        "IrisPipelinesAccessor"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

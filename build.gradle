@@ -43,6 +43,7 @@ dependencies {
 	modImplementation libs.modmenu
 	modImplementation libs.kaleido
 	include libs.kaleido
+	modCompileOnly libs.iris
 }
 
 processResources {

@@ -5,7 +5,7 @@
     Licence: GNU LGPLv3
 */
 
-package dev.dannytaylor.dtaf2026.client.modmenu;
+package dev.dannytaylor.dtaf2026.client.compatibility;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;

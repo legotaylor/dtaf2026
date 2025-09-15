@@ -1,3 +1,18 @@
 {
-	"dannytaylor.donate": "Donate"
+	"dannytaylor.donate": "Donate",
+
+	"dtaf2026.flashing_lights": "CAUTION: Flashing Lights",
+	"dtaf2026.flashing_lights.description": "This mod contains flashing lights and may not be suitable for players with photosensitive medical conditions.\n\nIf you experience lightheadedness, altered vision, twitching, involuntary movements, disorientation, confusion, or temporary loss of awareness, please stop playing immediately and seek medical advice.",
+
+	"itemGroup.dtaf2026": "Somnium Reale",
+
+	"item.dtaf2026.maple_bark": "Maple Bark",
+
+	"block.dtaf2026.maple_log": "Maple Log",
+	"block.dtaf2026.stripped_maple_log": "Stripped Maple Log",
+	"block.dtaf2026.twice_stripped_maple_log": "Twice Stripped Maple Log",
+
+	"block.dtaf2026.maple_wood": "Maple Wood",
+	"block.dtaf2026.stripped_maple_wood": "Stripped Maple Wood",
+	"block.dtaf2026.twice_stripped_maple_wood": "Twice Stripped Maple Wood"
 }

@@ -7,12 +7,17 @@
 
 package dev.dannytaylor.dtaf2026.common.mixin.entity;
 
+import dev.dannytaylor.dtaf2026.common.data.Data;
+import dev.dannytaylor.dtaf2026.common.registry.DimensionRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.TagRegistry;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -35,6 +40,7 @@ import java.util.Optional;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
+	@Unique private static final EntityAttributeModifier somniumRealeModifier;
 	@Unique private static final TrackedData<Optional<BlockPos>> lastBedPos;
 
 	protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
@@ -54,45 +60,63 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 	@Inject(method = "tick", at = @At("RETURN"))
 	private void dtaf2026$tick(CallbackInfo ci) {
 		RegistryKey<World> currentWorld = this.getWorld().getRegistryKey();
-		if (currentWorld.equals(World.OVERWORLD) || currentWorld.equals(World.NETHER)) {
+		TeleportTarget teleportTarget = null;
+		if (currentWorld.equals(World.OVERWORLD)) {
+			teleportTarget = createTeleportTarget(DimensionRegistry.somniumReale.world(), false);
+		} else if (currentWorld.equals(DimensionRegistry.somniumReale.world())) {
+			teleportTarget = createTeleportTarget(World.OVERWORLD, true);
+		}
+		if (teleportTarget != null) {
 			if (this.isSleeping() && this.sleepTimer >= 100) {
-				// Reset block before teleporting.
-				this.getSleepingPosition().filter((blockPos) -> {
-					ChunkPos chunkPos = this.getWorld().getChunk(blockPos).getPos();
-					return this.getWorld().isChunkLoaded(chunkPos.x, chunkPos.z);
-				}).ifPresent((blockPos) -> {
-					BlockState blockState = this.getWorld().getBlockState(blockPos);
-					if (blockState.getBlock() instanceof BedBlock) this.getWorld().setBlockState(blockPos, blockState.with(BedBlock.OCCUPIED, false), 3);
-				});
-				this.setPose(EntityPose.STANDING);
-				this.clearSleepingPosition();
-				// Teleport to dimension once fully asleep.
-				if (currentWorld.equals(World.OVERWORLD)) {
-					this.dataTracker.set(lastBedPos, Optional.of(this.getBlockPos()));
-					//TODO replace with our custom one when its added.
-					this.teleportTo(createTeleportTarget(World.NETHER, this, false));
-				} else if (currentWorld.equals(World.NETHER)) {
-					this.teleportTo(createTeleportTarget(World.OVERWORLD, this, true));
+				if (currentWorld.equals(World.OVERWORLD) || currentWorld.equals(DimensionRegistry.somniumReale.world())) {
+					// Reset block before teleporting.
+					this.getSleepingPosition().filter((blockPos) -> {
+						ChunkPos chunkPos = this.getWorld().getChunk(blockPos).getPos();
+						return this.getWorld().isChunkLoaded(chunkPos.x, chunkPos.z);
+					}).ifPresent((blockPos) -> {
+						BlockState blockState = this.getWorld().getBlockState(blockPos);
+						if (blockState.getBlock() instanceof BedBlock) this.getWorld().setBlockState(blockPos, blockState.with(BedBlock.OCCUPIED, false), 3);
+					});
+					this.setPose(EntityPose.STANDING);
+					this.clearSleepingPosition();
+					// Teleport to dimension once fully asleep.
+					if (currentWorld.equals(World.OVERWORLD)) setLastBedPos(this.getBlockPos());
+					this.teleportTo(teleportTarget);
+				}
+			} else {
+				if (!this.isSleeping() && !currentWorld.equals(DimensionRegistry.somniumReale.world())) clearLastBedPos();
+			}
+		}
+		this.updateSomniumReale();
+	}
+
+	@Unique
+	private void setLastBedPos(BlockPos blockPos) {
+		this.dataTracker.set(lastBedPos, Optional.of(blockPos));
+	}
+
+	@Unique
+	private void clearLastBedPos() {
+		this.dataTracker.set(lastBedPos, Optional.empty());
+	}
+
+	@Inject(method = "applyDamage", at = @At("HEAD"), cancellable = true)
+	protected void dtaf2026$applyDamage(ServerWorld world, DamageSource source, float amount, CallbackInfo ci) {
+		TeleportTarget teleportTarget = createTeleportTarget(World.OVERWORLD, true);
+		if (teleportTarget != null) {
+			if (world.getRegistryKey() == DimensionRegistry.somniumReale.world()) {
+				if (this.getHealth() - amount < 1.0F) {
+					this.setVelocity(Vec3d.ZERO);
+					this.teleportTo(teleportTarget);
+					this.setHealth(1.0F);
+					ci.cancel();
 				}
 			}
 		}
 	}
 
-	@Inject(method = "applyDamage", at = @At("HEAD"), cancellable = true)
-	protected void dtaf2026$applyDamage(ServerWorld world, DamageSource source, float amount, CallbackInfo ci) {
-		//TODO replace with our custom one when its added.
-		if (world.getRegistryKey() == World.NETHER) {
-			if (this.getHealth() - amount < 1.0F) {
-				this.setVelocity(Vec3d.ZERO);
-				this.teleportTo(createTeleportTarget(World.OVERWORLD, this, true));
-				this.setHealth(1.0F);
-				ci.cancel();
-			}
-		}
-	}
-
 	@Unique
-	private TeleportTarget createTeleportTarget(RegistryKey<World> registryKey, Entity entity, boolean toRespawnPos) {
+	private TeleportTarget createTeleportTarget(RegistryKey<World> registryKey, boolean toRespawnPos) {
 		if (!this.getWorld().isClient && this.getServer() != null) {
 			ServerWorld serverWorld = this.getServer().getWorld(registryKey);
 			if (serverWorld != null) {
@@ -100,7 +124,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 				if (toRespawnPos) {
 					Optional<BlockPos> lastBedPos = this.dataTracker.get(PlayerEntityMixin.lastBedPos);
 					if (lastBedPos.isPresent()) {
-						Optional<Vec3d> wakeUpPos = BedBlock.findWakeUpPosition(entity.getType(), serverWorld, lastBedPos.get(), serverWorld.getBlockState(lastBedPos.get()).get(BedBlock.FACING), serverWorld.getSpawnAngle());
+						Optional<Vec3d> wakeUpPos = BedBlock.findWakeUpPosition(this.getType(), serverWorld, lastBedPos.get(), serverWorld.getBlockState(lastBedPos.get()).get(BedBlock.FACING), serverWorld.getSpawnAngle());
 						if (wakeUpPos.isPresent()) {
 							blockPos = BlockPos.ofFloored(wakeUpPos.get());
 						}
@@ -112,7 +136,17 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 		return null;
 	}
 
+	@Unique
+	private void updateSomniumReale() {
+		EntityAttributeInstance entityAttributeInstance = this.getAttributeInstance(EntityAttributes.SCALE);
+		if (entityAttributeInstance != null) {
+			entityAttributeInstance.removeModifier(somniumRealeModifier.id());
+			if (this.getWorld().getBiome(this.getBlockPos()).isIn(TagRegistry.WorldGen.Biome.somnium_reale)) entityAttributeInstance.addTemporaryModifier(somniumRealeModifier);
+		}
+	}
+
 	static {
+		somniumRealeModifier = new EntityAttributeModifier(Data.idOf("somnium_reale"), -0.35F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 		lastBedPos = DataTracker.registerData(PlayerEntityMixin.class, TrackedDataHandlerRegistry.OPTIONAL_BLOCK_POS);
 	}
 }

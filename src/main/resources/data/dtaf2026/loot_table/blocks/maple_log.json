@@ -1,0 +1,328 @@
+{
+	"type": "minecraft:block",
+	"pools": [
+
+		{
+			"name": "player_break",
+			"rolls": 1.0,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "dtaf2026:maple_log"
+				}
+			],
+			"conditions": [
+				{
+					"condition": "minecraft:entity_properties",
+					"entity": "this",
+					"predicate": {
+						"type": "minecraft:player"
+					}
+				},
+				{
+					"condition": "minecraft:block_state_property",
+					"block": "dtaf2026:maple_log",
+					"properties": {
+						"dtaf2026_variant": "0"
+					}
+				},
+				{
+					"condition": "minecraft:match_tool",
+					"predicate": {
+						"predicates": {
+							"minecraft:enchantments": [
+								{
+									"enchantments": "minecraft:silk_touch",
+									"levels": {
+										"min": 1
+									}
+								}
+							]
+						}
+					}
+				},
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
+		},
+		{
+			"name": "player_break_1",
+			"rolls": 1.0,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "dtaf2026:stripped_maple_log"
+				}
+			],
+			"conditions": [
+				{
+					"condition": "minecraft:entity_properties",
+					"entity": "this",
+					"predicate": {
+						"type": "minecraft:player"
+					}
+				},
+				{
+					"condition": "minecraft:match_tool",
+					"predicate": {
+						"predicates": {
+							"minecraft:enchantments": [
+								{
+									"enchantments": "minecraft:silk_touch",
+									"levels": {
+										"min": 1
+									}
+								}
+							]
+						}
+					}
+				},
+				{
+					"condition": "minecraft:block_state_property",
+					"block": "dtaf2026:maple_log",
+					"properties": {
+						"dtaf2026_variant": "1"
+					}
+				},
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
+		},
+		{
+			"name": "player_break_2",
+			"rolls": 1.0,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "dtaf2026:twice_stripped_maple_log"
+				}
+			],
+			"conditions": [
+				{
+					"condition": "minecraft:entity_properties",
+					"entity": "this",
+					"predicate": {
+						"type": "minecraft:player"
+					}
+				},
+				{
+					"condition": "minecraft:block_state_property",
+					"block": "dtaf2026:maple_log",
+					"properties": {
+						"dtaf2026_variant": "2"
+					}
+				},
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
+		},
+		{
+			"name": "player_break_bark",
+			"rolls": 1.0,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"functions": [
+						{
+							"add": false,
+							"count": {
+								"type": "minecraft:uniform",
+								"max": 4.0,
+								"min": 1.0
+							},
+							"function": "minecraft:set_count"
+						},
+						{
+							"enchantment": "minecraft:fortune",
+							"formula": "minecraft:uniform_bonus_count",
+							"function": "minecraft:apply_bonus",
+							"parameters": {
+								"bonusMultiplier": 1
+							}
+						},
+						{
+							"function": "minecraft:limit_count",
+							"limit": {
+								"max": 16.0
+							}
+						},
+						{
+							"function": "minecraft:explosion_decay"
+						}
+					],
+					"name": "dtaf2026:maple_bark"
+				}
+			],
+			"conditions": [
+				{
+					"condition": "minecraft:block_state_property",
+					"block": "dtaf2026:maple_log",
+					"properties": {
+						"dtaf2026_variant": "0",
+						"dtaf2026_natural": "true"
+					}
+				},
+				{
+					"condition": "minecraft:entity_properties",
+					"entity": "this",
+					"predicate": {
+						"type": "minecraft:player"
+					}
+				}
+			]
+		},
+		{
+			"name": "player_break_stick",
+			"rolls": 1.0,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "minecraft:stick",
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"type": "minecraft:uniform",
+								"min": 1.0,
+								"max": 3.0
+							}
+						},
+						{
+							"function": "minecraft:apply_bonus",
+							"enchantment": "minecraft:fortune",
+							"formula": "minecraft:uniform_bonus_count",
+							"parameters": {
+								"bonusMultiplier": 1
+							}
+						},
+						{
+							"function": "minecraft:limit_count",
+							"limit": {
+								"max": 9.0
+							}
+						},
+						{
+							"function": "minecraft:explosion_decay"
+						}
+					]
+				}
+			],
+			"conditions": [
+				{
+					"condition": "minecraft:entity_properties",
+					"entity": "this",
+					"predicate": {
+						"type": "minecraft:player"
+					}
+				},
+				{
+					"condition": "minecraft:block_state_property",
+					"block": "dtaf2026:maple_log",
+					"properties": {
+						"dtaf2026_natural": "true"
+					}
+				}
+			]
+		},
+		{
+			"name": "non_player_break",
+			"rolls": 1.0,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "dtaf2026:maple_log"
+				}
+			],
+			"conditions": [
+				{
+					"condition": "minecraft:block_state_property",
+					"block": "dtaf2026:maple_log",
+					"properties": {
+						"dtaf2026_variant": "0"
+					}
+				},
+				{
+					"condition": "minecraft:inverted",
+					"term": {
+						"condition": "minecraft:entity_properties",
+						"entity": "this",
+						"predicate": {
+							"type": "minecraft:player"
+						}
+					}
+				},
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
+		},
+		{
+			"name": "non_player_break_1",
+			"rolls": 1.0,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "dtaf2026:stripped_maple_log"
+				}
+			],
+			"conditions": [
+				{
+					"condition": "minecraft:block_state_property",
+					"block": "dtaf2026:maple_log",
+					"properties": {
+						"dtaf2026_variant": "1"
+					}
+				},
+				{
+					"condition": "minecraft:inverted",
+					"term": {
+						"condition": "minecraft:entity_properties",
+						"entity": "this",
+						"predicate": {
+							"type": "minecraft:player"
+						}
+					}
+				},
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
+		},
+		{
+			"name": "non_player_break_2",
+			"rolls": 1.0,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "dtaf2026:twice_stripped_maple_log"
+				}
+			],
+			"conditions": [
+				{
+					"condition": "minecraft:block_state_property",
+					"block": "dtaf2026:maple_log",
+					"properties": {
+						"dtaf2026_variant": "2"
+					}
+				},
+				{
+					"condition": "minecraft:inverted",
+					"term": {
+						"condition": "minecraft:entity_properties",
+						"entity": "this",
+						"predicate": {
+							"type": "minecraft:player"
+						}
+					}
+				},
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			]
+		}
+	],
+	"random_sequence": "dtaf2026:blocks/maple_log"
+}

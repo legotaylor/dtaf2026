@@ -7,9 +7,11 @@
 
 package dev.dannytaylor.dtaf2026.common;
 
+import dev.dannytaylor.dtaf2026.common.registry.Registry;
 import net.fabricmc.api.ModInitializer;
 
 public class Main implements ModInitializer {
 	public void onInitialize() {
+		Registry.bootstrap();
 	}
 }

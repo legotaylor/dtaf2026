@@ -1,0 +1,24 @@
+{
+	"type": "dtaf2026:somnium_reale",
+	"generator": {
+		"type": "minecraft:noise",
+		"biome_source": {
+			"biomes": [
+				{
+					"biome": "minecraft:plains",
+					"parameters": {
+						"temperature": 0,
+						"humidity": 0,
+						"continentalness": 0,
+						"erosion": 0,
+						"weirdness": 0,
+						"depth": 0,
+						"offset": 0
+					}
+				}
+			],
+			"type": "minecraft:multi_noise"
+		},
+		"settings": "minecraft:overworld"
+	}
+}

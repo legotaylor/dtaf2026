@@ -1,0 +1,40 @@
+{
+	"variants": {
+		"axis=x,dtaf2026_variant=0": {
+			"model": "dtaf2026:block/maple_wood/maple_wood_horizontal",
+			"x": 90,
+			"y": 90
+		},
+		"axis=y,dtaf2026_variant=0": {
+			"model": "dtaf2026:block/maple_wood/maple_wood"
+		},
+		"axis=z,dtaf2026_variant=0": {
+			"model": "dtaf2026:block/maple_wood/maple_wood_horizontal",
+			"x": 90
+		},
+		"axis=x,dtaf2026_variant=1": {
+			"model": "dtaf2026:block/maple_wood/stripped_maple_wood_horizontal",
+			"x": 90,
+			"y": 90
+		},
+		"axis=y,dtaf2026_variant=1": {
+			"model": "dtaf2026:block/maple_wood/stripped_maple_wood"
+		},
+		"axis=z,dtaf2026_variant=1": {
+			"model": "dtaf2026:block/maple_wood/stripped_maple_wood_horizontal",
+			"x": 90
+		},
+		"axis=x,dtaf2026_variant=2": {
+			"model": "dtaf2026:block/maple_wood/twice_stripped_maple_wood_horizontal",
+			"x": 90,
+			"y": 90
+		},
+		"axis=y,dtaf2026_variant=2": {
+			"model": "dtaf2026:block/maple_wood/twice_stripped_maple_wood"
+		},
+		"axis=z,dtaf2026_variant=2": {
+			"model": "dtaf2026:block/maple_wood/twice_stripped_maple_wood_horizontal",
+			"x": 90
+		}
+	}
+}
