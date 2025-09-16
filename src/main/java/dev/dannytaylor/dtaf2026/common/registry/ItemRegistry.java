@@ -8,7 +8,7 @@
 package dev.dannytaylor.dtaf2026.common.registry;
 
 import dev.dannytaylor.dtaf2026.common.data.Data;
-import dev.dannytaylor.dtaf2026.common.registry.item.SupportedLogBlockItem;
+import dev.dannytaylor.dtaf2026.common.registry.item.SupportedWoodItemSet;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -16,21 +16,16 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.util.Identifier;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class ItemRegistry {
-	public static final Item maple_log;
-	public static final Item stripped_maple_log;
-	public static final Item twice_stripped_maple_log;
-	public static final Item maple_wood;
-	public static final Item stripped_maple_wood;
-	public static final Item twice_stripped_maple_wood;
-	public static final Item maple_bark;
+	public static final SupportedWoodItemSet maple;
 
-	private static RegistryKey<Item> keyOf(String path) {
-		return RegistryKey.of(RegistryKeys.ITEM, Data.idOf(path));
+	private static RegistryKey<Item> keyOf(Identifier path) {
+		return RegistryKey.of(RegistryKeys.ITEM, path);
 	}
 
 	private static RegistryKey<Item> keyOf(RegistryKey<Block> blockKey) {
@@ -49,8 +44,12 @@ public class ItemRegistry {
 		return register(keyOf(block.getRegistryEntry().registryKey()), (Function)((itemSettings) -> (Item)factory.apply(block, (Item.Settings) itemSettings)), settings.useBlockPrefixedTranslationKey());
 	}
 
-	public static Item register(String id, Function<Item.Settings, Item> factory, Item.Settings settings) {
+	public static Item register(Identifier id, Function<Item.Settings, Item> factory, Item.Settings settings) {
 		return register(keyOf(id), factory, settings);
+	}
+
+	public static Item register(String id, Function<Item.Settings, Item> factory, Item.Settings settings) {
+		return register(Data.idOf(id), factory, settings);
 	}
 
 	public static Item register(RegistryKey<Item> key, Function<Item.Settings, Item> factory, Item.Settings settings) {
@@ -63,14 +62,6 @@ public class ItemRegistry {
 	}
 
 	static {
-		maple_log = register("maple_log", (settings) -> new SupportedLogBlockItem(BlockRegistry.maple_log, 0, settings), new BlockItem.Settings().useBlockPrefixedTranslationKey());
-		stripped_maple_log = register("stripped_maple_log", (settings) -> new SupportedLogBlockItem(BlockRegistry.maple_log, 1, settings), new BlockItem.Settings().useBlockPrefixedTranslationKey());
-		twice_stripped_maple_log = register("twice_stripped_maple_log", (settings) -> new SupportedLogBlockItem(BlockRegistry.maple_log, 2, settings), new BlockItem.Settings().useBlockPrefixedTranslationKey());
-
-		maple_wood = register("maple_wood", (settings) -> new SupportedLogBlockItem(BlockRegistry.maple_wood, 0, settings), new BlockItem.Settings().useBlockPrefixedTranslationKey());
-		stripped_maple_wood = register("stripped_maple_wood", (settings) -> new SupportedLogBlockItem(BlockRegistry.maple_wood, 1, settings), new BlockItem.Settings().useBlockPrefixedTranslationKey());
-		twice_stripped_maple_wood = register("twice_stripped_maple_wood", (settings) -> new SupportedLogBlockItem(BlockRegistry.maple_wood, 2, settings), new BlockItem.Settings().useBlockPrefixedTranslationKey());
-
-		maple_bark = register("maple_bark", Item::new, new Item.Settings());
+		maple = SupportedWoodItemSet.builder(BlockRegistry.maple).build();
 	}
 }

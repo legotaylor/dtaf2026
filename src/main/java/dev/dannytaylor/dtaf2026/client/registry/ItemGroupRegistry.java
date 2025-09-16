@@ -20,17 +20,11 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class ItemGroupRegistry {
-	protected static final RegistryKey<ItemGroup> dtaf2026 = register(Data.idOf(Data.getModId()), FabricItemGroup.builder().icon(() -> new ItemStack(ItemRegistry.maple_bark)).displayName(Text.translatable("itemGroup." + Data.getModId(), Text.translatable(Data.getModId() + ".name"))).build());
+	protected static final RegistryKey<ItemGroup> dtaf2026 = register(Data.idOf(Data.getModId()), FabricItemGroup.builder().icon(() -> new ItemStack(ItemRegistry.maple.bark)).displayName(Text.translatable("itemGroup." + Data.getModId(), Text.translatable(Data.getModId() + ".name"))).build());
 	
 	public static void bootstrap() {
 		ItemGroupEvents.modifyEntriesEvent(dtaf2026).register((content) -> {
-			content.add(ItemRegistry.maple_log);
-			content.add(ItemRegistry.stripped_maple_log);
-			content.add(ItemRegistry.twice_stripped_maple_log);
-			content.add(ItemRegistry.maple_wood);
-			content.add(ItemRegistry.stripped_maple_wood);
-			content.add(ItemRegistry.twice_stripped_maple_wood);
-			content.add(ItemRegistry.maple_bark);
+			ItemRegistry.maple.addItemGroupEntries(content);
 		});
 	}
 	

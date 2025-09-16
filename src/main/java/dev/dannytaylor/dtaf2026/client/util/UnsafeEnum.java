@@ -5,17 +5,22 @@
     Licence: GNU LGPLv3
 */
 
-package dev.dannytaylor.dtaf2026.common.utils;
+package dev.dannytaylor.dtaf2026.client.util;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import sun.misc.Unsafe;
 
 import java.lang.reflect.Field;
 import java.util.Map;
 
-public class UnsafeEnumHelper {
+// This class is only for the client as letting UNSAFE on servers could be an issue.
+// I wish they used records instead :sob:
+@Environment(EnvType.CLIENT)
+public class UnsafeEnum {
 	public static final Unsafe UNSAFE;
 
-	public static <T extends Enum<?>> T createEnum(Class<T> enumClass, String name, int ordinal, Map<String, Object> extraFields) {
+	public static <T extends Enum<?>> T createEnumInstance(Class<T> enumClass, String name, int ordinal, Map<String, Object> extraFields) {
 		try {
 			T instance = (T) UNSAFE.allocateInstance(enumClass);
 			UNSAFE.putObject(instance, UNSAFE.objectFieldOffset(Enum.class.getDeclaredField("name")), name);

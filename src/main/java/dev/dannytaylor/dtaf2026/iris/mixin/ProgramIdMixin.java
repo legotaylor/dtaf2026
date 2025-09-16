@@ -8,7 +8,7 @@
 package dev.dannytaylor.dtaf2026.iris.mixin;
 
 import dev.dannytaylor.dtaf2026.iris.IrisMain;
-import dev.dannytaylor.dtaf2026.common.utils.UnsafeEnumHelper;
+import dev.dannytaylor.dtaf2026.client.util.UnsafeEnum;
 import net.irisshaders.iris.pipeline.programs.SomniumRealeShader;
 import net.irisshaders.iris.shaderpack.loading.ProgramId;
 import org.spongepowered.asm.mixin.Mixin;
@@ -40,11 +40,11 @@ public abstract class ProgramIdMixin {
 				options.putAll(Map.of("group", programId.group(), "sourceName", programId.sourceName(), "fallback", fallback));
 				if (programId.defaultBlendOverride() != null) options.put("defaultBlendOverride", programId.defaultBlendOverride());
 
-				ProgramId customProgramId = UnsafeEnumHelper.createEnum(ProgramId.class, id, oldValues.length, options);
+				ProgramId customProgramId = UnsafeEnum.createEnumInstance(ProgramId.class, id, oldValues.length, options);
 				SomniumRealeShader.registerCustomProgram(id, customProgramId);
 				ProgramId[] newValues = Arrays.copyOf(oldValues, oldValues.length + 1);
 				newValues[newValues.length - 1] = customProgramId;
-				UnsafeEnumHelper.UNSAFE.putObject(ProgramId.class, UnsafeEnumHelper.UNSAFE.staticFieldOffset(Arrays.stream(ProgramId.class.getDeclaredFields()).filter(f -> f.getType().equals(ProgramId[].class)).findFirst().orElseThrow()), newValues);
+				UnsafeEnum.UNSAFE.putObject(ProgramId.class, UnsafeEnum.UNSAFE.staticFieldOffset(Arrays.stream(ProgramId.class.getDeclaredFields()).filter(f -> f.getType().equals(ProgramId[].class)).findFirst().orElseThrow()), newValues);
 			} catch (Exception error) {
 				error.printStackTrace();
 			}

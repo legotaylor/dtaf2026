@@ -9,7 +9,6 @@ package dev.dannytaylor.dtaf2026.common.registry.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.dannytaylor.dtaf2026.common.data.Data;
-import dev.dannytaylor.dtaf2026.common.registry.BlockRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -58,6 +57,6 @@ public class SupportedLogBlock extends SupportedPillarBlock {
 	}
 
 	public IsOfBlock isOf() {
-		return (state -> state.isOf(BlockRegistry.maple_log));
+		return (state -> state.isIn(TagRegistry.Block.supportedLogs));
 	}
 }

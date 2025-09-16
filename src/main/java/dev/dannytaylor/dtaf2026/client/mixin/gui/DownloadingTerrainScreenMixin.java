@@ -10,7 +10,7 @@ package dev.dannytaylor.dtaf2026.client.mixin.gui;
 import dev.dannytaylor.dtaf2026.client.data.ClientData;
 import dev.dannytaylor.dtaf2026.client.gui.SomniumRealeWorldEntryReason;
 import dev.dannytaylor.dtaf2026.common.registry.BlockRegistry;
-import dev.dannytaylor.dtaf2026.common.utils.UnsafeEnumHelper;
+import dev.dannytaylor.dtaf2026.client.util.UnsafeEnum;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.DownloadingTerrainScreen;
@@ -39,11 +39,11 @@ public abstract class DownloadingTerrainScreenMixin {
 				try {
 					System.out.println("Registering custom world entry reason with id: " + id);
 					DownloadingTerrainScreen.WorldEntryReason[] oldValues = DownloadingTerrainScreen.WorldEntryReason.values();
-					DownloadingTerrainScreen.WorldEntryReason customReason = UnsafeEnumHelper.createEnum(DownloadingTerrainScreen.WorldEntryReason.class, id, oldValues.length, Map.of());
+					DownloadingTerrainScreen.WorldEntryReason customReason = UnsafeEnum.createEnumInstance(DownloadingTerrainScreen.WorldEntryReason.class, id, oldValues.length, Map.of());
 					SomniumRealeWorldEntryReason.registerCustom(id, customReason);
 					DownloadingTerrainScreen.WorldEntryReason[] newValues = Arrays.copyOf(oldValues, oldValues.length + 1);
 					newValues[newValues.length - 1] = customReason;
-					UnsafeEnumHelper.UNSAFE.putObject(DownloadingTerrainScreen.WorldEntryReason.class, UnsafeEnumHelper.UNSAFE.staticFieldOffset(Arrays.stream(DownloadingTerrainScreen.WorldEntryReason.class.getDeclaredFields()).filter(f -> f.getType().equals(DownloadingTerrainScreen.WorldEntryReason[].class)).findFirst().orElseThrow()), newValues);
+					UnsafeEnum.UNSAFE.putObject(DownloadingTerrainScreen.WorldEntryReason.class, UnsafeEnum.UNSAFE.staticFieldOffset(Arrays.stream(DownloadingTerrainScreen.WorldEntryReason.class.getDeclaredFields()).filter(f -> f.getType().equals(DownloadingTerrainScreen.WorldEntryReason[].class)).findFirst().orElseThrow()), newValues);
 				} catch (Exception error) {
 					error.printStackTrace();
 				}
@@ -63,7 +63,7 @@ public abstract class DownloadingTerrainScreenMixin {
 
 	@Unique
 	private Sprite getSomniumRealeBackgroundSprite() {
-		if (this.somniumRealeBackgroundSprite == null) this.somniumRealeBackgroundSprite = ClientData.getMinecraft().getBlockRenderManager().getModels().getModelParticleSprite(BlockRegistry.maple_wood.getDefaultState());
+		if (this.somniumRealeBackgroundSprite == null) this.somniumRealeBackgroundSprite = ClientData.getMinecraft().getBlockRenderManager().getModels().getModelParticleSprite(BlockRegistry.maple.wood.getDefaultState());
 		return this.somniumRealeBackgroundSprite;
 	}
 }

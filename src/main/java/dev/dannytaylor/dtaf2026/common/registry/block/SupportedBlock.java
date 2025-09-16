@@ -22,7 +22,6 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.ScheduledTickView;
-import org.jetbrains.annotations.Nullable;
 
 public class SupportedBlock extends Block {
 	public static final MapCodec<SupportedBlock> codec = createCodec(SupportedBlock::new);
@@ -90,10 +89,6 @@ public class SupportedBlock extends Block {
 			}
 		}
 		return i;
-	}
-
-	protected boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		return true;//calculateDistance(world, pos, isOf()) < 7;
 	}
 
 	public IsOfBlock isOf() {
