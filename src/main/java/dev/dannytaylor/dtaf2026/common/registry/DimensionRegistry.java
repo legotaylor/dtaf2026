@@ -21,7 +21,7 @@ public class DimensionRegistry {
 	}
 
 	static {
-		somniumReale = new Dimension(Data.idOf("somnium_reale"));
+		somniumReale = new Dimension(Data.getSomniumRealeId());
 	}
 
 	public record Dimension(Identifier id) {

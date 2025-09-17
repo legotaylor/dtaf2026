@@ -1,4 +1,11 @@
-package dev.dannytaylor.dtaf2026.client.registry;
+/*
+    dtaf2026
+    Contributor(s): dannytaylor
+    Github: https://github.com/legotaylor/dtaf2026
+    Licence: GNU LGPLv3
+*/
+
+package dev.dannytaylor.dtaf2026.client.registry.pipeline;
 
 import dev.dannytaylor.dtaf2026.common.data.Data;
 import dev.dannytaylor.dtaf2026.common.registry.TagRegistry;
@@ -15,7 +22,7 @@ public class PostEffectRegistry {
 	public static List<PostEffect> postEffects = new ArrayList<>();
 
 	public static void bootstrap() {
-		postEffects.add(new PostEffect(Data.idOf("somnium_reale"), (client) -> TagRegistry.WorldGen.Biome.isIn(client, TagRegistry.WorldGen.Biome.somnium_reale)));
+		postEffects.add(new PostEffect(Data.getSomniumRealeId(), (client) -> TagRegistry.WorldGen.Biome.isIn(client, TagRegistry.WorldGen.Biome.somnium_reale)));
 	}
 
 	// Update to use Luminance once Luminance is updated. (depth shaders would be cool)

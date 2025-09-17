@@ -17,6 +17,10 @@ public class Data {
 		return Identifier.of(getModId(), path);
 	}
 
+	public static Identifier getSomniumRealeId() {
+		return idOf("somnium_reale");
+	}
+
 	public static String getModId() {
 		return modId;
 	}

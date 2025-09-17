@@ -143,7 +143,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 	}
 
 	static {
-		somniumRealeModifier = new EntityAttributeModifier(Data.idOf("somnium_reale"), -0.35F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+		somniumRealeModifier = new EntityAttributeModifier(Data.getSomniumRealeId(), -0.35F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 		lastBedPos = DataTracker.registerData(PlayerEntityMixin.class, TrackedDataHandlerRegistry.OPTIONAL_BLOCK_POS);
 	}
 }

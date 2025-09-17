@@ -10,7 +10,7 @@ package dev.dannytaylor.dtaf2026.client.registry;
 import com.mojang.blaze3d.pipeline.BlendFunction;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import dev.dannytaylor.dtaf2026.client.registry.pipeline.SomniumRealeSettings;
+import dev.dannytaylor.dtaf2026.client.registry.pipeline.PostEffectRegistry;
 import dev.dannytaylor.dtaf2026.common.data.Data;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gl.UniformType;
@@ -21,9 +21,9 @@ public class PipelineRegistry {
 	public static final RenderPipeline stars;
 	public static final RenderPipeline bigStars;
 	public static final RenderPipeline sky;
-	public static SomniumRealeSettings somniumRealeSettings;
 
 	public static void bootstrap() {
+		// UBORegistry is registered through GameRendererMixin
 		PostEffectRegistry.bootstrap();
 	}
 
