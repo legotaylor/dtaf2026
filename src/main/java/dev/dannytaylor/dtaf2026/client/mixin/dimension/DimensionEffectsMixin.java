@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(DimensionEffects.class)
 public abstract class DimensionEffectsMixin {
 	@Inject(method = "byDimensionType", at = @At("HEAD"), cancellable = true)
-	private static void dtaf2025$byDimensionType(DimensionType dimensionType, CallbackInfoReturnable<DimensionEffects> cir) {
+	private static void dtaf2026$byDimensionType(DimensionType dimensionType, CallbackInfoReturnable<DimensionEffects> cir) {
 		DimensionEffects effects = ClientDimensionRegistry.getEffectType(dimensionType.effects());
 		if (effects != null) cir.setReturnValue(effects);
 	}

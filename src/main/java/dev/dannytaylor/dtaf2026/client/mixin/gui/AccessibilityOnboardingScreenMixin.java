@@ -7,17 +7,15 @@
 
 package dev.dannytaylor.dtaf2026.client.mixin.gui;
 
-import dev.dannytaylor.dtaf2026.client.gui.TitleScreenHelper;
 import net.minecraft.client.gui.screen.AccessibilityOnboardingScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-@Mixin(value = AccessibilityOnboardingScreen.class, priority = 100)
+@Mixin(AccessibilityOnboardingScreen.class)
 public abstract class AccessibilityOnboardingScreenMixin {
-	@Inject(at = @At("HEAD"), method = "init")
-	private void dtaf2025$init(CallbackInfo ci) {
-		TitleScreenHelper.showFlashingLightsWarning();
+	@ModifyArg(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/Positioner;margin(I)Lnet/minecraft/client/gui/widget/Positioner;"), method = "init")
+	private int dtaf2026$adjustMargin(int value) {
+		return 2;
 	}
 }

@@ -42,15 +42,12 @@ import java.util.Optional;
 public abstract class PlayerEntityMixin extends LivingEntity {
 	@Unique private static final EntityAttributeModifier somniumRealeModifier;
 	@Unique private static final TrackedData<Optional<BlockPos>> lastBedPos;
+	@Shadow public abstract void tick();
+	@Shadow private int sleepTimer;
 
 	protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
 		super(entityType, world);
 	}
-
-	@Shadow public abstract void tick();
-
-	@Shadow
-	private int sleepTimer;
 
 	@Inject(method = "initDataTracker", at = @At("RETURN"))
 	private void dtaf2026$initDataTracker(DataTracker.Builder builder, CallbackInfo ci) {
@@ -141,7 +138,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 		EntityAttributeInstance entityAttributeInstance = this.getAttributeInstance(EntityAttributes.SCALE);
 		if (entityAttributeInstance != null) {
 			entityAttributeInstance.removeModifier(somniumRealeModifier.id());
-			if (this.getWorld().getBiome(this.getBlockPos()).isIn(TagRegistry.WorldGen.Biome.somnium_reale)) entityAttributeInstance.addTemporaryModifier(somniumRealeModifier);
+			if (TagRegistry.WorldGen.Biome.isIn(this.getWorld(), this.getBlockPos(), TagRegistry.WorldGen.Biome.somnium_reale)) entityAttributeInstance.addTemporaryModifier(somniumRealeModifier);
 		}
 	}
 

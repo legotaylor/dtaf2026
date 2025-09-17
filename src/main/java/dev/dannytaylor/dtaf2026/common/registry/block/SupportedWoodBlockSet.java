@@ -14,12 +14,14 @@ public class SupportedWoodBlockSet {
 	public final SupportedLogBlock log;
 	public final SupportedLogBlock wood;
 	public final SupportedBlock planks;
+	public final SupportedSlabBlock slab;
 
-	private SupportedWoodBlockSet(Identifier id, SupportedLogBlock log, SupportedLogBlock wood, SupportedBlock planks) {
+	private SupportedWoodBlockSet(Identifier id, SupportedLogBlock log, SupportedLogBlock wood, SupportedBlock planks, SupportedSlabBlock slab) {
 		this.id = id;
 		this.log = log;
 		this.wood = wood;
 		this.planks = planks;
+		this.slab = slab;
 	}
 
 	public static Builder builder(String id) {
@@ -65,6 +67,7 @@ public class SupportedWoodBlockSet {
 		private AbstractBlock.Settings logSettings;
 		private AbstractBlock.Settings woodSettings;
 		private AbstractBlock.Settings planksSettings;
+		private AbstractBlock.Settings slabSettings;
 
 		public Builder(Identifier id) {
 			this(id, getDefaultLogSettings(), getDefaultLogSettings(), getDefaultPlanksSettings());
@@ -75,10 +78,15 @@ public class SupportedWoodBlockSet {
 		}
 
 		public Builder(Identifier id, AbstractBlock.Settings logSettings, AbstractBlock.Settings woodSettings, AbstractBlock.Settings planksSettings) {
+			this(id, logSettings, woodSettings, planksSettings, planksSettings);
+		}
+
+		public Builder(Identifier id, AbstractBlock.Settings logSettings, AbstractBlock.Settings woodSettings, AbstractBlock.Settings planksSettings, AbstractBlock.Settings slabSettings) {
 			this.id = id;
 			this.logSettings = logSettings;
 			this.woodSettings = woodSettings;
 			this.planksSettings = planksSettings;
+			this.slabSettings = slabSettings;
 		}
 
 		public Builder logSettings(AbstractBlock.Settings logSettings) {
@@ -96,11 +104,17 @@ public class SupportedWoodBlockSet {
 			return this;
 		}
 
+		public Builder slabSettings(AbstractBlock.Settings slabSettings) {
+			this.slabSettings = slabSettings;
+			return this;
+		}
+
 		public SupportedWoodBlockSet build() {
 			SupportedLogBlock log = (SupportedLogBlock) BlockRegistry.register(this.id.withSuffixedPath("_log"), SupportedLogBlock::new, this.logSettings);
 			SupportedLogBlock wood = (SupportedLogBlock) BlockRegistry.register(this.id.withSuffixedPath("_wood"), SupportedLogBlock::new, this.woodSettings);
 			SupportedBlock planks = (SupportedBlock) BlockRegistry.register(this.id.withSuffixedPath("_planks"), SupportedBlock::new, this.planksSettings);
-			return new SupportedWoodBlockSet(this.id, log, wood, planks);
+			SupportedSlabBlock slab = (SupportedSlabBlock) BlockRegistry.register(this.id.withSuffixedPath("_slab"), SupportedSlabBlock::new, this.slabSettings);
+			return new SupportedWoodBlockSet(this.id, log, wood, planks, slab);
 		}
 	}
 }

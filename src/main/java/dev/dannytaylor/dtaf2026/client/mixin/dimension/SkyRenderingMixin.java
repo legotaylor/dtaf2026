@@ -67,7 +67,7 @@ public abstract class SkyRenderingMixin {
 		GpuTextureView gpuTextureView = MinecraftClient.getInstance().getFramebuffer().getColorAttachmentView();
 		GpuTextureView gpuTextureView2 = MinecraftClient.getInstance().getFramebuffer().getDepthAttachmentView();
 		GpuBuffer gpuBuffer = isBig ? this.somniumRealeIndexBuffer.getIndexBuffer(this.somniumRealeStarIndexCount) : this.somniumRealeIndexBuffer2.getIndexBuffer(this.somniumRealeStarIndexCount2);
-		GpuBufferSlice gpuBufferSlice = RenderSystem.getDynamicUniforms().write(matrix4fStack, new Vector4f(brightness * 2.0F, brightness * 2.0F, brightness * 2.0F, brightness * 2.0F), new Vector3f(), new Matrix4f(), 0.0f);
+		GpuBufferSlice gpuBufferSlice = RenderSystem.getDynamicUniforms().write(matrix4fStack, new Vector4f(brightness, brightness, brightness, brightness), new Vector3f(), new Matrix4f(), 0.0f);
 		try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "Stars", gpuTextureView, OptionalInt.empty(), gpuTextureView2, OptionalDouble.empty());){
 			renderPass.setPipeline(renderPipeline);
 			RenderSystem.bindDefaultUniforms(renderPass);

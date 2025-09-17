@@ -24,6 +24,7 @@ public class IntegratedServerLoaderMixin {
 		callback.run();
 		ci.cancel();
 	}
+
 	@Inject(method = "tryLoad", at = @At("HEAD"), cancellable = true)
 	private static void dtaf2026$tryLoad(MinecraftClient client, CreateWorldScreen parent, Lifecycle lifecycle, Runnable loader, boolean bypassWarnings, CallbackInfo ci) {
 		loader.run();

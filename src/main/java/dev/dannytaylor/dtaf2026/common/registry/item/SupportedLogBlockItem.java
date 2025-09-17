@@ -9,13 +9,17 @@ package dev.dannytaylor.dtaf2026.common.registry.item;
 
 import dev.dannytaylor.dtaf2026.common.registry.block.SupportedLogBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemPlacementContext;
 
-public class SupportedLogBlockItem extends BlockItem {
+public class SupportedLogBlockItem extends SupportedBlockItem {
 	private final int variant;
+
 	public SupportedLogBlockItem(SupportedLogBlock block, int variant, Settings settings) {
-		super(block, settings);
+		this(block, variant, true, settings);
+	}
+
+	public SupportedLogBlockItem(SupportedLogBlock block, int variant, boolean gravity, Settings settings) {
+		super(block, gravity, settings);
 		this.variant = Math.clamp(variant, 0, 2);
 	}
 

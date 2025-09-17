@@ -1,0 +1,231 @@
+{
+	"targets": {
+		"bloom_1": {},
+		"bloom_2": {},
+		"highlights_1": {},
+		"highlights_2": {},
+		"swap": {}
+	},
+	"passes": [
+		{
+			"vertex_shader": "minecraft:post/screenquad",
+			"fragment_shader": "dtaf2026:post/brightness_threshold",
+			"inputs": [
+				{
+					"sampler_name": "In",
+					"target": "minecraft:main"
+				}
+			],
+			"output": "bloom_1",
+			"uniforms": {
+				"BrightnessThresholdConfig": [
+					{
+						"name": "ThresholdBrightness",
+						"type": "float",
+						"value": 0.75
+					}
+				]
+			}
+		},
+		{
+			"vertex_shader": "minecraft:post/screenquad",
+			"fragment_shader": "dtaf2026:post/brightness_threshold",
+			"inputs": [
+				{
+					"sampler_name": "In",
+					"target": "minecraft:main"
+				}
+			],
+			"output": "highlights_1",
+			"uniforms": {
+				"BrightnessThresholdConfig": [
+					{
+						"name": "ThresholdBrightness",
+						"type": "float",
+						"value": 0.9
+					}
+				]
+			}
+		},
+		{
+			"vertex_shader": "minecraft:post/blur",
+			"fragment_shader": "dtaf2026:post/gaussian_blur",
+			"inputs": [
+				{
+					"sampler_name": "In",
+					"target": "bloom_1",
+					"bilinear": true
+				}
+			],
+			"output": "bloom_2",
+			"uniforms": {
+				"BlurConfig": [
+					{
+						"name": "BlurDir",
+						"type": "vec2",
+						"value": [ 1.0, 0.0 ]
+					},
+					{
+						"name": "Radius",
+						"type": "float",
+						"value": 50.0
+					}
+				]
+			}
+		},
+		{
+			"vertex_shader": "minecraft:post/blur",
+			"fragment_shader": "dtaf2026:post/gaussian_blur",
+			"inputs": [
+				{
+					"sampler_name": "In",
+					"target": "bloom_2",
+					"bilinear": true
+				}
+			],
+			"output": "bloom_1",
+			"uniforms": {
+				"BlurConfig": [
+					{
+						"name": "BlurDir",
+						"type": "vec2",
+						"value": [ 0.0, 1.0 ]
+					},
+					{
+						"name": "Radius",
+						"type": "float",
+						"value": 50.0
+					}
+				]
+			}
+		},
+		{
+			"vertex_shader": "minecraft:post/blur",
+			"fragment_shader": "dtaf2026:post/gaussian_blur",
+			"inputs": [
+				{
+					"sampler_name": "In",
+					"target": "highlights_1",
+					"bilinear": true
+				}
+			],
+			"output": "highlights_2",
+			"uniforms": {
+				"BlurConfig": [
+					{
+						"name": "BlurDir",
+						"type": "vec2",
+						"value": [ 1.0, 0.0 ]
+					},
+					{
+						"name": "Radius",
+						"type": "float",
+						"value": 20.0
+					}
+				]
+			}
+		},
+		{
+			"vertex_shader": "minecraft:post/blur",
+			"fragment_shader": "dtaf2026:post/gaussian_blur",
+			"inputs": [
+				{
+					"sampler_name": "In",
+					"target": "highlights_2",
+					"bilinear": true
+				}
+			],
+			"output": "highlights_1",
+			"uniforms": {
+				"BlurConfig": [
+					{
+						"name": "BlurDir",
+						"type": "vec2",
+						"value": [ 0.0, 1.0 ]
+					},
+					{
+						"name": "Radius",
+						"type": "float",
+						"value": 20.0
+					}
+				]
+			}
+		},
+		{
+			"vertex_shader": "minecraft:post/screenquad",
+			"fragment_shader": "dtaf2026:post/bloom",
+			"inputs": [
+				{
+					"sampler_name": "In",
+					"target": "minecraft:main"
+				},
+				{
+					"sampler_name": "Bloom",
+					"target": "bloom_1"
+				},
+				{
+					"sampler_name": "Highlights",
+					"target": "highlights_1"
+				}
+			],
+			"output": "bloom_2",
+			"uniforms": {
+				"BloomConfig": [
+					{
+						"name": "BloomFactor",
+						"type": "float",
+						"value": 0.5
+					},
+					{
+						"name": "HighlightsFactor",
+						"type": "float",
+						"value": 1.5
+					},
+					{
+						"name": "Thirst",
+						"type": "float",
+						"value": 1.0
+					}
+				]
+			}
+		},
+		{
+			"vertex_shader": "minecraft:post/sobel",
+			"fragment_shader": "dtaf2026:post/merge_bloom",
+			"inputs": [
+				{
+					"sampler_name": "In",
+					"target": "bloom_2"
+				},
+				{
+					"sampler_name": "Merge",
+					"target": "minecraft:main"
+				}
+			],
+			"output": "swap",
+			"uniforms": {
+				"SomniumReale": []
+			}
+		},
+		{
+			"vertex_shader": "minecraft:post/blit",
+			"fragment_shader": "minecraft:post/blit",
+			"inputs": [
+				{
+					"sampler_name": "In",
+					"target": "swap"
+				}
+			],
+			"uniforms": {
+				"BlitConfig": [
+					{
+						"name": "ColorModulate",
+						"type": "vec4",
+						"value": [ 1.0, 1.0, 1.0, 1.0 ]
+					}
+				]
+			},
+			"output": "minecraft:main"
+		}
+	]
+}

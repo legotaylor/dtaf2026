@@ -5,15 +5,17 @@
 	"client": [
 		"dimension.DimensionEffectsMixin",
 		"dimension.SkyRenderingMixin",
-		"dimension.WorldRendererMixin",
 		"gui.AccessibilityOnboardingScreenMixin",
 		"gui.ClientPlayNetworkHandlerMixin",
 		"gui.DownloadingTerrainScreenMixin",
 		"gui.DownloadingTerrainScreenMixin$WorldEntryReasonMixin",
+		"gui.InGameHudMixin",
 		"gui.IntegratedServerLoaderMixin",
 		"gui.LogoDrawerMixin",
+		"gui.MinecraftClientMixin",
 		"gui.SplashTextRendererMixin",
-		"gui.TitleScreenMixin"
+		"shaders.GameRendererMixin",
+		"shaders.RenderSystemMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

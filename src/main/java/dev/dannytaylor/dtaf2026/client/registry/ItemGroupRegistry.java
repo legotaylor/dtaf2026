@@ -11,6 +11,7 @@ import dev.dannytaylor.dtaf2026.common.data.Data;
 import dev.dannytaylor.dtaf2026.common.registry.ItemRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -21,10 +22,18 @@ import net.minecraft.util.Identifier;
 
 public class ItemGroupRegistry {
 	protected static final RegistryKey<ItemGroup> dtaf2026 = register(Data.idOf(Data.getModId()), FabricItemGroup.builder().icon(() -> new ItemStack(ItemRegistry.maple.bark)).displayName(Text.translatable("itemGroup." + Data.getModId(), Text.translatable(Data.getModId() + ".name"))).build());
+	protected static final RegistryKey<ItemGroup> dtaf2026Creative = register(Data.idOf(Data.getModId() + "_creative"), FabricItemGroup.builder().icon(() -> {
+		ItemStack stack = new ItemStack(ItemRegistry.maple.bark);
+		stack.apply(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true, (b) -> b);
+		return stack;
+	}).displayName(Text.translatable("itemGroup." + Data.getModId() + "Creative", Text.translatable(Data.getModId() + ".name"))).build());
 	
 	public static void bootstrap() {
 		ItemGroupEvents.modifyEntriesEvent(dtaf2026).register((content) -> {
-			ItemRegistry.maple.addItemGroupEntries(content);
+			ItemRegistry.maple.addItemGroupEntries(content, false);
+		});
+		ItemGroupEvents.modifyEntriesEvent(dtaf2026Creative).register((content) -> {
+			ItemRegistry.maple.addItemGroupEntries(content, true);
 		});
 	}
 	
