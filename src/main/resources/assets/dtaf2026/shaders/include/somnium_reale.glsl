@@ -28,6 +28,8 @@ layout(std140) uniform SomniumReale {
 #define WorldTime time.z // Current world time (% 24000)
 #define TickProgress time.w // Current tick progress
 
+float Multiplier = PhotosensitiveMode < 2 ? (PhotosensitiveMode > 0 ? 0.125 : 1.0) : 0.0; // Returns effects multiplier based on PhotosensitiveMode 0=1.0, 1=0.125, 2=0.0
+
 // Uses SmoothTime to cycle color between pink and blue, depending on PhotosensitiveMode; Used in <dtaf2026:rendertype_clouds.fsh>
 vec4 getCloudsColor(vec4 color) {
 	if (PhotosensitiveMode < 2) {
@@ -46,7 +48,6 @@ vec4 getStarsColor(vec4 color, float level) {
 
 // Uses SmoothTime to twinkle stars, depending on PhotosensitiveMode; Used in <dtaf2026:stars.fsh>, <dtaf2026:stars_tiny.fsh>
 vec4 twinkleStars(vec4 color, float level, vec3 pos) {
-	float multi = PhotosensitiveMode > 0 ? 0.125 : 1.0;
-	color.a += sin((SmoothTime * (level * multi)) + pos.x + pos.z);
+	color.a += sin((SmoothTime * (level * Multiplier)) + pos.x + pos.z);
 	return color;
 }
