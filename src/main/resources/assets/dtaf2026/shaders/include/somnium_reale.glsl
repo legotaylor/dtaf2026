@@ -37,3 +37,16 @@ vec4 getCloudsColor(vec4 color) {
 	}
 	return color;
 }
+
+// Uses SmoothBlockLight to dim stars when in lit areas, depending on PhotosensitiveMode; Used in <dtaf2026:stars.fsh>, <dtaf2026:stars_tiny.fsh>, <dtaf2026:stars_big.fsh>
+vec4 getStarsColor(vec4 color, float level) {
+	color *= mix(1.0, (1.0 - clamp(SmoothBlockLight * 1.3636 / 15.0, 0.0, 1.0)), PhotosensitiveMode < 2 ? (PhotosensitiveMode == 1 ? level * 0.1923076923 : level) : 0.0);
+	return color;
+}
+
+// Uses SmoothTime to twinkle stars, depending on PhotosensitiveMode; Used in <dtaf2026:stars.fsh>, <dtaf2026:stars_tiny.fsh>
+vec4 twinkleStars(vec4 color, float level, vec3 pos) {
+	float multi = PhotosensitiveMode > 0 ? 0.125 : 1.0;
+	color.a += sin((SmoothTime * (level * multi)) + pos.x + pos.z);
+	return color;
+}
