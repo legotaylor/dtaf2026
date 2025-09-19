@@ -10,6 +10,7 @@ package dev.dannytaylor.dtaf2026.client;
 import dev.dannytaylor.dtaf2026.client.config.Config;
 import dev.dannytaylor.dtaf2026.client.gui.ScreenHelper;
 import dev.dannytaylor.dtaf2026.client.registry.ClientRegistry;
+import dev.dannytaylor.dtaf2026.client.registry.pipeline.ubo.UBORegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
@@ -23,5 +24,6 @@ public class ClientMain implements ClientModInitializer {
 
 	public static void tick(MinecraftClient client) {
 		ScreenHelper.tick();
+		UBORegistry.tick(client);
 	}
 }

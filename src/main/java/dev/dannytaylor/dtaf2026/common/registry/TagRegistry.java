@@ -60,7 +60,7 @@ public class TagRegistry {
 			}
 
 			static {
-				somnium_reale = TagKey.of(RegistryKeys.BIOME, Data.getSomniumRealeId());
+				somnium_reale = TagKey.of(RegistryKeys.BIOME, Data.getSomniumRealeId().withPrefixedPath("is_"));
 			}
 		}
 	}

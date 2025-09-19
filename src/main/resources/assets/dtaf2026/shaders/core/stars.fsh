@@ -14,5 +14,5 @@ void main() {
 	color.g += 0.25 * (sin(time + pos.y * 2.0) * Multiplier);
 	color.b += 0.25 * (sin(time + pos.z * 4.0) * Multiplier);
 	color.rgb = mix(color.rgb, vec3(color.r * 0.9 + color.g * 0.1, color.g * 0.9 + color.b * 0.1, color.b * 0.9 + color.r * 0.1), 0.3);
-	fragColor = getStarsColor(color, 0.65);
+	fragColor = getDimColor(color, 0.65);
 }

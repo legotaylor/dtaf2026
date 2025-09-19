@@ -4,6 +4,7 @@
 	"compatibilityLevel": "JAVA_21",
 	"client": [
 		"block.RenderLayersMixin",
+		"dimension.ClientWorldMixin",
 		"dimension.DimensionEffectsMixin",
 		"dimension.GameRendererMixin",
 		"dimension.SkyRenderingMixin",

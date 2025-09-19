@@ -29,7 +29,7 @@ public class SomniumRealeEffect extends DimensionEffects {
 		float f = MathHelper.cos(skyAngle * ((float)Math.PI * 2F));
 		float g = f / 0.4F * 0.5F + 0.5F;
 		float h = MathHelper.square(1.0F - (1.0F - MathHelper.sin(g * (float)Math.PI)) * 0.99F);
-		return ColorHelper.fromFloats(h, g * 0.3F + 0.7F, g * g * 0.7F + 0.2F, 0.2F);
+		return ColorHelper.fromFloats(h, (g * 0.3F + 0.7F), (g * g * 0.7F + 0.2F), (0.2F));
 	}
 
 	public Vec3d adjustFogColor(Vec3d color, float sunHeight) {

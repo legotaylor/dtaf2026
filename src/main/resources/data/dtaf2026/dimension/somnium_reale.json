@@ -5,7 +5,7 @@
 		"biome_source": {
 			"biomes": [
 				{
-					"biome": "minecraft:plains",
+					"biome": "dtaf2026:maple_forest",
 					"parameters": {
 						"temperature": 0,
 						"humidity": 0,

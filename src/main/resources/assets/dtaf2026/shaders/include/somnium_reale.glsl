@@ -2,7 +2,7 @@
 
 // Values are automatically updated in UBORegistry/SomniumRealeUBO
 layout(std140) uniform SomniumReale {
-	ivec4 lightData;
+	vec4 lightData;
 	vec4 smoothLightData;
 	vec4 bloomAlpha;
 	vec4 time;
@@ -41,8 +41,8 @@ vec4 getCloudsColor(vec4 color) {
 }
 
 // Uses SmoothBlockLight to dim stars when in lit areas, depending on PhotosensitiveMode; Used in <dtaf2026:stars.fsh>, <dtaf2026:stars_tiny.fsh>, <dtaf2026:stars_big.fsh>
-vec4 getStarsColor(vec4 color, float level) {
-	color *= mix(1.0, (1.0 - clamp(SmoothBlockLight * 1.3636 / 15.0, 0.0, 1.0)), PhotosensitiveMode < 2 ? (PhotosensitiveMode == 1 ? level * 0.1923076923 : level) : 0.0);
+vec4 getDimColor(vec4 color, float level) {
+	color *= mix(1.0, (1.0 - clamp(SmoothBlockLight * 1.3636, 0.0, 1.0)), PhotosensitiveMode < 2 ? (PhotosensitiveMode == 1 ? level * 0.1923076923 : level) : 0.0);
 	return color;
 }
 

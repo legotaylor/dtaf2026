@@ -6,5 +6,5 @@
 out vec4 fragColor;
 
 void main() {
-	fragColor = getStarsColor(ColorModulator * 2.0, 0.325);
+	fragColor = getDimColor(ColorModulator * 2.0, 0.325);
 }

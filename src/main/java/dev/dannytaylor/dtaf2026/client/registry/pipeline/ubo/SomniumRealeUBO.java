@@ -13,43 +13,62 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.util.math.MathHelper;
 import org.joml.Vector4f;
-import org.joml.Vector4i;
 
 @Environment(EnvType.CLIENT)
 public class SomniumRealeUBO extends UBOSettings {
-	private int prevLight;
-	private int prevSkyLight;
-	private int prevBlockLight;
+	private float light;
+	private float skyLight;
+	private float blockLight;
+	private float bloomAlpha;
+	private float gameTime;
+	private float worldTime;
+	private float tickProgress;
+	private float prevLight;
+	private float prevSkyLight;
+	private float prevBlockLight;
 	private float prevBloomAlpha;
 	private float prevGameTime;
 
 	public SomniumRealeUBO(String name) {
-		super(name, new Std140Builder().putIVec4().putVec4().putVec4().putVec4());
+		super(name, new Std140Builder().putVec4().putVec4().putVec4().putVec4());
 	}
 
-	public void set(int light, int skyLight, int blockLight, float bloomAlpha, long time) {
+	public void set() {
+		float smoothLight = smooth(this.prevLight, this.light);
+		float smoothSkyLight = smooth(this.prevSkyLight, this.skyLight);
+		float smoothBlockLight = smooth(this.prevBlockLight, this.blockLight);
+		float smoothBloomAlpha = smooth(this.prevBloomAlpha, this.bloomAlpha);
+		float smoothGameTime = smooth(this.prevGameTime, this.gameTime);
+
+		this.set(new Vector4f(this.light, this.skyLight, this.blockLight, Config.instance.photosensitiveMode.value().getNumericId()),
+			new Vector4f(smoothLight, smoothSkyLight, smoothBlockLight, 0),
+			new Vector4f(this.bloomAlpha, smoothBloomAlpha, 0, 0),
+			new Vector4f(this.gameTime, smoothGameTime, this.worldTime, this.tickProgress)
+		);
+	}
+
+	public void update(float light, float skyLight, float blockLight, float bloomAlpha, long time) {
 		float worldTime = time % 24000L;
 		float tickProgress = ClientData.getMinecraft().getRenderTickCounter().getTickProgress(false);
 		float gameTime = (worldTime + tickProgress) / 24000.0F;
-		this.set(new Vector4i(light, skyLight, blockLight, Config.instance.photosensitiveMode.value().getNumericId()),
-			new Vector4f(softSmooth(this.prevLight, light), softSmooth(this.prevSkyLight, skyLight), softSmooth(this.prevBlockLight, blockLight), 0),
-			new Vector4f(bloomAlpha, softSmooth(this.prevBloomAlpha, bloomAlpha), 0, 0),
-			new Vector4f(gameTime, softSmooth(this.prevGameTime, gameTime), worldTime, tickProgress)
-		);
-		this.prevLight = light;
-		this.prevSkyLight = skyLight;
-		this.prevBlockLight = blockLight;
-		this.prevBloomAlpha = bloomAlpha;
-		this.prevGameTime = gameTime;
+
+		this.prevLight = this.light;
+		this.prevSkyLight = this.skyLight;
+		this.prevBlockLight = this.blockLight;
+		this.prevBloomAlpha = this.bloomAlpha;
+		this.prevGameTime = this.gameTime;
+
+		this.light = light / 15;
+		this.skyLight = skyLight / 15;
+		this.blockLight = blockLight / 15;
+		this.bloomAlpha = bloomAlpha;
+		this.gameTime = gameTime;
+		this.worldTime = worldTime;
+		this.tickProgress = tickProgress;
 	}
 
 	public void apply() {
 		super.apply();
-	}
-
-	private float softSmooth(float prev, float current) {
-		float softened = (prev + current) * 0.5F;
-		return smooth(prev, softened);
 	}
 
 	private float smooth(float prevValue, float value) {
