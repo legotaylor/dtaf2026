@@ -73,18 +73,15 @@ public class SupportedSlabBlock extends SupportedBlock implements Waterloggable 
 	}
 
 	public BlockState getPlacementState(ItemPlacementContext ctx) {
-		BlockState state = super.getPlacementState(ctx);
-		if (state != null) {
-			if (state.isOf(this)) {
-				state = state.with(type, SlabType.DOUBLE).with(waterlogged, false);
-			} else {
-				FluidState fluidState = super.getFluidState(state);
-				BlockState blockState2 = this.getDefaultState().with(type, SlabType.BOTTOM).with(waterlogged, fluidState.getFluid() == Fluids.WATER);
-				Direction direction = ctx.getSide();
-				state = direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double)ctx.getBlockPos().getY() > (double)0.5F)) ? blockState2 : blockState2.with(type, SlabType.TOP);
-			}
+		BlockPos blockPos = ctx.getBlockPos();
+		BlockState state = ctx.getWorld().getBlockState(blockPos);
+		if (state.isOf(this)) {
+			return state.with(type, SlabType.DOUBLE).with(waterlogged, false);
+		} else {
+			state = super.getPlacementState(ctx).with(type, SlabType.BOTTOM).with(waterlogged, ctx.getWorld().getFluidState(blockPos).getFluid() == Fluids.WATER);
+			Direction direction = ctx.getSide();
+			return direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double)blockPos.getY() > (double)0.5F)) ? state : state.with(type, SlabType.TOP);
 		}
-		return state;
 	}
 
 	protected boolean canReplace(BlockState state, ItemPlacementContext context) {
@@ -127,12 +124,17 @@ public class SupportedSlabBlock extends SupportedBlock implements Waterloggable 
 		return super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
 	}
 
+	public BlockState getFallingBlockState(BlockState state) {
+		// Falling slabs are always bottom slabs.
+		return super.getFallingBlockState(state).with(type, SlabType.BOTTOM);
+	}
+
 	protected boolean canPathfindThrough(BlockState state, NavigationType type) {
 		return type.equals(NavigationType.WATER) && state.getFluidState().isIn(FluidTags.WATER);
 	}
 
 	public IsOfBlock isOf() {
-		return (state -> state.isOf(this) && state.get(type).equals(SlabType.DOUBLE));
+		return (state -> state.isOf(this));
 	}
 
 	static {

@@ -18,10 +18,13 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class ItemRegistry {
+	public static final List<SupportedWoodItemSet> woodItemSets;
 	public static final SupportedWoodItemSet maple;
 
 	private static RegistryKey<Item> keyOf(Identifier path) {
@@ -61,7 +64,14 @@ public class ItemRegistry {
 	public static void bootstrap() {
 	}
 
+	public static SupportedWoodItemSet register(SupportedWoodItemSet.Builder builder) {
+		SupportedWoodItemSet itemSet = builder.build();
+		woodItemSets.add(itemSet);
+		return itemSet;
+	}
+
 	static {
-		maple = SupportedWoodItemSet.builder(BlockRegistry.maple).build();
+		woodItemSets = new ArrayList<>();
+		maple = register(SupportedWoodItemSet.builder(BlockRegistry.maple));
 	}
 }

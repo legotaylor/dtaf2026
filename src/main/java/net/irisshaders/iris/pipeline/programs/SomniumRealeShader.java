@@ -5,7 +5,7 @@
     Licence: GNU LGPLv3
 */
 
-package net.irisshaders.iris.pipeline.programs;
+package net.irisshaders.iris.pipeline.programs; // We have to be in this package to be able to use ShaderKey$LightingModel.
 
 import dev.dannytaylor.dtaf2026.iris.SomniumRealeProgramId;
 import dev.dannytaylor.dtaf2026.iris.SomniumRealeShaderKey;

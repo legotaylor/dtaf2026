@@ -10,6 +10,7 @@ in vec2 texCoord;
 out vec4 fragColor;
 
 void main() {
+	// Depth based bloom would be cool :)
 	vec3 baseColor = texture(InSampler, texCoord).rgb;
 	vec3 mixColor = texture(MergeSampler, texCoord).rgb;
 	fragColor = vec4(mix(mixColor, baseColor, mix(1.0, 0.5, SmoothBlockLight / 15.0) * SmoothBloomAlpha), 1.0);

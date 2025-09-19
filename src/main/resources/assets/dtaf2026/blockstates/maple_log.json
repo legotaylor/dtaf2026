@@ -1,39 +1,39 @@
 {
 	"variants": {
 		"axis=x,dtaf2026_variant=0": {
-			"model": "dtaf2026:block/maple/log/maple_log_horizontal",
+			"model": "dtaf2026:block/maple/maple_log_horizontal",
 			"x": 90,
 			"y": 90
 		},
 		"axis=y,dtaf2026_variant=0": {
-			"model": "dtaf2026:block/maple/log/maple_log"
+			"model": "dtaf2026:block/maple/maple_log"
 		},
 		"axis=z,dtaf2026_variant=0": {
-			"model": "dtaf2026:block/maple/log/maple_log_horizontal",
+			"model": "dtaf2026:block/maple/maple_log_horizontal",
 			"x": 90
 		},
 		"axis=x,dtaf2026_variant=1": {
-			"model": "dtaf2026:block/maple/log/stripped_maple_log_horizontal",
+			"model": "dtaf2026:block/maple/stripped_maple_log_horizontal",
 			"x": 90,
 			"y": 90
 		},
 		"axis=y,dtaf2026_variant=1": {
-			"model": "dtaf2026:block/maple/log/stripped_maple_log"
+			"model": "dtaf2026:block/maple/stripped_maple_log"
 		},
 		"axis=z,dtaf2026_variant=1": {
-			"model": "dtaf2026:block/maple/log/stripped_maple_log_horizontal",
+			"model": "dtaf2026:block/maple/stripped_maple_log_horizontal",
 			"x": 90
 		},
 		"axis=x,dtaf2026_variant=2": {
-			"model": "dtaf2026:block/maple/log/twice_stripped_maple_log_horizontal",
+			"model": "dtaf2026:block/maple/twice_stripped_maple_log_horizontal",
 			"x": 90,
 			"y": 90
 		},
 		"axis=y,dtaf2026_variant=2": {
-			"model": "dtaf2026:block/maple/log/twice_stripped_maple_log"
+			"model": "dtaf2026:block/maple/twice_stripped_maple_log"
 		},
 		"axis=z,dtaf2026_variant=2": {
-			"model": "dtaf2026:block/maple/log/twice_stripped_maple_log_horizontal",
+			"model": "dtaf2026:block/maple/twice_stripped_maple_log_horizontal",
 			"x": 90
 		}
 	}

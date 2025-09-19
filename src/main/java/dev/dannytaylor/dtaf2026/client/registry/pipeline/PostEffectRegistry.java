@@ -7,8 +7,8 @@
 
 package dev.dannytaylor.dtaf2026.client.registry.pipeline;
 
+import dev.dannytaylor.dtaf2026.client.registry.ClientDimensionRegistry;
 import dev.dannytaylor.dtaf2026.common.data.Data;
-import dev.dannytaylor.dtaf2026.common.registry.TagRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.PostEffectProcessor;
 import net.minecraft.client.render.DefaultFramebufferSet;
@@ -22,7 +22,7 @@ public class PostEffectRegistry {
 	public static List<PostEffect> postEffects = new ArrayList<>();
 
 	public static void bootstrap() {
-		postEffects.add(new PostEffect(Data.getSomniumRealeId(), (client) -> TagRegistry.WorldGen.Biome.isIn(client, TagRegistry.WorldGen.Biome.somnium_reale)));
+		postEffects.add(new PostEffect(Data.getSomniumRealeId(), (client) -> ClientDimensionRegistry.isSomniumReale()));
 	}
 
 	// Update to use Luminance once Luminance is updated. (depth shaders would be cool)

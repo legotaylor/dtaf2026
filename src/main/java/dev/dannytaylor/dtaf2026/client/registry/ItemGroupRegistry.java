@@ -9,6 +9,7 @@ package dev.dannytaylor.dtaf2026.client.registry;
 
 import dev.dannytaylor.dtaf2026.common.data.Data;
 import dev.dannytaylor.dtaf2026.common.registry.ItemRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.item.SupportedWoodItemSet;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.DataComponentTypes;
@@ -30,10 +31,10 @@ public class ItemGroupRegistry {
 	
 	public static void bootstrap() {
 		ItemGroupEvents.modifyEntriesEvent(dtaf2026).register((content) -> {
-			ItemRegistry.maple.addItemGroupEntries(content, false);
+			for (SupportedWoodItemSet itemSet : ItemRegistry.woodItemSets) itemSet.addItemGroupEntries(content, false);
 		});
 		ItemGroupEvents.modifyEntriesEvent(dtaf2026Creative).register((content) -> {
-			ItemRegistry.maple.addItemGroupEntries(content, true);
+			for (SupportedWoodItemSet itemSet : ItemRegistry.woodItemSets) itemSet.addItemGroupEntries(content, true);
 		});
 	}
 	

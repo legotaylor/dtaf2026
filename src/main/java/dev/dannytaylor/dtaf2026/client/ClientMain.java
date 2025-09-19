@@ -20,6 +20,7 @@ public class ClientMain implements ClientModInitializer {
 		ClientRegistry.bootstrap();
 		ClientTickEvents.START_CLIENT_TICK.register(ClientMain::tick);
 	}
+
 	public static void tick(MinecraftClient client) {
 		ScreenHelper.tick();
 	}

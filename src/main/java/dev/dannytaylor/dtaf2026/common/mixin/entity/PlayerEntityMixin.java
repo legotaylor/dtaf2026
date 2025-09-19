@@ -7,7 +7,7 @@
 
 package dev.dannytaylor.dtaf2026.common.mixin.entity;
 
-import dev.dannytaylor.dtaf2026.common.data.Data;
+import dev.dannytaylor.dtaf2026.common.registry.AttributeModifierRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.DimensionRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.TagRegistry;
 import net.minecraft.block.BedBlock;
@@ -16,7 +16,6 @@ import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
@@ -26,7 +25,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.s2c.play.PositionFlag;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -40,7 +41,6 @@ import java.util.Optional;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
-	@Unique private static final EntityAttributeModifier somniumRealeModifier;
 	@Unique private static final TrackedData<Optional<BlockPos>> lastBedPos;
 	@Shadow public abstract void tick();
 	@Shadow private int sleepTimer;
@@ -84,7 +84,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 				if (!this.isSleeping() && !currentWorld.equals(DimensionRegistry.somniumReale.world())) clearLastBedPos();
 			}
 		}
-		this.updateSomniumReale();
+		this.updateSomniumRealeBiome();
 	}
 
 	@Unique
@@ -99,14 +99,18 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
 	@Inject(method = "applyDamage", at = @At("HEAD"), cancellable = true)
 	protected void dtaf2026$applyDamage(ServerWorld world, DamageSource source, float amount, CallbackInfo ci) {
-		TeleportTarget teleportTarget = createTeleportTarget(World.OVERWORLD, true);
-		if (teleportTarget != null) {
-			if (world.getRegistryKey() == DimensionRegistry.somniumReale.world()) {
-				if (this.getHealth() - amount < 1.0F) {
-					this.setVelocity(Vec3d.ZERO);
-					this.teleportTo(teleportTarget);
-					this.setHealth(1.0F);
-					ci.cancel();
+		// Peaceful, Easy, Normal difficulties will prevent death in the Somnium Reale dimension.
+		// You can die on Hard difficulty in the Somnium Reale dimension.
+		if (world.getDifficulty().ordinal() <= 2) {
+			TeleportTarget teleportTarget = createTeleportTarget(World.OVERWORLD, true);
+			if (teleportTarget != null) {
+				if (world.getRegistryKey() == DimensionRegistry.somniumReale.world()) {
+					if (this.getHealth() - amount < 1.0F) {
+						this.setVelocity(Vec3d.ZERO);
+						this.teleportTo(teleportTarget);
+						this.setHealth(1.0F);
+						ci.cancel();
+					}
 				}
 			}
 		}
@@ -134,16 +138,15 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 	}
 
 	@Unique
-	private void updateSomniumReale() {
+	private void updateSomniumRealeBiome() {
 		EntityAttributeInstance entityAttributeInstance = this.getAttributeInstance(EntityAttributes.SCALE);
 		if (entityAttributeInstance != null) {
-			entityAttributeInstance.removeModifier(somniumRealeModifier.id());
-			if (TagRegistry.WorldGen.Biome.isIn(this.getWorld(), this.getBlockPos(), TagRegistry.WorldGen.Biome.somnium_reale)) entityAttributeInstance.addTemporaryModifier(somniumRealeModifier);
+			entityAttributeInstance.removeModifier(AttributeModifierRegistry.somniumRealeBiomeModifier.id());
+			if (TagRegistry.WorldGen.Biome.isIn(this.getWorld(), this.getBlockPos(), TagRegistry.WorldGen.Biome.somnium_reale)) entityAttributeInstance.addTemporaryModifier(AttributeModifierRegistry.somniumRealeBiomeModifier);
 		}
 	}
 
 	static {
-		somniumRealeModifier = new EntityAttributeModifier(Data.getSomniumRealeId(), -0.35F, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 		lastBedPos = DataTracker.registerData(PlayerEntityMixin.class, TrackedDataHandlerRegistry.OPTIONAL_BLOCK_POS);
 	}
 }

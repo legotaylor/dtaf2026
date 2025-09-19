@@ -9,14 +9,22 @@ package dev.dannytaylor.dtaf2026.common.registry.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.dannytaylor.dtaf2026.common.data.Data;
-import net.minecraft.block.*;
+import dev.dannytaylor.dtaf2026.common.registry.BlockRegistry;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.FallingBlockEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -46,8 +54,7 @@ public class SupportedBlock extends Block {
 	}
 
 	public BlockState getPlacementState(ItemPlacementContext ctx) {
-		BlockState state = super.getPlacementState(ctx);
-		return state != null ? state.with(distance, distance_max) : null;
+		return super.getPlacementState(ctx).with(distance, distance_max);
 	}
 
 	protected void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
@@ -65,34 +72,38 @@ public class SupportedBlock extends Block {
 	}
 
 	protected void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-		BlockState newState = state.with(distance, calculateDistance(world, pos, isOf(), state.get(gravity)));
-		if (newState.get(distance) == distance_max) {
-			if (state.get(distance) == distance_max) FallingBlockEntity.spawnFromBlock(world, pos, newState);
+		BlockState blockState = state.with(distance, calculateDistance(world, pos, isOf(), state.get(gravity)));
+		if (blockState.get(distance) == distance_max) {
+			if (state.get(distance) == distance_max) FallingBlockEntity.spawnFromBlock(world, pos, getFallingBlockState(blockState));
 			else world.breakBlock(pos, true);
-		} else if (state != newState) world.setBlockState(pos, newState, 3);
+		} else if (state != blockState) world.setBlockState(pos, blockState, 3);
+	}
+
+	public BlockState getFallingBlockState(BlockState state) {
+		return state;
 	}
 
 	public static int calculateDistance(BlockView world, BlockPos pos, IsOfBlock isOfBlock, boolean gravity) {
 		if (!gravity) return 0;
 		BlockPos downPos = pos.offset(Direction.DOWN);
 		BlockState blockState = world.getBlockState(downPos);
-		int i = distance_max;
+		int distance = distance_max;
 		if (isOfBlock.call(blockState)) {
-			i = blockState.get(distance);
-		} else if (blockState.isSideSolidFullSquare(world, downPos, Direction.UP)) {
+			distance = blockState.isSideSolidFullSquare(world, downPos, Direction.UP) ? blockState.get(SupportedBlock.distance) : distance_max;
+		} else if (!blockState.isReplaceable()) {
 			return 0;
 		}
 
 		for (Direction direction : Direction.Type.HORIZONTAL) {
 			BlockState blockState2 = world.getBlockState(pos.offset(direction));
 			if (isOfBlock.call(blockState2)) {
-				i = Math.min(i, blockState2.get(distance) + 1);
-				if (i == 1) {
+				distance = Math.min(distance, blockState2.get(SupportedBlock.distance) + 1);
+				if (distance == 1) {
 					break;
 				}
 			}
 		}
-		return Math.clamp(i, 0, 7);
+		return Math.clamp(distance, 0, 7);
 	}
 
 	public IsOfBlock isOf() {
@@ -102,5 +113,19 @@ public class SupportedBlock extends Block {
 	@FunctionalInterface
 	public interface IsOfBlock {
 		boolean call(BlockState state);
+	}
+
+	protected ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state, boolean includeData) {
+		return new ItemStack(getItem(this.getRegistryEntry().registryKey(), !state.get(gravity)));
+	}
+
+	public static Item getItem(RegistryKey<Block> block, boolean creative) {
+		return Registries.ITEM.get(getId(block.getValue(), creative));
+	}
+
+	public static Identifier getId(Identifier id, boolean creative) {
+		// We assume all SupportedLogBlock's use the same naming system.
+		// If you're making an addon mod, I would suggest using the same naming system.
+		return id.withPrefixedPath(BlockRegistry.getIdPrefix(creative));
 	}
 }

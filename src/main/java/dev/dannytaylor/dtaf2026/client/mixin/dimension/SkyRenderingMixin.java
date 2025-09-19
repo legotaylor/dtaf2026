@@ -14,14 +14,15 @@ import com.mojang.blaze3d.systems.RenderPass;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.textures.GpuTextureView;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import dev.dannytaylor.dtaf2026.client.data.ClientData;
+import dev.dannytaylor.dtaf2026.client.registry.ClientDimensionRegistry;
 import dev.dannytaylor.dtaf2026.client.registry.PipelineRegistry;
-import dev.dannytaylor.dtaf2026.client.registry.dimension.SomniumRealeEffect;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.BufferBuilder;
+import net.minecraft.client.render.BuiltBuffer;
+import net.minecraft.client.render.SkyRendering;
+import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.BufferAllocator;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import org.joml.*;
@@ -52,7 +53,7 @@ public abstract class SkyRenderingMixin {
 
 	@Inject(method = "renderStars", at = @At("RETURN"))
 	private void dtaf2026$renderBigStars(float brightness, MatrixStack matrices, CallbackInfo ci) {
-		if (this.isSomniumReale()) {
+		if (ClientDimensionRegistry.isSomniumReale()) {
 			renderStars(matrices, brightness, true);
 			renderStars(matrices, brightness, false);
 		}
@@ -68,7 +69,7 @@ public abstract class SkyRenderingMixin {
 		GpuTextureView gpuTextureView2 = MinecraftClient.getInstance().getFramebuffer().getDepthAttachmentView();
 		GpuBuffer gpuBuffer = isBig ? this.somniumRealeIndexBuffer.getIndexBuffer(this.somniumRealeStarIndexCount) : this.somniumRealeIndexBuffer2.getIndexBuffer(this.somniumRealeStarIndexCount2);
 		GpuBufferSlice gpuBufferSlice = RenderSystem.getDynamicUniforms().write(matrix4fStack, new Vector4f(brightness, brightness, brightness, brightness), new Vector3f(), new Matrix4f(), 0.0f);
-		try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "Stars", gpuTextureView, OptionalInt.empty(), gpuTextureView2, OptionalDouble.empty());){
+		try (RenderPass renderPass = RenderSystem.getDevice().createCommandEncoder().createRenderPass(() -> "Stars", gpuTextureView, OptionalInt.empty(), gpuTextureView2, OptionalDouble.empty())){
 			renderPass.setPipeline(renderPipeline);
 			RenderSystem.bindDefaultUniforms(renderPass);
 			renderPass.setUniform("DynamicTransforms", gpuBufferSlice);
@@ -96,13 +97,7 @@ public abstract class SkyRenderingMixin {
 
 	@Unique
 	private void updatePipeline(RenderPass renderPass, RenderPipeline pipeline, RenderPipeline somniumRealePipeline) {
-		renderPass.setPipeline(isSomniumReale() ? somniumRealePipeline : pipeline);
-	}
-
-	@Unique
-	private boolean isSomniumReale() {
-		ClientWorld world = ClientData.getMinecraft().world;
-		return world != null && world.getDimensionEffects() instanceof SomniumRealeEffect;
+		renderPass.setPipeline(ClientDimensionRegistry.isSomniumReale() ? somniumRealePipeline : pipeline);
 	}
 
 	@Unique

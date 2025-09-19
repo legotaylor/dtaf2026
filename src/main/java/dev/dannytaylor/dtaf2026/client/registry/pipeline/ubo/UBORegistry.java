@@ -31,7 +31,7 @@ public class UBORegistry {
 				skyLight = ClientData.getMinecraft().world.getLightLevel(LightType.SKY, blockPos);
 				blockLight = ClientData.getMinecraft().world.getLightLevel(LightType.BLOCK, blockPos);
 			}
-			settings.set(light, skyLight, blockLight, Config.instance.bloomAlpha.value());
+			settings.set(light, skyLight, blockLight, Config.instance.bloomAlpha.value(), ClientData.getMinecraft().world == null ? 0L : ClientData.getMinecraft().world.getTime());
 		}));
 	}
 

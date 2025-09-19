@@ -12,6 +12,8 @@
 
 	"item.dtaf2026.maple_bark": "Maple Bark",
 
+	"block.dtaf2026.maple_sapling": "Maple Sapling",
+
 	"block.dtaf2026.maple_log": "Maple Log",
 	"block.dtaf2026.stripped_maple_log": "Stripped Maple Log",
 	"block.dtaf2026.twice_stripped_maple_log": "Twice Stripped Maple Log",
@@ -29,5 +31,11 @@
 	"block.dtaf2026.creative_twice_stripped_maple_wood": "Twice Stripped Maple Wood (Creative)",
 
 	"block.dtaf2026.maple_planks": "Maple Planks",
-	"block.dtaf2026.creative_maple_planks": "Maple Planks (Creative)"
+	"block.dtaf2026.creative_maple_planks": "Maple Planks (Creative)",
+
+	"block.dtaf2026.maple_slab": "Maple Slab",
+	"block.dtaf2026.creative_maple_slab": "Maple Slab (Creative)",
+
+	"block.dtaf2026.maple_leaves": "Maple Leaves",
+	"block.dtaf2026.creative_maple_leaves": "Maple Leaves (Creative)"
 }

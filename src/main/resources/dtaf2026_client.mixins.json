@@ -3,7 +3,9 @@
 	"package": "dev.dannytaylor.dtaf2026.client.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
+		"block.RenderLayersMixin",
 		"dimension.DimensionEffectsMixin",
+		"dimension.GameRendererMixin",
 		"dimension.SkyRenderingMixin",
 		"gui.AccessibilityOnboardingScreenMixin",
 		"gui.ClientPlayNetworkHandlerMixin",
@@ -14,6 +16,7 @@
 		"gui.LogoDrawerMixin",
 		"gui.MinecraftClientMixin",
 		"gui.SplashTextRendererMixin",
+		"shaders.CloudRendererMixin",
 		"shaders.GameRendererMixin",
 		"shaders.RenderSystemMixin"
 	],

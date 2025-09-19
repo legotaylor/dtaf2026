@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:block",
+	"pools": [
+		{
+			"bonus_rolls": 0.0,
+			"conditions": [
+				{
+					"condition": "minecraft:survives_explosion"
+				}
+			],
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "dtaf2026:maple_planks"
+				}
+			],
+			"rolls": 1.0
+		}
+	],
+	"random_sequence": "dtaf2026:blocks/maple_planks"
+}

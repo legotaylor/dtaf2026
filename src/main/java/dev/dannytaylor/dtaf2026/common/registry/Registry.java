@@ -13,5 +13,6 @@ public class Registry {
 		ItemRegistry.bootstrap();
 		FuelRegistry.bootstrap();
 		DimensionRegistry.bootstrap();
+		AttributeModifierRegistry.bootstrap();
 	}
 }

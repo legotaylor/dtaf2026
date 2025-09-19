@@ -7,9 +7,11 @@
 
 package dev.dannytaylor.dtaf2026.client.registry;
 
+import dev.dannytaylor.dtaf2026.client.data.ClientData;
 import dev.dannytaylor.dtaf2026.client.registry.dimension.SomniumRealeEffect;
 import dev.dannytaylor.dtaf2026.common.registry.DimensionRegistry;
 import net.minecraft.client.render.DimensionEffects;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
@@ -28,5 +30,13 @@ public class ClientDimensionRegistry {
 
 	public static DimensionEffects getEffectType(Identifier id) {
 		return effectsMap.getOrDefault(id, null);
+	}
+
+	public static boolean isSomniumReale(ClientWorld world) {
+		return world != null && world.getDimensionEffects() instanceof SomniumRealeEffect;
+	}
+
+	public static boolean isSomniumReale() {
+		return isSomniumReale(ClientData.getMinecraft().world);
 	}
 }
