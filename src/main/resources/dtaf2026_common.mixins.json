@@ -3,7 +3,10 @@
 	"package": "dev.dannytaylor.dtaf2026.common.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"entity.PlayerEntityMixin"
+		"enchanted_status_effect.AnvilScreenHandlerMixin",
+		"enchanted_status_effect.PlayerEntityMixin",
+		"entity.PlayerEntityMixin",
+		"item.ItemMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

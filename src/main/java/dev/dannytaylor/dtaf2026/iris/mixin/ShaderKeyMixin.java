@@ -7,6 +7,7 @@
 
 package dev.dannytaylor.dtaf2026.iris.mixin;
 
+import dev.dannytaylor.dtaf2026.common.data.Data;
 import dev.dannytaylor.dtaf2026.iris.IrisMain;
 import dev.dannytaylor.dtaf2026.client.util.UnsafeEnum;
 import net.irisshaders.iris.pipeline.programs.ShaderKey;
@@ -22,6 +23,7 @@ import java.util.Map;
 
 @Mixin(value = ShaderKey.class, remap = false, priority = 100)
 public abstract class ShaderKeyMixin {
+	@SuppressWarnings("deprecation")
 	@Inject(method = "<clinit>", at = @At("RETURN"))
 	private static void dtaf2026$addCustomShader(CallbackInfo ci) {
 		IrisMain.registerShaderKeys();
@@ -37,7 +39,7 @@ public abstract class ShaderKeyMixin {
 				UnsafeEnum.UNSAFE.putObject(ShaderKey.class, UnsafeEnum.UNSAFE.staticFieldOffset(Arrays.stream(ShaderKey.class.getDeclaredFields()).filter(f -> f.getType().equals(ShaderKey[].class)).findFirst().orElseThrow()), newValues);
 				if (shaderKey.pipeline() != null) IrisPipelinesAccessor.dtaf2026$invokeAssignToMain(shaderKey.pipeline(), (p) -> customShaderKey);
 			} catch (Exception error) {
-				error.printStackTrace();
+				Data.getLogger().error("Failed to add custom shader key: {}", error.getLocalizedMessage());
 			}
 		});
 	}

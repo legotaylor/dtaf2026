@@ -36,14 +36,16 @@ public class TagRegistry {
 	}
 
 	public static class Item {
+		public static final TagKey<net.minecraft.item.Item> arcaNocturna;
 		public static final TagKey<net.minecraft.item.Item> bark;
+		public static final TagKey<net.minecraft.item.Item> relic;
 		public static final TagKey<net.minecraft.item.Item> supportedLogs;
-		public static final TagKey<net.minecraft.item.Item> supportedLeaves;
 
 		static {
+			arcaNocturna = TagKey.of(RegistryKeys.ITEM, Data.idOf("arca_nocturna"));
 			bark = TagKey.of(RegistryKeys.ITEM, Data.idOf("bark"));
+			relic = TagKey.of(RegistryKeys.ITEM, Data.idOf("relic"));
 			supportedLogs = TagKey.of(RegistryKeys.ITEM, Data.idOf("supported_logs"));
-			supportedLeaves = TagKey.of(RegistryKeys.ITEM, Data.idOf("supported_leaves"));
 		}
 	}
 

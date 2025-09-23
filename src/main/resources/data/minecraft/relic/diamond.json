@@ -1,0 +1,16 @@
+{
+	"type": "dtaf2026:status_effect",
+	"value": [
+		{
+			"type": "minecraft:resistance",
+			"value": {
+				"amplifier": 0,
+				"show_particles": false,
+				"show_icon": false
+			}
+		}
+	],
+	"conditions": [
+		{ "type": "dtaf2026:arca_nocturna" }
+	]
+}

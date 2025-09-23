@@ -37,6 +37,7 @@ public class PostEffectRegistry {
 			this.shouldRender = shouldRender;
 		}
 
+		@SuppressWarnings("deprecation")
 		public void render(MinecraftClient client) {
 			try {
 				if (this.shouldRender.shouldRender(client)) {

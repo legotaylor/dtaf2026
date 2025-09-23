@@ -52,6 +52,7 @@ public class SomniumRealeShader {
 		return registeredShaderKeys;
 	}
 
+	@SuppressWarnings("ClassEscapesDefinedScope")
 	public enum LightingModel {
 		FULLBRIGHT(ShaderKey.LightingModel.FULLBRIGHT),
 		LIGHTMAP(ShaderKey.LightingModel.LIGHTMAP),

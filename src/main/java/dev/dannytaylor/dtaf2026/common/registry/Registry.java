@@ -7,6 +7,8 @@
 
 package dev.dannytaylor.dtaf2026.common.registry;
 
+import dev.dannytaylor.dtaf2026.common.registry.relic.Relic;
+
 public class Registry {
 	public static void bootstrap() {
 		BlockRegistry.bootstrap();
@@ -14,5 +16,7 @@ public class Registry {
 		FuelRegistry.bootstrap();
 		DimensionRegistry.bootstrap();
 		AttributeModifierRegistry.bootstrap();
+		StatusEffectRegistry.bootstrap();
+		Relic.bootstrap();
 	}
 }

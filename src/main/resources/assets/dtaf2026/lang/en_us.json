@@ -37,5 +37,39 @@
 	"block.dtaf2026.creative_maple_slab": "Maple Slab (Creative)",
 
 	"block.dtaf2026.maple_leaves": "Maple Leaves",
-	"block.dtaf2026.creative_maple_leaves": "Maple Leaves (Creative)"
+	"block.dtaf2026.creative_maple_leaves": "Maple Leaves (Creative)",
+
+	"item.dtaf2026.arca_nocturna": "Arca Nocturna",
+	"dtaf2026.arca_nocturna_contents.contains": "%s",
+	"dtaf2026.arca_nocturna_contents.empty": "Empty",
+	"dtaf2026.relic": "%s",
+	"dtaf2026.relic.none": "Unknown Relic!",
+	"dtaf2026.relic.obfuscated": "I... AM STEVE!",
+
+	"item.dtaf2026.jasper": "Jasper",
+	"dtaf2026.relic.jasper": "Grants Resistance V when active inside an Arca Nocturna",
+
+	"tag.block.dtaf2026.supported_leaves": "Supported Leaves",
+	"tag.block.dtaf2026.supported_logs": "Supported Logs",
+	"tag.block.dtaf2026.supports_supported_leaves": "Supports Supported Leaves",
+
+	"tag.enchantment.dtaf2026.fully_breaks_supported_logs": "Fully Breaks Supported Logs",
+
+	"tag.item.dtaf2026.arca_nocturna": "Arca Nocturna",
+	"tag.item.dtaf2026.bark": "Bark",
+	"tag.item.dtaf2026.relic": "Relic",
+	"tag.item.dtaf2026.supported_logs": "Supported Logs",
+
+	"tag.worldgen.biome.dtaf2026.is_somnium_reale": "Is Somnium Reale",
+
+	"minecraft.relic.amethyst_shard": "Grants Regeneration when active inside an Arca Nocturna",
+	"minecraft.relic.diamond": "Grants Resistance when active inside an Arca Nocturna",
+	"minecraft.relic.emerald": "Grants Night Vision when active inside an Arca Nocturna",
+	"minecraft.relic.heart_of_the_sea": "Grants Conduit Power when active inside an Arca Nocturna",
+	"minecraft.relic.lapis_lazuli": "Grants Enchanting when active inside an Arca Nocturna",
+	"minecraft.relic.prismarine_shard": "Grants Water Breathing when active inside an Arca Nocturna",
+	"minecraft.relic.quartz": "Grants Fire Resistance when active inside an Arca Nocturna",
+	"minecraft.relic.redstone": "Grants Speed when active inside an Arca Nocturna",
+
+	"effect.dtaf2026.enchanted": "Enchanted"
 }

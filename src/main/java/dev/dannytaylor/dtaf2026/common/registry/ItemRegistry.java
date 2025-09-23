@@ -8,7 +8,11 @@
 package dev.dannytaylor.dtaf2026.common.registry;
 
 import dev.dannytaylor.dtaf2026.common.data.Data;
+import dev.dannytaylor.dtaf2026.common.registry.item.ArcaNocturnaItem;
+import dev.dannytaylor.dtaf2026.common.registry.item.ComponentTypeRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.item.SupportedWoodItemSet;
+import dev.dannytaylor.dtaf2026.common.registry.item.component.ArcaNocturnaContentsComponent;
+import dev.dannytaylor.dtaf2026.common.registry.item.component.RelicComponent;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -17,6 +21,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +31,8 @@ import java.util.function.Function;
 public class ItemRegistry {
 	public static final List<SupportedWoodItemSet> woodItemSets;
 	public static final SupportedWoodItemSet maple;
+	public static final Item arcaNocturna;
+	public static final Item jasper;
 
 	private static RegistryKey<Item> keyOf(Identifier path) {
 		return RegistryKey.of(RegistryKeys.ITEM, path);
@@ -43,8 +50,9 @@ public class ItemRegistry {
 		return register(block, factory, new Item.Settings());
 	}
 
+	@SuppressWarnings("deprecation")
 	public static Item register(Block block, BiFunction<Block, Item.Settings, Item> factory, Item.Settings settings) {
-		return register(keyOf(block.getRegistryEntry().registryKey()), (Function)((itemSettings) -> (Item)factory.apply(block, (Item.Settings) itemSettings)), settings.useBlockPrefixedTranslationKey());
+		return register(keyOf(block.getRegistryEntry().registryKey()), (itemSettings) -> factory.apply(block, itemSettings), settings.useBlockPrefixedTranslationKey());
 	}
 
 	public static Item register(Identifier id, Function<Item.Settings, Item> factory, Item.Settings settings) {
@@ -55,6 +63,15 @@ public class ItemRegistry {
 		return register(Data.idOf(id), factory, settings);
 	}
 
+	public static Item registerRelic(Identifier id, Function<Item.Settings, Item> factory, Item.Settings settings, Identifier relicId) {
+		return register(id, factory, relic(settings, relicId));
+	}
+
+	public static Item registerRelic(String id, Function<Item.Settings, Item> factory, Item.Settings settings) {
+		Identifier identifier = Data.idOf(id);
+		return registerRelic(identifier, factory, settings, identifier);
+	}
+
 	public static Item register(RegistryKey<Item> key, Function<Item.Settings, Item> factory, Item.Settings settings) {
 		Item item = factory.apply(settings.registryKey(key));
 		if (item instanceof BlockItem blockItem) blockItem.appendBlocks(Item.BLOCK_ITEMS, item);
@@ -62,6 +79,7 @@ public class ItemRegistry {
 	}
 
 	public static void bootstrap() {
+		ComponentTypeRegistry.bootstrap();
 	}
 
 	public static SupportedWoodItemSet register(SupportedWoodItemSet.Builder builder) {
@@ -70,8 +88,18 @@ public class ItemRegistry {
 		return itemSet;
 	}
 
+	public static Item.Settings relic(Item.Settings settings, Identifier relicId) {
+		return settings.component(ComponentTypeRegistry.relic, new RelicComponent(relicId));
+	}
+
+	public static Item.Settings arcaNocturna(Item.Settings settings, ArcaNocturnaContentsComponent arcaNocturnaContentsComponent) {
+		return settings.component(ComponentTypeRegistry.arcaNocturnaContents, arcaNocturnaContentsComponent);
+	}
+
 	static {
 		woodItemSets = new ArrayList<>();
 		maple = register(SupportedWoodItemSet.builder(BlockRegistry.maple));
+		arcaNocturna = register("arca_nocturna", ArcaNocturnaItem::new, arcaNocturna(new Item.Settings().maxCount(1), ArcaNocturnaContentsComponent.empty).rarity(Rarity.RARE));
+		jasper = registerRelic("jasper", Item::new, new Item.Settings());
 	}
 }

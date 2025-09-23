@@ -10,6 +10,8 @@ package dev.dannytaylor.dtaf2026.client.registry;
 public class ClientRegistry {
 	public static void bootstrap() {
 		ClientBlockRegistry.bootstrap();
+		ItemModelRegistry.bootstrap();
+		TooltipRegistry.bootstrap();
 		ItemGroupRegistry.bootstrap();
 		ClientDimensionRegistry.bootstrap();
 		PipelineRegistry.bootstrap();

@@ -8,6 +8,8 @@
 		"dimension.DimensionEffectsMixin",
 		"dimension.GameRendererMixin",
 		"dimension.SkyRenderingMixin",
+		"enchanted_status_effect.AnvilScreenMixin",
+		"enchanted_status_effect.EnchantmentScreenMixin",
 		"gui.AccessibilityOnboardingScreenMixin",
 		"gui.ClientPlayNetworkHandlerMixin",
 		"gui.DownloadingTerrainScreenMixin",
@@ -19,6 +21,7 @@
 		"gui.SplashTextRendererMixin",
 		"shaders.CloudRendererMixin",
 		"shaders.GameRendererMixin",
+		"shaders.LightmapTextureManagerMixin",
 		"shaders.RenderSystemMixin"
 	],
 	"injectors": {

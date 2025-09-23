@@ -28,7 +28,7 @@ layout(std140) uniform SomniumReale {
 #define WorldTime time.z // Current world time (% 24000)
 #define TickProgress time.w // Current tick progress
 
-float Multiplier = PhotosensitiveMode < 2 ? (PhotosensitiveMode > 0 ? 0.125 : 1.0) : 0.0; // Returns effects multiplier based on PhotosensitiveMode 0=1.0, 1=0.125, 2=0.0
+float Multiplier = PhotosensitiveMode < 2 ? (PhotosensitiveMode > 0 ? 0.125 : 1.0) : 0.0; // Returns value multiplier based on PhotosensitiveMode 0=1.0, 1=0.125, 2=0.0
 
 // Uses SmoothTime to cycle color between pink and blue, depending on PhotosensitiveMode; Used in <dtaf2026:rendertype_clouds.fsh>
 vec4 getCloudsColor(vec4 color) {

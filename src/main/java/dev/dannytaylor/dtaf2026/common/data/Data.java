@@ -9,9 +9,12 @@ package dev.dannytaylor.dtaf2026.common.data;
 
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Data {
 	private static final String modId;
+	private static final Logger logger;
 
 	public static Identifier idOf(String path) {
 		return Identifier.of(getModId(), path);
@@ -25,11 +28,16 @@ public class Data {
 		return modId;
 	}
 
+	public static Logger getLogger() {
+		return logger;
+	}
+
 	public static boolean isModInstalled(String modId) {
 		return FabricLoader.getInstance().isModLoaded(modId);
 	}
 
 	static {
 		modId = "dtaf2026";
+		logger = LoggerFactory.getLogger(getModId());
 	}
 }

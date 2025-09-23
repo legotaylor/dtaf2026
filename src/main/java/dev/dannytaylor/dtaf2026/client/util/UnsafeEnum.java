@@ -20,6 +20,7 @@ import java.util.Map;
 public class UnsafeEnum {
 	public static final Unsafe UNSAFE;
 
+	@SuppressWarnings({"unchecked", "deprecation"})
 	public static <T extends Enum<?>> T createEnumInstance(Class<T> enumClass, String name, int ordinal, Map<String, Object> extraFields) {
 		try {
 			T instance = (T) UNSAFE.allocateInstance(enumClass);

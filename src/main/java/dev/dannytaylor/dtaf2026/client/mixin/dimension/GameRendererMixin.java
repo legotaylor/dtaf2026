@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
 	@Redirect(method = "updateFovMultiplier", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/AbstractClientPlayerEntity;getFovMultiplier(ZF)F"))
-	private float dtaf2025$updateFovMultiplier(AbstractClientPlayerEntity player, boolean firstPerson, float fovEffectScale) {
+	private float dtaf2026$updateFovMultiplier(AbstractClientPlayerEntity player, boolean firstPerson, float fovEffectScale) {
 		float fov = player.getFovMultiplier(firstPerson, fovEffectScale);
 		if (Config.instance.scaleFOV.value()) {
 			EntityAttributeInstance entityAttributeInstance = player.getAttributeInstance(EntityAttributes.SCALE);

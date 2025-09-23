@@ -10,6 +10,7 @@ package dev.dannytaylor.dtaf2026.client.mixin.gui;
 import dev.dannytaylor.dtaf2026.client.gui.ScreenHelper;
 import dev.dannytaylor.dtaf2026.client.gui.SomniumRealeWorldEntryReason;
 import dev.dannytaylor.dtaf2026.client.util.UnsafeEnum;
+import dev.dannytaylor.dtaf2026.common.data.Data;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.DownloadingTerrainScreen;
@@ -27,10 +28,11 @@ import java.util.Map;
 public abstract class DownloadingTerrainScreenMixin {
 	@Shadow @Final private DownloadingTerrainScreen.WorldEntryReason worldEntryReason;
 
+	@SuppressWarnings("deprecation")
 	@Mixin(value = DownloadingTerrainScreen.WorldEntryReason.class, priority = 100)
 	public static class WorldEntryReasonMixin {
 		@Inject(method = "<clinit>", at = @At("RETURN"))
-		private static void dtaf2026$addCustomProgram(CallbackInfo ci) {
+		private static void dtaf2026$addCustomWorldEntryReason(CallbackInfo ci) {
 			SomniumRealeWorldEntryReason.bootstrap();
 			SomniumRealeWorldEntryReason.getWorldEntryReasons().forEach((id) -> {
 				try {
@@ -42,7 +44,7 @@ public abstract class DownloadingTerrainScreenMixin {
 					newValues[newValues.length - 1] = customReason;
 					UnsafeEnum.UNSAFE.putObject(DownloadingTerrainScreen.WorldEntryReason.class, UnsafeEnum.UNSAFE.staticFieldOffset(Arrays.stream(DownloadingTerrainScreen.WorldEntryReason.class.getDeclaredFields()).filter(f -> f.getType().equals(DownloadingTerrainScreen.WorldEntryReason[].class)).findFirst().orElseThrow()), newValues);
 				} catch (Exception error) {
-					error.printStackTrace();
+					Data.getLogger().error("Failed to add custom world entry reason: {}", error.getLocalizedMessage());
 				}
 			});
 		}

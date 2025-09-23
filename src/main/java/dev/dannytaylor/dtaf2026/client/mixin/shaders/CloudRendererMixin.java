@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Mixin(CloudRenderer.class)
 public abstract class CloudRendererMixin {
 	@ModifyArg(at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderPass;setPipeline(Lcom/mojang/blaze3d/pipeline/RenderPipeline;)V"), method = "renderClouds")
-	private RenderPipeline dtaf2025$renderClouds(RenderPipeline pipeline) {
+	private RenderPipeline dtaf2026$renderClouds(RenderPipeline pipeline) {
 		return ClientDimensionRegistry.isSomniumReale(ClientData.getMinecraft().world) ? (ClientData.getMinecraft().options.getCloudRenderModeValue() == CloudRenderMode.FANCY ? PipelineRegistry.clouds : PipelineRegistry.flatClouds) : pipeline;
 	}
 }

@@ -1,0 +1,31 @@
+{
+	"model": {
+		"type": "minecraft:select",
+		"property": "minecraft:display_context",
+		"cases": [
+			{
+				"when": "gui",
+				"model": {
+					"type": "minecraft:composite",
+					"models": [
+						{
+							"type": "minecraft:model",
+							"model": "dtaf2026:item/arca_nocturna/arca_nocturna_back"
+						},
+						{
+							"type": "dtaf2026:arca_nocturna/item"
+						},
+						{
+							"type": "minecraft:model",
+							"model": "dtaf2026:item/arca_nocturna/arca_nocturna_front"
+						}
+					]
+				}
+			}
+		],
+		"fallback": {
+			"type": "minecraft:model",
+			"model": "dtaf2026:item/arca_nocturna/arca_nocturna"
+		}
+	}
+}

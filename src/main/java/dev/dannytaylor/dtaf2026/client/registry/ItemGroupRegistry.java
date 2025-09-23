@@ -32,6 +32,8 @@ public class ItemGroupRegistry {
 	public static void bootstrap() {
 		ItemGroupEvents.modifyEntriesEvent(dtaf2026).register((content) -> {
 			for (SupportedWoodItemSet itemSet : ItemRegistry.woodItemSets) itemSet.addItemGroupEntries(content, false);
+			content.add(ItemRegistry.arcaNocturna.getDefaultStack());
+			content.add(ItemRegistry.jasper.getDefaultStack());
 		});
 		ItemGroupEvents.modifyEntriesEvent(dtaf2026Creative).register((content) -> {
 			for (SupportedWoodItemSet itemSet : ItemRegistry.woodItemSets) itemSet.addItemGroupEntries(content, true);
