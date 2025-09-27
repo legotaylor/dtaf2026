@@ -18,6 +18,7 @@ import net.minecraft.util.Identifier;
 
 public class StatusEffectRegistry {
 	public static final RegistryEntry<StatusEffect> enchanted;
+	public static final RegistryEntry<StatusEffect> sureLanding;
 
 	public static RegistryEntry<StatusEffect> register(Identifier id, StatusEffect statusEffect) {
 		return Registry.registerReference(Registries.STATUS_EFFECT, id, statusEffect);
@@ -32,5 +33,6 @@ public class StatusEffectRegistry {
 
 	static {
 		enchanted = register("enchanted", new SomniumRealeStatusEffect(StatusEffectCategory.BENEFICIAL, 9347907));
+		sureLanding = register("sure_landing", new SomniumRealeStatusEffect(StatusEffectCategory.BENEFICIAL, 8446161));
 	}
 }

@@ -14,6 +14,9 @@ import dev.dannytaylor.dtaf2026.common.registry.item.SupportedWoodItemSet;
 import dev.dannytaylor.dtaf2026.common.registry.item.component.ArcaNocturnaContentsComponent;
 import dev.dannytaylor.dtaf2026.common.registry.item.component.RelicComponent;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.vehicle.BoatEntity;
+import net.minecraft.entity.vehicle.ChestBoatEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -83,7 +86,11 @@ public class ItemRegistry {
 	}
 
 	public static SupportedWoodItemSet register(SupportedWoodItemSet.Builder builder) {
-		SupportedWoodItemSet itemSet = builder.build();
+		return register(builder, false, null, null);
+	}
+
+	public static SupportedWoodItemSet register(SupportedWoodItemSet.Builder builder, boolean raft, EntityType<BoatEntity> boatEntityEntityType, EntityType<ChestBoatEntity> chestBoatEntityEntityType) {
+		SupportedWoodItemSet itemSet = builder.build(raft, boatEntityEntityType, chestBoatEntityEntityType);
 		woodItemSets.add(itemSet);
 		return itemSet;
 	}
@@ -98,7 +105,7 @@ public class ItemRegistry {
 
 	static {
 		woodItemSets = new ArrayList<>();
-		maple = register(SupportedWoodItemSet.builder(BlockRegistry.maple));
+		maple = register(SupportedWoodItemSet.builder(BlockRegistry.maple), false, EntityRegistry.mapleBoat, EntityRegistry.mapleChestBoat);
 		arcaNocturna = register("arca_nocturna", ArcaNocturnaItem::new, arcaNocturna(new Item.Settings().maxCount(1), ArcaNocturnaContentsComponent.empty).rarity(Rarity.RARE));
 		jasper = registerRelic("jasper", Item::new, new Item.Settings());
 	}

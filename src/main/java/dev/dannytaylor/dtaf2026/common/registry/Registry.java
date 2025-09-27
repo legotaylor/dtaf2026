@@ -11,6 +11,7 @@ import dev.dannytaylor.dtaf2026.common.registry.relic.Relic;
 
 public class Registry {
 	public static void bootstrap() {
+		EntityRegistry.bootstrap();
 		BlockRegistry.bootstrap();
 		ItemRegistry.bootstrap();
 		FuelRegistry.bootstrap();

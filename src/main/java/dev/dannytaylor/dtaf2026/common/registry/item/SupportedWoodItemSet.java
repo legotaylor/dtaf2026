@@ -11,7 +11,10 @@ import dev.dannytaylor.dtaf2026.common.registry.BlockRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.ItemRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.block.SupportedWoodBlockSet;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.vehicle.AbstractBoatEntity;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.BoatItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.Rarity;
 
@@ -20,12 +23,16 @@ public class SupportedWoodItemSet {
 	public final Blocks creativeBlocks;
 	public final Item bark;
 	public final Item sapling;
+	public final Item boat;
+	public final Item chestBoat;
 
-	private SupportedWoodItemSet(Blocks blocks, Blocks creativeBlocks, Item bark, Item sapling) {
+	private SupportedWoodItemSet(Blocks blocks, Blocks creativeBlocks, Item bark, Item sapling, Item boat, Item chestBoat) {
 		this.blocks = blocks;
 		this.creativeBlocks = creativeBlocks;
 		this.bark = bark;
 		this.sapling = sapling;
+		this.boat = boat;
+		this.chestBoat = chestBoat;
 	}
 
 	public void addItemGroupEntries(FabricItemGroupEntries content, boolean creative) {
@@ -41,6 +48,8 @@ public class SupportedWoodItemSet {
 			content.add(this.blocks.leaves);
 			content.add(this.bark);
 			content.add(this.sapling);
+			if (this.boat != null) content.add(this.boat);
+			if (this.chestBoat != null) content.add(this.chestBoat);
 		} else {
 			content.add(this.creativeBlocks.log.zero);
 			content.add(this.creativeBlocks.log.one);
@@ -110,12 +119,14 @@ public class SupportedWoodItemSet {
 			return new Blocks(new Blocks.WoodLog(log, stripped_log, twice_stripped_log), new Blocks.WoodLog(wood, stripped_wood, twice_stripped_wood), planks, slab, leaves);
 		}
 
-		public SupportedWoodItemSet build() {
+		public SupportedWoodItemSet build(boolean raft, EntityType<? extends AbstractBoatEntity> boatEntityType, EntityType<? extends AbstractBoatEntity> chestBoatEntityType) {
 			Item bark = ItemRegistry.register(this.blockSet.id.withSuffixedPath("_bark"), Item::new, new Item.Settings());
 			Item sapling = ItemRegistry.register(this.blockSet.id.withSuffixedPath("_sapling"), (settings) -> new BlockItem(this.blockSet.sapling, settings), new BlockItem.Settings().useBlockPrefixedTranslationKey());
+			Item boat = boatEntityType != null ? ItemRegistry.register(this.blockSet.id.withSuffixedPath("_" + (raft ? "raft" : "boat")), (settings) -> new BoatItem(boatEntityType, settings), new Item.Settings().maxCount(1)) : null;
+			Item chestBoat =  chestBoatEntityType != null ? ItemRegistry.register(this.blockSet.id.withSuffixedPath("_chest_" + (raft ? "raft" : "boat")), (settings) -> new BoatItem(chestBoatEntityType, settings), new Item.Settings().maxCount(1)) : null;
 			Blocks creativeBlocks = buildBlocks(false);
 			Blocks blocks = buildBlocks(true);
-			return new SupportedWoodItemSet(blocks, creativeBlocks, bark, sapling);
+			return new SupportedWoodItemSet(blocks, creativeBlocks, bark, sapling, boat, chestBoat);
 		}
 	}
 }

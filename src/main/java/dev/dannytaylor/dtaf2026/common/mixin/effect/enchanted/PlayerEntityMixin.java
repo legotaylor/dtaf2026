@@ -5,7 +5,7 @@
     Licence: GNU LGPLv3
 */
 
-package dev.dannytaylor.dtaf2026.common.mixin.enchanted_status_effect;
+package dev.dannytaylor.dtaf2026.common.mixin.effect.enchanted;
 
 import dev.dannytaylor.dtaf2026.common.registry.StatusEffectRegistry;
 import net.minecraft.entity.EntityType;
@@ -23,7 +23,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 	}
 
 	@ModifyVariable(method = "applyEnchantmentCosts", at = @At("HEAD"), index = 2, argsOnly = true)
-	public int onTakeOutput(int value) {
+	public int dtaf2026$applyEnchantmentCosts(int value) {
 		return this.hasStatusEffect(StatusEffectRegistry.enchanted) ? 0 : value;
 	}
 }

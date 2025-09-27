@@ -5,7 +5,7 @@
     Licence: GNU LGPLv3
 */
 
-package dev.dannytaylor.dtaf2026.common.mixin.entity;
+package dev.dannytaylor.dtaf2026.common.mixin.dimension;
 
 import dev.dannytaylor.dtaf2026.common.registry.AttributeModifierRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.DimensionRegistry;

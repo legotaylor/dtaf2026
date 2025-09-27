@@ -38,7 +38,7 @@ public abstract class ItemMixin {
 	}
 
 	@Inject(method = "getTooltipData", at = @At("RETURN"), cancellable = true)
-	public void getTooltipData(ItemStack stack, CallbackInfoReturnable<Optional<TooltipData>> cir) {
+	public void dtaf2026$getTooltipData(ItemStack stack, CallbackInfoReturnable<Optional<TooltipData>> cir) {
 		Identifier id = Registries.ITEM.getId((Item) (Object) this);
 		if (RelicLoader.get(id).isPresent()) {
 			if (cir.getReturnValue().isEmpty()) {

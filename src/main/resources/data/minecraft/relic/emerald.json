@@ -2,7 +2,7 @@
 	"type": "dtaf2026:status_effect",
 	"value": [
 		{
-			"type": "minecraft:night_vision",
+			"type": "minecraft:hero_of_the_village",
 			"value": {
 				"amplifier": 0,
 				"show_particles": false,

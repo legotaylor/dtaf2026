@@ -39,6 +39,11 @@
 	"block.dtaf2026.maple_leaves": "Maple Leaves",
 	"block.dtaf2026.creative_maple_leaves": "Maple Leaves (Creative)",
 
+	"item.dtaf2026.maple_boat": "Maple Boat",
+	"entity.dtaf2026.maple_boat": "Maple Boat",
+	"item.dtaf2026.maple_chest_boat": "Maple Boat with Chest",
+	"entity.dtaf2026.maple_chest_boat": "Maple Boat with Chest",
+
 	"item.dtaf2026.arca_nocturna": "Arca Nocturna",
 	"dtaf2026.arca_nocturna_contents.contains": "%s",
 	"dtaf2026.arca_nocturna_contents.empty": "Empty",
@@ -64,12 +69,13 @@
 
 	"minecraft.relic.amethyst_shard": "Grants Regeneration when active inside an Arca Nocturna",
 	"minecraft.relic.diamond": "Grants Resistance when active inside an Arca Nocturna",
-	"minecraft.relic.emerald": "Grants Night Vision when active inside an Arca Nocturna",
+	"minecraft.relic.emerald": "Grants Hero of the Village when active inside an Arca Nocturna",
 	"minecraft.relic.heart_of_the_sea": "Grants Conduit Power when active inside an Arca Nocturna",
 	"minecraft.relic.lapis_lazuli": "Grants Enchanting when active inside an Arca Nocturna",
 	"minecraft.relic.prismarine_shard": "Grants Water Breathing when active inside an Arca Nocturna",
 	"minecraft.relic.quartz": "Grants Fire Resistance when active inside an Arca Nocturna",
 	"minecraft.relic.redstone": "Grants Speed when active inside an Arca Nocturna",
 
-	"effect.dtaf2026.enchanted": "Enchanted"
+	"effect.dtaf2026.enchanted": "Enchanted",
+	"effect.dtaf2026.sure_landing": "Sure Landing"
 }
