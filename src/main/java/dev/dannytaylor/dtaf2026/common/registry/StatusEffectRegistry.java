@@ -18,7 +18,9 @@ import net.minecraft.util.Identifier;
 
 public class StatusEffectRegistry {
 	public static final RegistryEntry<StatusEffect> enchanted;
-	public static final RegistryEntry<StatusEffect> sureLanding;
+	public static final RegistryEntry<StatusEffect> safeLanding;
+	public static final RegistryEntry<StatusEffect> growth;
+	public static final RegistryEntry<StatusEffect> shrink;
 
 	public static RegistryEntry<StatusEffect> register(Identifier id, StatusEffect statusEffect) {
 		return Registry.registerReference(Registries.STATUS_EFFECT, id, statusEffect);
@@ -32,7 +34,9 @@ public class StatusEffectRegistry {
 	}
 
 	static {
-		enchanted = register("enchanted", new SomniumRealeStatusEffect(StatusEffectCategory.BENEFICIAL, 9347907));
-		sureLanding = register("sure_landing", new SomniumRealeStatusEffect(StatusEffectCategory.BENEFICIAL, 8446161));
+		enchanted = register("enchanted", new SomniumRealeStatusEffect(StatusEffectCategory.BENEFICIAL, 0x93a344));
+		safeLanding = register("safe_landing", new SomniumRealeStatusEffect(StatusEffectCategory.BENEFICIAL, 0x87e0cf));
+		growth = register("growth", new SomniumRealeStatusEffect(StatusEffectCategory.BENEFICIAL, 0x99dd00));
+		shrink = register("shrink", new SomniumRealeStatusEffect(StatusEffectCategory.BENEFICIAL, 0xff0800));
 	}
 }

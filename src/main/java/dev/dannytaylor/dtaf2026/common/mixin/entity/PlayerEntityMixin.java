@@ -5,17 +5,17 @@
     Licence: GNU LGPLv3
 */
 
-package dev.dannytaylor.dtaf2026.common.mixin.dimension;
+package dev.dannytaylor.dtaf2026.common.mixin.entity;
 
 import dev.dannytaylor.dtaf2026.common.registry.AttributeModifierRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.DimensionRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.TagRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.StatusEffectRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.entity.SomniumRealeLivingEntity;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
@@ -35,6 +35,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Optional;
@@ -59,9 +60,9 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 		RegistryKey<World> currentWorld = this.getWorld().getRegistryKey();
 		TeleportTarget teleportTarget = null;
 		if (currentWorld.equals(World.OVERWORLD)) {
-			teleportTarget = createTeleportTarget(DimensionRegistry.somniumReale.world(), false);
+			teleportTarget = dtaf2026$createTeleportTarget(DimensionRegistry.somniumReale.world(), false);
 		} else if (currentWorld.equals(DimensionRegistry.somniumReale.world())) {
-			teleportTarget = createTeleportTarget(World.OVERWORLD, true);
+			teleportTarget = dtaf2026$createTeleportTarget(World.OVERWORLD, true);
 		}
 		if (teleportTarget != null) {
 			if (this.isSleeping() && this.sleepTimer >= 100) {
@@ -77,23 +78,23 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 					this.setPose(EntityPose.STANDING);
 					this.clearSleepingPosition();
 					// Teleport to dimension once fully asleep.
-					if (currentWorld.equals(World.OVERWORLD)) setLastBedPos(this.getBlockPos());
+					if (currentWorld.equals(World.OVERWORLD)) dtaf2026$setLastBedPos(this.getBlockPos());
 					this.teleportTo(teleportTarget);
 				}
 			} else {
-				if (!this.isSleeping() && !currentWorld.equals(DimensionRegistry.somniumReale.world())) clearLastBedPos();
+				if (!this.isSleeping() && !currentWorld.equals(DimensionRegistry.somniumReale.world())) dtaf2026$clearLastBedPos();
 			}
 		}
-		this.updateSomniumRealeBiome();
+		this.dtaf2026$updateSomniumReale();
 	}
 
 	@Unique
-	private void setLastBedPos(BlockPos blockPos) {
+	private void dtaf2026$setLastBedPos(BlockPos blockPos) {
 		this.dataTracker.set(lastBedPos, Optional.of(blockPos));
 	}
 
 	@Unique
-	private void clearLastBedPos() {
+	private void dtaf2026$clearLastBedPos() {
 		this.dataTracker.set(lastBedPos, Optional.empty());
 	}
 
@@ -102,7 +103,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 		// Peaceful, Easy, Normal difficulties will prevent death in the Somnium Reale dimension.
 		// You can die on Hard difficulty in the Somnium Reale dimension.
 		if (world.getDifficulty().ordinal() <= 2) {
-			TeleportTarget teleportTarget = createTeleportTarget(World.OVERWORLD, true);
+			TeleportTarget teleportTarget = dtaf2026$createTeleportTarget(World.OVERWORLD, true);
 			if (teleportTarget != null) {
 				if (world.getRegistryKey() == DimensionRegistry.somniumReale.world()) {
 					if (this.getHealth() - amount < 1.0F) {
@@ -117,7 +118,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 	}
 
 	@Unique
-	private TeleportTarget createTeleportTarget(RegistryKey<World> registryKey, boolean toRespawnPos) {
+	private TeleportTarget dtaf2026$createTeleportTarget(RegistryKey<World> registryKey, boolean toRespawnPos) {
 		if (!this.getWorld().isClient && this.getServer() != null) {
 			ServerWorld serverWorld = this.getServer().getWorld(registryKey);
 			if (serverWorld != null) {
@@ -138,12 +139,13 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 	}
 
 	@Unique
-	private void updateSomniumRealeBiome() {
-		EntityAttributeInstance entityAttributeInstance = this.getAttributeInstance(EntityAttributes.SCALE);
-		if (entityAttributeInstance != null) {
-			entityAttributeInstance.removeModifier(AttributeModifierRegistry.somniumRealeBiomeModifier.id());
-			if (TagRegistry.WorldGen.Biome.isIn(this.getWorld(), this.getBlockPos(), TagRegistry.WorldGen.Biome.somnium_reale)) entityAttributeInstance.addTemporaryModifier(AttributeModifierRegistry.somniumRealeBiomeModifier);
-		}
+	private void dtaf2026$updateSomniumReale() {
+		((SomniumRealeLivingEntity)this).dtaf2026$updateAttribute(EntityAttributes.SCALE, AttributeModifierRegistry.somniumRealeScaleModifier, () -> ((SomniumRealeLivingEntity)this).dtaf2026$isInSomniumReale());
+	}
+
+	@ModifyVariable(method = "applyEnchantmentCosts", at = @At("HEAD"), index = 2, argsOnly = true)
+	public int dtaf2026$applyEnchantmentCosts(int value) {
+		return this.hasStatusEffect(StatusEffectRegistry.enchanted) ? 0 : value;
 	}
 
 	static {

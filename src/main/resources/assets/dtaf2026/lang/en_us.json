@@ -77,5 +77,7 @@
 	"minecraft.relic.redstone": "Grants Speed when active inside an Arca Nocturna",
 
 	"effect.dtaf2026.enchanted": "Enchanted",
-	"effect.dtaf2026.sure_landing": "Sure Landing"
+	"effect.dtaf2026.safe_landing": "Safe Landing",
+	"effect.dtaf2026.growth": "Growth",
+	"effect.dtaf2026.shrink": "Shrink"
 }

@@ -24,10 +24,6 @@ public class Config extends ReflectiveConfig {
 	@FloatRange(min = 0.0F, max = 1.0F)
 	public final TrackedValue<Float> bloomAlpha = this.value(0.5F);
 
-	public final TrackedValue<Boolean> scaleFOV = this.value(true);
-
-	public final TrackedValue<Float> scaleFOVStrength = this.value(0.175F);
-
 	public static void bootstrap() {
 	}
 }

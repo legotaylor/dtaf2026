@@ -8,7 +8,6 @@
 package dev.dannytaylor.dtaf2026.common.registry;
 
 import dev.dannytaylor.dtaf2026.common.data.Data;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
@@ -55,10 +54,6 @@ public class TagRegistry {
 
 			public static boolean isIn(WorldView world, BlockPos blockPos, TagKey<net.minecraft.world.biome.Biome> tag) {
 				return world.getBiome(blockPos).isIn(tag);
-			}
-
-			public static boolean isIn(MinecraftClient client, TagKey<net.minecraft.world.biome.Biome> tag) {
-				return client.world != null && client.player != null && isIn(client.world, client.player.getBlockPos(), tag);
 			}
 
 			static {

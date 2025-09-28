@@ -6,7 +6,6 @@
 		"block.RenderLayersMixin",
 		"dimension.ClientWorldMixin",
 		"dimension.DimensionEffectsMixin",
-		"dimension.GameRendererMixin",
 		"dimension.SkyRenderingMixin",
 		"enchanted_status_effect.AnvilScreenMixin",
 		"enchanted_status_effect.EnchantmentScreenMixin",

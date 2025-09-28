@@ -5,7 +5,7 @@
     Licence: GNU LGPLv3
 */
 
-package dev.dannytaylor.dtaf2026.common.mixin.effect.enchanted;
+package dev.dannytaylor.dtaf2026.common.mixin.screen;
 
 import dev.dannytaylor.dtaf2026.common.registry.StatusEffectRegistry;
 import net.minecraft.entity.player.PlayerEntity;
