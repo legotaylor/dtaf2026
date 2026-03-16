@@ -47,10 +47,6 @@ public class Zoom {
 		hasUpdated = true;
 	}
 
-	public static double getMouseSensitivity(MinecraftClient client) {
-		return Math.pow(client.options.getMouseSensitivity().getValue() * 0.6000000238418579F + 0.20000000298023224F, 3.0F) * 8.0F;
-	}
-
 	public static void adjustZoomLevel(int amount, float multiplier) {
 		setZoomLevel(zoomLevel + (amount * multiplier));
 	}

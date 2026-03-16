@@ -37,11 +37,12 @@ public abstract class GameRendererMixin {
 	@Shadow
 	@Final
 	private ProjectionMatrix3 hudProjectionMatrix;
-	@Unique
-	private float fov;
 
 	@Shadow
 	public abstract boolean isRenderingPanorama();
+
+	@Unique
+	private float fov;
 
 	@Inject(method = "updateFovMultiplier", at = @At("TAIL"))
 	private void dtaf2026$updateFovMultiplier(CallbackInfo ci) {

@@ -11,9 +11,9 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.Perspective;
 
 public class HoldPerspective {
-	private static Perspective beforePressed;
-	private static boolean wasBackPressed;
-	private static boolean wasFrontPressed;
+	public static Perspective beforePressed;
+	public static boolean wasBackPressed;
+	public static boolean wasFrontPressed;
 
 	public static void tick(MinecraftClient client) {
 		// Back

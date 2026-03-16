@@ -7,9 +7,11 @@
 
 package dev.dannytaylor.dtaf2026.client.registry.entity;
 
+import dev.dannytaylor.dtaf2026.client.contributor.ContributorFaceModel;
 import dev.dannytaylor.dtaf2026.client.registry.entity.model.*;
 import dev.dannytaylor.dtaf2026.common.data.Data;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.minecraft.client.model.Dilation;
 import net.minecraft.client.render.entity.model.BoatEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 
@@ -27,22 +29,7 @@ public class EntityModelRegistry {
 	public static final EntityModelLayer fleecifer;
 	public static final EntityModelLayer fleeciferWool;
 	public static final EntityModelLayer fleeciferWoolUndercoat;
-
-	public static void bootstrap() {
-		EntityModelLayerRegistry.registerModelLayer(mapleBoat, BoatEntityModel::getTexturedModelData);
-		EntityModelLayerRegistry.registerModelLayer(mapleChestBoat, BoatEntityModel::getChestTexturedModelData);
-		EntityModelLayerRegistry.registerModelLayer(ceruleanBoat, BoatEntityModel::getTexturedModelData);
-		EntityModelLayerRegistry.registerModelLayer(ceruleanChestBoat, BoatEntityModel::getChestTexturedModelData);
-		EntityModelLayerRegistry.registerModelLayer(boar, BoarEntityModel::getTexturedModelData);
-		EntityModelLayerRegistry.registerModelLayer(babyBoar, () -> BoarEntityModel.getTexturedModelData().transform(BoarEntityModel.babyTransformer));
-		EntityModelLayerRegistry.registerModelLayer(bigJunglefowl, BigJunglefowlEntityModel::getTexturedModelData);
-		EntityModelLayerRegistry.registerModelLayer(babyBigJunglefowl, () -> BigJunglefowlEntityModel.getTexturedModelData().transform(AbstractJunglefowlEntityModel.babyTransformer));
-		EntityModelLayerRegistry.registerModelLayer(smallJunglefowl, SmallJunglefowlEntityModel::getTexturedModelData);
-		EntityModelLayerRegistry.registerModelLayer(babySmallJunglefowl, () -> SmallJunglefowlEntityModel.getTexturedModelData().transform(AbstractJunglefowlEntityModel.babyTransformer));
-		EntityModelLayerRegistry.registerModelLayer(fleecifer, FleeciferEntityModel::getTexturedModelData);
-		EntityModelLayerRegistry.registerModelLayer(fleeciferWool, FleeciferWoolEntityModel::getTexturedModelData);
-		EntityModelLayerRegistry.registerModelLayer(fleeciferWoolUndercoat, FleeciferWoolEntityModel::getTexturedModelData);
-	}
+	public static final EntityModelLayer contributorFace;
 
 	static {
 		mapleBoat = new EntityModelLayer(Data.idOf("boat/maple"), "main");
@@ -58,5 +45,23 @@ public class EntityModelRegistry {
 		fleecifer = new EntityModelLayer(Data.idOf("fleecifer"), "main");
 		fleeciferWool = new EntityModelLayer(Data.idOf("fleecifer"), "wool");
 		fleeciferWoolUndercoat = new EntityModelLayer(Data.idOf("fleecifer"), "wool_undercoat");
+		contributorFace = new EntityModelLayer(Data.idOf("contributor"), "face");
+	}
+
+	public static void bootstrap() {
+		EntityModelLayerRegistry.registerModelLayer(mapleBoat, BoatEntityModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(mapleChestBoat, BoatEntityModel::getChestTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(ceruleanBoat, BoatEntityModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(ceruleanChestBoat, BoatEntityModel::getChestTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(boar, BoarEntityModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(babyBoar, () -> BoarEntityModel.getTexturedModelData().transform(BoarEntityModel.babyTransformer));
+		EntityModelLayerRegistry.registerModelLayer(bigJunglefowl, BigJunglefowlEntityModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(babyBigJunglefowl, () -> BigJunglefowlEntityModel.getTexturedModelData().transform(AbstractJunglefowlEntityModel.babyTransformer));
+		EntityModelLayerRegistry.registerModelLayer(smallJunglefowl, SmallJunglefowlEntityModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(babySmallJunglefowl, () -> SmallJunglefowlEntityModel.getTexturedModelData().transform(AbstractJunglefowlEntityModel.babyTransformer));
+		EntityModelLayerRegistry.registerModelLayer(fleecifer, FleeciferEntityModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(fleeciferWool, FleeciferWoolEntityModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(fleeciferWoolUndercoat, FleeciferWoolEntityModel::getTexturedModelData);
+		EntityModelLayerRegistry.registerModelLayer(contributorFace, () -> ContributorFaceModel.getTexturedModelData(Dilation.NONE));
 	}
 }

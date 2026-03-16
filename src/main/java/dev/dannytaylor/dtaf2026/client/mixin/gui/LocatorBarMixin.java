@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(value = LocatorBar.class, priority = 100)
 public abstract class LocatorBarMixin {
 	@Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/util/Identifier;IIIII)V"), method = "method_70870")
-	private void dtaf2026$render(DrawContext instance, RenderPipeline pipeline, Identifier sprite, int x, int y, int width, int height, int color, @Local(name = "config") Waypoint.Config config) {
+	private void dtaf2026$render(DrawContext instance, RenderPipeline pipeline, Identifier sprite, int x, int y, int width, int height, int color, @Local Waypoint.Config config) {
 		if (config.style.equals(WaypointStyleRegistry.fleeciferBoss)) {
 			Matrix3x2fStack matrices = instance.getMatrices();
 			matrices.pushMatrix();

@@ -7,13 +7,15 @@
 
 package dev.dannytaylor.dtaf2026.client.mixin.gui;
 
-import com.llamalad7.mixinextras.sugar.Local;
 import dev.dannytaylor.dtaf2026.client.gui.ScreenHelper;
 import dev.dannytaylor.dtaf2026.common.data.Data;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.LogoDrawer;
+import net.minecraft.util.math.ColorHelper;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
@@ -22,13 +24,19 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 @Mixin(LogoDrawer.class)
 public abstract class LogoDrawerMixin {
+	@Shadow
+	@Final
+	private boolean ignoreAlpha;
+
 	@ModifyArgs(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/LogoDrawer;draw(Lnet/minecraft/client/gui/DrawContext;IFI)V"), method = "draw(Lnet/minecraft/client/gui/DrawContext;IF)V")
 	private void dtaf2026$updateY(Args args) {
 		args.set(args.size() - 1, (int)args.get(args.size() - 1) + ScreenHelper.getTitleYOffset());
 	}
 
 	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/util/Identifier;IIFFIIIII)V", ordinal = 0), method = "draw(Lnet/minecraft/client/gui/DrawContext;IFI)V")
-	private void dtaf2026$addUpdateTexture(DrawContext context, int screenWidth, float alpha, int y, CallbackInfo ci, @Local(name = "j") int color) {
-		context.drawTexture(RenderPipelines.GUI_TEXTURED, Data.idOf("textures/gui/title/subtitle.png"), screenWidth / 2 - 160, y, 0.0F, 0.0F, 320, 256, 320, 256, color);
+	private void dtaf2026$addUpdateTexture(DrawContext context, int screenWidth, float alpha, int y, CallbackInfo ci) {
+		float f = this.ignoreAlpha ? 1.0F : alpha;
+		int j = ColorHelper.getWhite(f);
+		context.drawTexture(RenderPipelines.GUI_TEXTURED, Data.idOf("textures/gui/title/subtitle.png"), screenWidth / 2 - 160, y, 0.0F, 0.0F, 320, 256, 320, 256, j);
 	}
 }

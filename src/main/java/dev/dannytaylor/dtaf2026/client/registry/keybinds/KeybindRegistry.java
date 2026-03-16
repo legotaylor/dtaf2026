@@ -20,12 +20,6 @@ public class KeybindRegistry {
 	public static final KeyBinding holdPerspectiveFront;
 	public static final KeyBinding zoom;
 
-	static {
-		holdPerspectiveBack = register(Data.getModId(), Data.getModId(), "hold_perspective_back", GLFW.GLFW_KEY_Z);
-		holdPerspectiveFront = register(Data.getModId(), Data.getModId(), "hold_perspective_front", GLFW.GLFW_KEY_R);
-		zoom = register(Data.getModId(), Data.getModId(), "zoom", GLFW.GLFW_KEY_V);
-	}
-
 	public static void bootstrap() {
 		ClientTickEvents.END_CLIENT_TICK.register(KeybindRegistry::tick);
 	}
@@ -37,5 +31,11 @@ public class KeybindRegistry {
 
 	public static KeyBinding register(String namespace, String category, String key, int keyCode) {
 		return KeyBindingHelper.registerKeyBinding(new KeyBinding("gui." + namespace + ".keybinding." + key, InputUtil.Type.KEYSYM, keyCode, "gui." + namespace + ".keybindings.category." + category));
+	}
+
+	static {
+		holdPerspectiveBack = register(Data.getModId(), Data.getModId(), "hold_perspective_back", GLFW.GLFW_KEY_Z);
+		holdPerspectiveFront = register(Data.getModId(), Data.getModId(), "hold_perspective_front", GLFW.GLFW_KEY_R);
+		zoom = register(Data.getModId(), Data.getModId(), "zoom", GLFW.GLFW_KEY_V);
 	}
 }
