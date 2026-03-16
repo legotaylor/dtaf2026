@@ -7,8 +7,12 @@
 
 package dev.dannytaylor.dtaf2026.common.mixin.entity;
 
+import dev.dannytaylor.dtaf2026.common.registry.block.BlockRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.block.CreakingVariant;
 import dev.dannytaylor.dtaf2026.common.registry.entity.TrackedDataRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.entity.creaking.TerrorlandsCreaking;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -22,7 +26,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 @Mixin(CreakingEntity.class)
 public abstract class CreakingEntityMixin extends HostileEntity implements TerrorlandsCreaking {
@@ -42,6 +48,20 @@ public abstract class CreakingEntityMixin extends HostileEntity implements Terro
 	@Inject(method = "initDataTracker", at = @At("RETURN"))
 	private void dtaf2026$initDataTracker(DataTracker.Builder builder, CallbackInfo ci) {
 		builder.add(variant, defaultId);
+	}
+
+	@ModifyArgs(method = "finishCrumbling", at = @At(value = "INVOKE", target = "Lnet/minecraft/particle/BlockStateParticleEffect;<init>(Lnet/minecraft/particle/ParticleType;Lnet/minecraft/block/BlockState;)V"))
+	private void dtaf2026$finishCrumbling(Args args) {
+		CreakingVariant variant = CreakingVariant.fromIdentifier(this.dtaf2026$getVariant());
+		if (variant != null) {
+			if (args.get(1).equals(Blocks.PALE_OAK_WOOD.getDefaultState())) {
+				args.set(1, switch (variant) {
+					case MAPLE -> BlockRegistry.maple.wood.getDefaultState();
+					case CERULEAN -> BlockRegistry.cerulean.wood.getDefaultState();
+					case VANILLA -> (BlockState) args.get(1);
+				});
+			} else args.set(1, ((BlockState) args.get(1)).with(BlockRegistry.Properties.creakingVariant, variant));
+		}
 	}
 
 	@Override

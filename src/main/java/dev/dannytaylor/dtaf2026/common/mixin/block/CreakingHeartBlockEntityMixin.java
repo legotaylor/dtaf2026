@@ -26,10 +26,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class CreakingHeartBlockEntityMixin {
 	@Inject(method = "spawnCreakingPuppet", at = @At("RETURN"), cancellable = true)
 	private static void dtaf2026$spawnPuppet(ServerWorld world, CreakingHeartBlockEntity blockEntity, CallbackInfoReturnable<CreakingEntity> cir) {
-		TerrorlandsCreaking creakingEntity = (TerrorlandsCreaking) cir.getReturnValue();
+		CreakingEntity creakingEntity = cir.getReturnValue();
 		if (creakingEntity != null) {
-			creakingEntity.dtaf2026$setVariant(world.getBlockState(blockEntity.getPos()).get(BlockRegistry.Properties.creakingVariant).variant);
-			cir.setReturnValue((CreakingEntity) creakingEntity);
+			((TerrorlandsCreaking) creakingEntity).dtaf2026$setVariant(world.getBlockState(blockEntity.getPos()).get(BlockRegistry.Properties.creakingVariant).variant);
+			cir.setReturnValue(creakingEntity);
 		}
 	}
 
@@ -39,6 +39,7 @@ public abstract class CreakingHeartBlockEntityMixin {
 		if (world instanceof ServerWorld serverWorld) {
 			Identifier variant = serverWorld.getBlockState(blockEntity.getPos()).get(BlockRegistry.Properties.creakingVariant).variant;
 			blockEntity.getCreakingPuppet().ifPresent((puppet) -> {
+				if (puppet.getHomePos() == null) puppet.setHomePos(pos);
 				if (!((TerrorlandsCreaking) puppet).dtaf2026$getVariant().equals(variant))
 					((TerrorlandsCreaking) puppet).dtaf2026$setVariant(variant);
 			});

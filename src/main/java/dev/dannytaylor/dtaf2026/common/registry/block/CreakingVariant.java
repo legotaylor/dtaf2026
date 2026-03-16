@@ -29,4 +29,11 @@ public enum CreakingVariant implements StringIdentifiable {
 	public String asString() {
 		return this.variant.toUnderscoreSeparatedString();
 	}
+
+	public static CreakingVariant fromIdentifier(Identifier identifier) {
+		for (CreakingVariant value : values()) {
+			if (value.variant.equals(identifier)) return value;
+		}
+		return null;
+	}
 }

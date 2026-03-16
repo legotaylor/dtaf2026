@@ -14,22 +14,12 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
 public class SoundEventRegistry {
-	public static final SoundEvent entityJunglefowlAmbient;
-	public static final SoundEvent entityJunglefowlDeath;
-	public static final SoundEvent entityJunglefowlEgg;
-	public static final SoundEvent entityJunglefowlHurt;
-	public static final SoundEvent entityJunglefowlStep;
 	public static final SoundEvent portalAmbient;
 	public static final SoundEvent portalTeleport;
 	public static final SoundEvent summonFleeciferBoss;
 	public static final SoundEvent fleeciferEyeBreak;
 
 	static {
-		entityJunglefowlAmbient = register("entity.junglefowl.ambient");
-		entityJunglefowlDeath = register("entity.junglefowl.death");
-		entityJunglefowlEgg = register("entity.junglefowl.egg");
-		entityJunglefowlHurt = register("entity.junglefowl.hurt");
-		entityJunglefowlStep = register("entity.junglefowl.step");
 		portalAmbient = register("portal_ambient");
 		portalTeleport = register("portal_teleport");
 		summonFleeciferBoss = register("summon_fleecifer_boss");
