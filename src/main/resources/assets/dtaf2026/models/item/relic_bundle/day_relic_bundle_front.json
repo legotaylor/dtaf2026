@@ -1,0 +1,6 @@
+{
+	"parent": "dtaf2026:item/relic_bundle/relic_bundle_front",
+	"textures": {
+		"layer0": "dtaf2026:item/relic_bundle/day_relic_bundle_front"
+	}
+}

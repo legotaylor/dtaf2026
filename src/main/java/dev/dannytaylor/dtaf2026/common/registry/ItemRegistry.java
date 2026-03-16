@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -8,17 +8,21 @@
 package dev.dannytaylor.dtaf2026.common.registry;
 
 import dev.dannytaylor.dtaf2026.common.data.Data;
-import dev.dannytaylor.dtaf2026.common.registry.item.ArcaNocturnaItem;
-import dev.dannytaylor.dtaf2026.common.registry.item.ComponentTypeRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.item.SupportedWoodItemSet;
-import dev.dannytaylor.dtaf2026.common.registry.item.component.ArcaNocturnaContentsComponent;
+import dev.dannytaylor.dtaf2026.common.registry.block.CreakingVariant;
+import dev.dannytaylor.dtaf2026.common.registry.item.*;
+import dev.dannytaylor.dtaf2026.common.registry.item.component.RelicBundleContentsComponent;
 import dev.dannytaylor.dtaf2026.common.registry.item.component.RelicComponent;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ConsumableComponents;
+import net.minecraft.component.type.FoodComponents;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.entity.vehicle.ChestBoatEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -32,10 +36,47 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class ItemRegistry {
+	public static final Item dirtBlock;
+	public static final Item grassBlock;
+	public static final Item dryGrassBlock;
+	public static final Item stoneBlock;
+	public static final Item stoneStairsBlock;
+	public static final Item stoneSlabBlock;
+	public static final Item cobblestoneBlock;
+	public static final Item cobblestoneStairsBlock;
+	public static final Item cobblestoneSlabBlock;
+	public static final Item cobblestoneWallBlock;
+	public static final Item deepslateBlock;
+	public static final Item deepslateStairsBlock;
+	public static final Item deepslateSlabBlock;
+	public static final Item cobbledDeepslateBlock;
+	public static final Item cobbledDeepslateStairsBlock;
+	public static final Item cobbledDeepslateSlabBlock;
+	public static final Item cobbledDeepslateWallBlock;
+	public static final Item jasperOreBlock;
+	public static final Item deepslateJasperOreBlock;
 	public static final List<SupportedWoodItemSet> woodItemSets;
 	public static final SupportedWoodItemSet maple;
-	public static final Item arcaNocturna;
+	public static final SupportedWoodItemSet cerulean;
+	public static final Item mapleCreakingHeart;
+	public static final Item ceruleanCreakingHeart;
+	public static final Item violet;
+	public static final Item nightRelicBundle;
+	public static final Item dayRelicBundle;
+	public static final Item relicBundle;
 	public static final Item jasper;
+	public static final Item redEgg;
+	public static final Item largeRedEgg;
+	public static final Item grayEgg;
+	public static final Item largeGrayEgg;
+	public static final Item junglefowl;
+	public static final Item cookedJunglefowl;
+	public static final Item junglefowlSpawnEgg;
+	public static final Item boarSpawnEgg;
+	public static final Item fleeciferBossSpawnEgg;
+	public static final Item fleeciferSpawnEgg;
+	public static final Item eyeOfFleecifer;
+	public static final Item fleeciferWool;
 
 	private static RegistryKey<Item> keyOf(Identifier path) {
 		return RegistryKey.of(RegistryKeys.ITEM, path);
@@ -99,14 +140,51 @@ public class ItemRegistry {
 		return settings.component(ComponentTypeRegistry.relic, new RelicComponent(relicId));
 	}
 
-	public static Item.Settings arcaNocturna(Item.Settings settings, ArcaNocturnaContentsComponent arcaNocturnaContentsComponent) {
-		return settings.component(ComponentTypeRegistry.arcaNocturnaContents, arcaNocturnaContentsComponent);
+	public static Item.Settings relicBundle(Item.Settings settings, RelicBundleContentsComponent relicBundleContentsComponent) {
+		return settings.component(ComponentTypeRegistry.relicBundleContents, relicBundleContentsComponent).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true);
 	}
 
 	static {
+		dirtBlock = register(BlockRegistry.dirt);
+		grassBlock = register(BlockRegistry.grassBlock);
+		dryGrassBlock = register(BlockRegistry.dryGrassBlock);
+		stoneBlock = register(BlockRegistry.stone);
+		stoneStairsBlock = register(BlockRegistry.stoneStairs);
+		stoneSlabBlock = register(BlockRegistry.stoneSlab);
+		cobblestoneBlock = register(BlockRegistry.cobblestone);
+		cobblestoneStairsBlock = register(BlockRegistry.cobblestoneStairs);
+		cobblestoneSlabBlock = register(BlockRegistry.cobblestoneSlab);
+		cobblestoneWallBlock = register(BlockRegistry.cobblestoneWall);
+		deepslateBlock = register(BlockRegistry.deepslate);
+		deepslateStairsBlock = register(BlockRegistry.deepslateStairs);
+		deepslateSlabBlock = register(BlockRegistry.deepslateSlab);
+		cobbledDeepslateBlock = register(BlockRegistry.cobbledDeepslate);
+		cobbledDeepslateStairsBlock = register(BlockRegistry.cobbledDeepslateStairs);
+		cobbledDeepslateSlabBlock = register(BlockRegistry.cobbledDeepslateSlab);
+		cobbledDeepslateWallBlock = register(BlockRegistry.cobbledDeepslateWall);
+		jasperOreBlock = register(BlockRegistry.jasperOre);
+		deepslateJasperOreBlock = register(BlockRegistry.deepslateJasperOre);
 		woodItemSets = new ArrayList<>();
 		maple = register(SupportedWoodItemSet.builder(BlockRegistry.maple), false, EntityRegistry.mapleBoat, EntityRegistry.mapleChestBoat);
-		arcaNocturna = register("arca_nocturna", ArcaNocturnaItem::new, arcaNocturna(new Item.Settings().maxCount(1), ArcaNocturnaContentsComponent.empty).rarity(Rarity.RARE));
+		cerulean = register(SupportedWoodItemSet.builder(BlockRegistry.cerulean), false, EntityRegistry.ceruleanBoat, EntityRegistry.ceruleanChestBoat);
+		mapleCreakingHeart = register("maple_creaking_heart", (settings) -> new CreakingVariantHeartBlockItem(Blocks.CREAKING_HEART, CreakingVariant.MAPLE, settings), new Item.Settings().useBlockPrefixedTranslationKey());
+		ceruleanCreakingHeart = register("cerulean_creaking_heart", (settings) -> new CreakingVariantHeartBlockItem(Blocks.CREAKING_HEART, CreakingVariant.CERULEAN, settings), new Item.Settings().useBlockPrefixedTranslationKey());
+		violet = register(BlockRegistry.violet);
+		nightRelicBundle = register("night_relic_bundle", RelicBundleItem::new, relicBundle(new Item.Settings().maxCount(1), RelicBundleContentsComponent.empty).rarity(Rarity.RARE));
+		dayRelicBundle = register("day_relic_bundle", RelicBundleItem::new, relicBundle(new Item.Settings().maxCount(1), RelicBundleContentsComponent.empty).rarity(Rarity.RARE));
+		relicBundle = register("relic_bundle", RelicBundleItem::new, relicBundle(new Item.Settings().maxCount(1), RelicBundleContentsComponent.empty).rarity(Rarity.RARE));
 		jasper = registerRelic("jasper", Item::new, new Item.Settings());
+		redEgg = register(BlockRegistry.redEgg);
+		largeRedEgg = register(BlockRegistry.largeRedEgg);
+		grayEgg = register(BlockRegistry.grayEgg);
+		largeGrayEgg = register(BlockRegistry.largeGrayEgg);
+		junglefowl = register("junglefowl", Item::new, new Item.Settings().food(FoodComponents.CHICKEN, ConsumableComponents.RAW_CHICKEN));
+		cookedJunglefowl = register("cooked_junglefowl", Item::new, new Item.Settings().food(FoodComponents.COOKED_CHICKEN));
+		junglefowlSpawnEgg = register("junglefowl_spawn_egg", (settings) -> new SpawnEggItem(EntityRegistry.junglefowl, settings), new Item.Settings());
+		boarSpawnEgg = register("boar_spawn_egg", (settings) -> new SpawnEggItem(EntityRegistry.boar, settings), new Item.Settings());
+		fleeciferSpawnEgg = register("fleecifer_spawn_egg", (settings) -> new SpawnEggItem(EntityRegistry.fleecifer, settings), new Item.Settings());
+		fleeciferBossSpawnEgg = register("fleecifer_boss_spawn_egg", (settings) -> new SpawnEggItem(EntityRegistry.fleeciferBoss, settings), new Item.Settings());
+		eyeOfFleecifer = register("fleecifer_eye", FleeciferEyeItem::new, new Item.Settings());
+		fleeciferWool = register("fleecifer_wool", Item::new, new Item.Settings());
 	}
 }

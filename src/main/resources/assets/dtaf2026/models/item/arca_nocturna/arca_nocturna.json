@@ -1,6 +1,0 @@
-{
-	"parent": "minecraft:item/generated",
-	"textures": {
-		"layer0": "dtaf2026:item/arca_nocturna/arca_nocturna"
-	}
-}

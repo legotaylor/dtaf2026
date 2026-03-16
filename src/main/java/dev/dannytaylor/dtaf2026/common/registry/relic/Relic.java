@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -15,6 +15,8 @@ import dev.dannytaylor.dtaf2026.common.registry.TagRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.tag.TagKey;
@@ -28,6 +30,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class Relic {
+	public static final RelicLoader data;
+
 	private boolean active;
 	public RelicAction action;
 	public List<RelicCondition> conditions;
@@ -37,9 +41,9 @@ public class Relic {
 		this.conditions = conditions;
 	}
 
-	public void tick(LivingEntity livingEntity) {
-		if (testConditions(conditions, livingEntity)) {
-			this.action.apply(livingEntity, this.active);
+	public void tick(LivingEntity livingEntity, ItemStack bundle) {
+		if (testConditions(conditions, livingEntity, bundle)) {
+			this.action.apply(livingEntity, bundle, this.active);
 			if (!this.active) this.active = true;
 		} else {
 			if (this.active) this.active = false;
@@ -57,7 +61,7 @@ public class Relic {
 	}
 
 	public interface RelicAction {
-		void apply(LivingEntity entity, boolean active);
+		void apply(LivingEntity entity, ItemStack bundle, boolean active);
 
 		JsonObject toJson();
 
@@ -86,10 +90,10 @@ public class Relic {
 			return json;
 		}
 
-		public void apply(LivingEntity entity, boolean active) {
+		public void apply(LivingEntity entity, ItemStack bundle, boolean active) {
 			entity.getWorld().getRegistryManager().getOptional(RegistryKeys.STATUS_EFFECT).ifPresent((statusEffects) -> {
 				for (StatusEffectInstanceData data : this.effects) {
-					if (testConditions(data.conditions, entity)) {
+					if (testConditions(data.conditions, entity, bundle)) {
 						statusEffects.getEntry(data.id).ifPresent(statusEffectReference -> entity.addStatusEffect(new StatusEffectInstance(statusEffectReference, data.duration, data.amplifier, data.ambient, data.showParticles, data.showIcon)));
 					}
 				}
@@ -139,13 +143,13 @@ public class Relic {
 						if (jsonElement instanceof JsonObject jsonObject) conditions.add(RelicCondition.fromJson(jsonObject));
 					}
 				}
-				return new StatusEffectInstanceData(Identifier.of(json.get("type").getAsString()), value.has("duration") ? value.get("duration").getAsInt() : 1, value.has("amplifier") ? value.get("amplifier").getAsInt() : 0, !value.has("ambient") || value.get("ambient").getAsBoolean(), !value.has("show_particles") || value.get("show_particles").getAsBoolean(), !value.has("show_icon") || value.get("show_icon").getAsBoolean(), conditions);
+				return new StatusEffectInstanceData(Identifier.of(json.get("type").getAsString()), value.has("duration") ? value.get("duration").getAsInt() : 30, value.has("amplifier") ? value.get("amplifier").getAsInt() : 0, !value.has("ambient") || value.get("ambient").getAsBoolean(), !value.has("show_particles") || value.get("show_particles").getAsBoolean(), !value.has("show_icon") || value.get("show_icon").getAsBoolean(), conditions);
 			}
 		}
 	}
 
 	public interface RelicCondition {
-		boolean test(LivingEntity entity);
+		boolean test(LivingEntity entity, ItemStack bundle);
 		JsonObject toJson();
 
 		Map<Identifier, Function<JsonObject, RelicCondition>> registry = new HashMap<>();
@@ -188,8 +192,8 @@ public class Relic {
 				return json;
 			}
 
-			public boolean test(LivingEntity entity) {
-				return !condition.test(entity);
+			public boolean test(LivingEntity entity, ItemStack bundle) {
+				return !condition.test(entity, bundle);
 			}
 
 			public @NotNull String toString() {
@@ -208,8 +212,8 @@ public class Relic {
 			return json;
 		}
 
-		public boolean test(LivingEntity entity) {
-			return value.stream().allMatch(condition -> condition.test(entity));
+		public boolean test(LivingEntity entity, ItemStack bundle) {
+			return value.stream().allMatch(condition -> condition.test(entity, bundle));
 		}
 
 		public static AndCondition fromJsonArray(JsonArray array) {
@@ -235,8 +239,8 @@ public class Relic {
 			return json;
 		}
 
-		public boolean test(LivingEntity entity) {
-			return this.value.stream().anyMatch(condition -> condition.test(entity));
+		public boolean test(LivingEntity entity, ItemStack bundle) {
+			return this.value.stream().anyMatch(condition -> condition.test(entity, bundle));
 		}
 
 		public static OrCondition fromJsonArray(JsonArray array) {
@@ -263,7 +267,7 @@ public class Relic {
 			return json;
 		}
 
-		public boolean test(LivingEntity entity) {
+		public boolean test(LivingEntity entity, ItemStack bundle) {
 			RegistryEntry<Biome> biome = entity.getWorld().getBiome(entity.getBlockPos());
 			for (Identifier id : this.biomeIds) if (biome.matchesId(id)) return true;
 			for (Identifier tag : this.biomeTags) if (biome.isIn(TagKey.of(RegistryKeys.BIOME, tag))) return true;
@@ -289,7 +293,7 @@ public class Relic {
 		}
 	}
 
-	public record TimeOfDayCondition(Long min, Long max) implements RelicCondition {
+	public record TimeOfDayCondition(Long min, Long max, Boolean raw) implements RelicCondition {
 		public JsonObject toJson() {
 			JsonObject json = new JsonObject();
 			json.addProperty("type", ConditionTypes.timeOfDay.toString());
@@ -300,37 +304,169 @@ public class Relic {
 			return json;
 		}
 
-		public boolean test(LivingEntity entity) {
+		public boolean test(LivingEntity entity, ItemStack bundle) {
 			long time = entity.getWorld().getTimeOfDay() % 24000;
+			if (!raw) {
+				if (entity.getWorld().getDimension().hasFixedTime()) {
+					OptionalLong fixedTime = entity.getWorld().getDimension().fixedTime();
+					if (fixedTime.isPresent()) time = fixedTime.getAsLong();
+				}
+			}
 			if (min != null && max != null && min > max) return time >= min || time <= max;
 			if (min != null && time < min) return false;
 			return max == null || time <= max;
 		}
 
 		public static TimeOfDayCondition fromJson(JsonObject json) {
-			return new TimeOfDayCondition(json.has("min") ? json.get("min").getAsLong() : null, json.has("max") ? json.get("max").getAsLong() : null);
+			return new TimeOfDayCondition(json.has("min") ? json.get("min").getAsLong() : null, json.has("max") ? json.get("max").getAsLong() : null, json.has("raw") && json.get("raw").getAsBoolean());
 		}
 
 		public @NotNull String toString() {
-			return "TimeOfDayCondition[min=" + this.min + ", max=" + this.max + "]";
+			return "TimeOfDayCondition[min=" + this.min + ", max=" + this.max + ", raw=" + this.raw + "]";
 		}
 	}
 
-	public record ArcaNocturnaCondition(OrCondition orCondition) implements RelicCondition {
+	public record NightCondition(TimeOfDayCondition timeOfDayCondition) implements RelicCondition {
+		public JsonObject toJson() {
+			return timeOfDayCondition.toJson();
+		}
+
+		public boolean test(LivingEntity entity, ItemStack bundle) {
+			return timeOfDayCondition.test(entity, bundle);
+		}
+
+		public static NightCondition build() {
+			return new NightCondition(new TimeOfDayCondition(12000L, 0L, false));
+		}
+
+		public @NotNull String toString() {
+			return "NightCondition[timeOfDayCondition=" + this.timeOfDayCondition + "]";
+		}
+	}
+
+	public record DayCondition(TimeOfDayCondition timeOfDayCondition) implements RelicCondition {
+		public JsonObject toJson() {
+			return timeOfDayCondition.toJson();
+		}
+
+		public boolean test(LivingEntity entity, ItemStack bundle) {
+			return timeOfDayCondition.test(entity, bundle);
+		}
+
+		public static DayCondition build() {
+			return new DayCondition(new TimeOfDayCondition(0L, 12000L, false));
+		}
+
+		public @NotNull String toString() {
+			return "DayCondition[timeOfDayCondition=" + this.timeOfDayCondition + "]";
+		}
+	}
+
+	public record InBundleCondition(List<Identifier> bundleIds, List<Identifier> bundleTags) implements RelicCondition {
+		public JsonObject toJson() {
+			JsonObject json = new JsonObject();
+			json.addProperty("type", ConditionTypes.inBiome.toString());
+			JsonArray array = new JsonArray();
+			for (Identifier id : this.bundleIds) array.add(id.toString());
+			for (Identifier tag : this.bundleTags) array.add("#" + tag.toString());
+			json.add("value", array);
+			return json;
+		}
+
+		public boolean test(LivingEntity entity, ItemStack bundle) {
+			for (Identifier id : this.bundleIds) if (bundle.isOf(Registries.ITEM.get(id))) return true;
+			for (Identifier tag : this.bundleTags) if (bundle.isIn(TagKey.of(RegistryKeys.ITEM, tag))) return true;
+			return false;
+		}
+
+		public static InBundleCondition fromJson(JsonElement jsonElement) {
+			List<Identifier> bundleIds = new ArrayList<>();
+			List<Identifier> bundleTags = new ArrayList<>();
+			if (jsonElement.isJsonArray()) {
+				for (JsonElement element : jsonElement.getAsJsonArray()) parseBiome(element.getAsString(), bundleIds, bundleTags);
+			} else parseBiome(jsonElement.getAsString(), bundleIds, bundleTags);
+			return new InBundleCondition(bundleIds, bundleTags);
+		}
+
+		public static void parseBiome(String id, List<Identifier> bundleIds, List<Identifier> bundleTags) {
+			if (id.startsWith("#")) bundleTags.add(Identifier.of(id.substring(1)));
+			else bundleIds.add(Identifier.of(id));
+		}
+
+		public @NotNull String toString() {
+			return "InBundleCondition[bundleIds=" + this.bundleIds + ", bundleTags=" + this.bundleTags + "]";
+		}
+	}
+
+	public record InNightRelicBundleCondition(InBundleCondition inBundleCondition) implements RelicCondition {
+		public JsonObject toJson() {
+			return inBundleCondition.toJson();
+		}
+
+		public boolean test(LivingEntity entity, ItemStack bundle) {
+			return inBundleCondition.test(entity, bundle);
+		}
+
+		public static InNightRelicBundleCondition build() {
+			return new InNightRelicBundleCondition(new InBundleCondition(List.of(TagRegistry.Item.nightRelicBundle.id()), List.of()));
+		}
+
+		public @NotNull String toString() {
+			return "InNightRelicBundleCondition[inBundleCondition=" + this.inBundleCondition + "]";
+		}
+	}
+
+	public record InDayRelicBundleCondition(InBundleCondition inBundleCondition) implements RelicCondition {
+		public JsonObject toJson() {
+			return inBundleCondition.toJson();
+		}
+
+		public boolean test(LivingEntity entity, ItemStack bundle) {
+			return inBundleCondition.test(entity, bundle);
+		}
+
+		public static InDayRelicBundleCondition build() {
+			return new InDayRelicBundleCondition(new InBundleCondition(List.of(TagRegistry.Item.dayRelicBundle.id()), List.of()));
+		}
+
+		public @NotNull String toString() {
+			return "InDayRelicBundleCondition[inBundleCondition=" + this.inBundleCondition + "]";
+		}
+	}
+
+	public record InRelicBundleCondition(InBundleCondition inBundleCondition) implements RelicCondition {
+		public JsonObject toJson() {
+			return inBundleCondition.toJson();
+		}
+
+		public boolean test(LivingEntity entity, ItemStack bundle) {
+			return inBundleCondition.test(entity, bundle);
+		}
+
+		public static InRelicBundleCondition build() {
+			return new InRelicBundleCondition(new InBundleCondition(List.of(TagRegistry.Item.relicBundle.id()), List.of()));
+		}
+
+		public @NotNull String toString() {
+			return "InRelicBundleCondition[inBundleCondition=" + this.inBundleCondition + "]";
+		}
+	}
+
+	public record InActiveRelicBundleCondition(OrCondition orCondition) implements RelicCondition {
 		public JsonObject toJson() {
 			return orCondition.toJson();
 		}
 
-		public boolean test(LivingEntity entity) {
-			return orCondition.test(entity);
+		public boolean test(LivingEntity entity, ItemStack bundle) {
+			return orCondition.test(entity, bundle);
 		}
 
-		public static ArcaNocturnaCondition build() {
-			return new ArcaNocturnaCondition(new OrCondition(List.of(new InBiomeCondition(List.of(), List.of(TagRegistry.WorldGen.Biome.somnium_reale.id())), new TimeOfDayCondition(12000L, 0L))));
+		public static InActiveRelicBundleCondition build() {
+			return new InActiveRelicBundleCondition(new OrCondition(List.of(new AndCondition(List.of(NightCondition.build(), InNightRelicBundleCondition.build())), new AndCondition(List.of(DayCondition.build(), InDayRelicBundleCondition.build())), InRelicBundleCondition.build())));
 		}
 
 		public @NotNull String toString() {
-			return "ArcaNocturnaCondition[orCondition=" + this.orCondition + "]";
+			return "InActiveRelicBundleCondition[orCondition=" + this.orCondition + "]";
 		}
 	}
 
@@ -343,12 +479,18 @@ public class Relic {
 		public static final Identifier or = Data.idOf("or");
 		public static final Identifier inBiome = Data.idOf("in_biome");
 		public static final Identifier timeOfDay = Data.idOf("time_of_day");
-		public static final Identifier arca_nocturna = Data.idOf("arca_nocturna");
+		public static final Identifier night = Data.idOf("night");
+		public static final Identifier day = Data.idOf("day");
+		public static final Identifier inBundle = Data.idOf("in_bundle");
+		public static final Identifier inNightRelicBundle = Data.idOf("in_night_relic_bundle");
+		public static final Identifier inDayRelicBundle = Data.idOf("in_day_relic_bundle");
+		public static final Identifier inRelicBundle = Data.idOf("in_relic_bundle");
+		public static final Identifier inActiveRelicBundle = Data.idOf("in_active_relic_bundle");
 	}
 
-	public static boolean testConditions(List<RelicCondition> conditions, LivingEntity entity) {
+	public static boolean testConditions(List<RelicCondition> conditions, LivingEntity entity, ItemStack bundle) {
 		for (RelicCondition condition : conditions) {
-			if (!condition.test(entity)) return false;
+			if (!condition.test(entity, bundle)) return false;
 		}
 		return true;
 	}
@@ -366,7 +508,7 @@ public class Relic {
 	public static void bootstrap() {
 		registerActions();
 		registerConditions();
-		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new RelicLoader("relic"));
+		ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(data);
 	}
 
 	private static void registerActions() {
@@ -378,10 +520,20 @@ public class Relic {
 		RelicCondition.register(ConditionTypes.or, json -> OrCondition.fromJsonArray(json.getAsJsonArray()));
 		RelicCondition.register(ConditionTypes.inBiome, InBiomeCondition::fromJson);
 		RelicCondition.register(ConditionTypes.timeOfDay, json -> TimeOfDayCondition.fromJson(json.getAsJsonObject()));
-		RelicCondition.register(ConditionTypes.arca_nocturna, ArcaNocturnaCondition::build);
+		RelicCondition.register(ConditionTypes.night, NightCondition::build);
+		RelicCondition.register(ConditionTypes.day, DayCondition::build);
+		RelicCondition.register(ConditionTypes.inBundle, InBundleCondition::fromJson);
+		RelicCondition.register(ConditionTypes.inNightRelicBundle, InNightRelicBundleCondition::build);
+		RelicCondition.register(ConditionTypes.inDayRelicBundle, InDayRelicBundleCondition::build);
+		RelicCondition.register(ConditionTypes.inRelicBundle, InRelicBundleCondition::build);
+		RelicCondition.register(ConditionTypes.inActiveRelicBundle, InActiveRelicBundleCondition::build);
 	}
 
 	public @NotNull String toString() {
 		return "Relic[action=" + this.action + ", conditions=" + this.conditions + "]";
+	}
+
+	static {
+		data = new RelicLoader("relic");
 	}
 }

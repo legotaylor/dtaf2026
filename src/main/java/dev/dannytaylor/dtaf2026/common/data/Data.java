@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -7,7 +7,6 @@
 
 package dev.dannytaylor.dtaf2026.common.data;
 
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,16 +23,16 @@ public class Data {
 		return idOf("somnium_reale");
 	}
 
+	public static Identifier getSomniaMetusId() {
+		return idOf("the_terrorlands");
+	}
+
 	public static String getModId() {
 		return modId;
 	}
 
 	public static Logger getLogger() {
 		return logger;
-	}
-
-	public static boolean isModInstalled(String modId) {
-		return FabricLoader.getInstance().isModLoaded(modId);
 	}
 
 	static {

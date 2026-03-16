@@ -1,0 +1,6 @@
+{
+	"parent": "dtaf2026:block/egg/large_gray_egg",
+	"textures": {
+		"all": "dtaf2026:block/egg/large_gray_egg_slightly_cracked"
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"asset_id": "dtaf2026:entity/junglefowl/large_red_junglefowl",
+	"baby_asset_id": "dtaf2026:entity/junglefowl/large_red_junglefowl_baby",
+	"model": "big",
+	"spawn_conditions": [
+		{
+			"priority": 0
+		}
+	]
+}

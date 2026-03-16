@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -8,16 +8,15 @@
 package dev.dannytaylor.dtaf2026.common.mixin.entity;
 
 import dev.dannytaylor.dtaf2026.common.registry.AttributeModifierRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.DimensionRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.StatusEffectRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.entity.SomniumRealeLivingEntity;
+import dev.dannytaylor.dtaf2026.common.registry.worldgen.DimensionRegistry;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -61,7 +60,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 		TeleportTarget teleportTarget = null;
 		if (currentWorld.equals(World.OVERWORLD)) {
 			teleportTarget = dtaf2026$createTeleportTarget(DimensionRegistry.somniumReale.world(), false);
-		} else if (currentWorld.equals(DimensionRegistry.somniumReale.world())) {
+		} else if (currentWorld.equals(DimensionRegistry.somniumReale.world()) || currentWorld.equals(DimensionRegistry.theTerrorlands.world())) {
 			teleportTarget = dtaf2026$createTeleportTarget(World.OVERWORLD, true);
 		}
 		if (teleportTarget != null) {
@@ -98,23 +97,19 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 		this.dataTracker.set(lastBedPos, Optional.empty());
 	}
 
-	@Inject(method = "applyDamage", at = @At("HEAD"), cancellable = true)
-	protected void dtaf2026$applyDamage(ServerWorld world, DamageSource source, float amount, CallbackInfo ci) {
+
+	@Override
+	public void setHealth(float health) {
 		// Peaceful, Easy, Normal difficulties will prevent death in the Somnium Reale dimension.
 		// You can die on Hard difficulty in the Somnium Reale dimension.
-		if (world.getDifficulty().ordinal() <= 2) {
+		if ((this.getWorld().getRegistryKey() == DimensionRegistry.somniumReale.world() || this.getWorld().getRegistryKey() == DimensionRegistry.theTerrorlands.world()) && this.getWorld().getDifficulty().ordinal() <= 2 && health < 1.0F) {
+			this.setOnFire(false); // We don't want the player dying once they teleport either.
+			this.setFrozenTicks(0);
+			this.setVelocity(Vec3d.ZERO);
+			this.setHealth(1.0F);
 			TeleportTarget teleportTarget = dtaf2026$createTeleportTarget(World.OVERWORLD, true);
-			if (teleportTarget != null) {
-				if (world.getRegistryKey() == DimensionRegistry.somniumReale.world()) {
-					if (this.getHealth() - amount < 1.0F) {
-						this.setVelocity(Vec3d.ZERO);
-						this.teleportTo(teleportTarget);
-						this.setHealth(1.0F);
-						ci.cancel();
-					}
-				}
-			}
-		}
+			if (teleportTarget != null) this.teleportTo(teleportTarget);
+		} else super.setHealth(health);
 	}
 
 	@Unique
@@ -123,7 +118,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 			ServerWorld serverWorld = this.getServer().getWorld(registryKey);
 			if (serverWorld != null) {
 				BlockPos blockPos = serverWorld.getSpawnPos();
-				if (toRespawnPos) {
+				if (!toRespawnPos) blockPos = DimensionRegistry.toHighestBlockPos(serverWorld, blockPos);
+				else {
 					Optional<BlockPos> lastBedPos = this.dataTracker.get(PlayerEntityMixin.lastBedPos);
 					if (lastBedPos.isPresent()) {
 						Optional<Vec3d> wakeUpPos = BedBlock.findWakeUpPosition(this.getType(), serverWorld, lastBedPos.get(), serverWorld.getBlockState(lastBedPos.get()).get(BedBlock.FACING), serverWorld.getSpawnAngle());
@@ -140,7 +136,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
 	@Unique
 	private void dtaf2026$updateSomniumReale() {
-		((SomniumRealeLivingEntity)this).dtaf2026$updateAttribute(EntityAttributes.SCALE, AttributeModifierRegistry.somniumRealeScaleModifier, () -> ((SomniumRealeLivingEntity)this).dtaf2026$isInSomniumReale());
+		((SomniumRealeLivingEntity)this).dtaf2026$updateAttribute(EntityAttributes.SCALE, AttributeModifierRegistry.somniumRealeScale, () -> ((SomniumRealeLivingEntity)this).dtaf2026$isInAbstractSomniumReale());
 	}
 
 	@ModifyVariable(method = "applyEnchantmentCosts", at = @At("HEAD"), index = 2, argsOnly = true)

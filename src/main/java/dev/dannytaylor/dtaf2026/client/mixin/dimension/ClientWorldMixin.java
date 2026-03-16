@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -17,6 +17,6 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public abstract class ClientWorldMixin {
 	@ModifyArg(method = "getSkyColor", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/Vec3d;multiply(D)Lnet/minecraft/util/math/Vec3d;", ordinal = 1))
 	private double dtaf2026$getSkyColor(double value) {
-		return ClientDimensionRegistry.isSomniumReale() ? 1.0F : value;
+		return ClientDimensionRegistry.isAbstractSomniumReale() ? 1.0F : value;
 	}
 }

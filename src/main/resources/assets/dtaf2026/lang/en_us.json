@@ -1,14 +1,67 @@
 {
 	"dtaf2026.name": "Somnium Reale",
+	"dtaf2026.not_associated": "%s is not an official Minecraft product.",
 
-	"dannytaylor.donate": "Donate",
+	"dannytaylor.donate": "Ko-Fi",
 
 	"dtaf2026.flashingLights": "CAUTION: Flashing Lights",
-	"dtaf2026.flashingLights.description": "%s contains flashing lights and may not be suitable for players with photosensitive medical conditions.\n\nIf you experience lightheadedness, altered vision, twitching, involuntary movements, disorientation, confusion, or temporary loss of awareness, please stop playing immediately and seek medical advice.",
+	"dtaf2026.flashingLights.description": "%s contains some minor flashing lights and may not be suitable for some players with photosensitive medical conditions.\n\nIf you experience lightheadedness, altered vision, twitching, involuntary movements, disorientation, confusion, or temporary loss of awareness, please stop playing immediately and seek medical advice.",
 	"dtaf2026.flashingLights.check": "Do not show this screen again",
+
+	"options.dtaf2026.bloom_alpha": "Bloom Strength",
+	"options.dtaf2026.photosensitive_mode": "Photosensitivity Mode",
+	"options.dtaf2026.photosensitive_mode.full": "OFF",
+	"options.dtaf2026.photosensitive_mode.reduced": "Minimal",
+	"options.dtaf2026.photosensitive_mode.reduced.tooltip": "Stars won't twinkle.",
+	"options.dtaf2026.photosensitive_mode.none": "ON",
+	"options.dtaf2026.photosensitive_mode.none.tooltip": "Stars won't twinkle, and tiny stars won't be rendered.",
 
 	"itemGroup.dtaf2026": "%s",
 	"itemGroup.dtaf2026Creative": "%s (Creative)",
+
+	"block.dtaf2026.dirt": "Dirt",
+
+	"block.dtaf2026.grass_block": "Grass Block",
+
+	"block.dtaf2026.dry_grass_block": "Dry Grass Block",
+
+	"block.dtaf2026.stone": "Stone",
+
+	"block.dtaf2026.stone_stairs": "Stone Stairs",
+
+	"block.dtaf2026.stone_slab": "Stone Slab",
+
+	"block.dtaf2026.cobblestone": "Cobblestone",
+
+	"block.dtaf2026.cobblestone_stairs": "Cobblestone Stairs",
+
+	"block.dtaf2026.cobblestone_slab": "Cobblestone Slab",
+
+	"block.dtaf2026.cobblestone_wall": "Cobblestone Wall",
+
+	"block.dtaf2026.deepslate": "Basalt",
+
+	"block.dtaf2026.deepslate_stairs": "Basalt Stairs",
+
+	"block.dtaf2026.deepslate_slab": "Basalt Slab",
+
+	"block.dtaf2026.cobbled_deepslate": "Cobbled Basalt",
+
+	"block.dtaf2026.cobbled_deepslate_stairs": "Cobbled Basalt Stairs",
+
+	"block.dtaf2026.cobbled_deepslate_slab": "Cobbled Basalt Slab",
+
+	"block.dtaf2026.cobbled_deepslate_wall": "Cobbled Basalt Wall",
+
+	"block.dtaf2026.jasper_ore": "Jasper Ore",
+
+	"block.dtaf2026.deepslate_jasper_ore": "Basalt Jasper Ore",
+
+	"block.dtaf2026.terrorlands_portal": "Terrorlands Portal",
+
+	"block.dtaf2026.violet": "Violet",
+
+	"block.dtaf2026.potted_violet": "Potted Violet",
 
 	"item.dtaf2026.maple_bark": "Maple Bark",
 
@@ -36,23 +89,114 @@
 	"block.dtaf2026.maple_slab": "Maple Slab",
 	"block.dtaf2026.creative_maple_slab": "Maple Slab (Creative)",
 
+	"block.dtaf2026.maple_stairs": "Maple Stairs",
+	"block.dtaf2026.creative_maple_stairs": "Maple Stairs (Creative)",
+
+	"block.dtaf2026.maple_fence": "Maple Fence",
+	"block.dtaf2026.creative_maple_fence": "Maple Fence (Creative)",
+
+	"block.dtaf2026.maple_fence_gate": "Maple Fence Gate",
+	"block.dtaf2026.creative_maple_fence_gate": "Maple Fence Gate (Creative)",
+
 	"block.dtaf2026.maple_leaves": "Maple Leaves",
 	"block.dtaf2026.creative_maple_leaves": "Maple Leaves (Creative)",
 
+	"block.dtaf2026.maple_door": "Maple Door",
+
+	"block.dtaf2026.maple_trapdoor": "Maple Trapdoor",
+
+	"block.dtaf2026.maple_pressure_plate": "Maple Pressure Plate",
+
+	"block.dtaf2026.maple_button": "Maple Button",
+
 	"item.dtaf2026.maple_boat": "Maple Boat",
 	"entity.dtaf2026.maple_boat": "Maple Boat",
+
 	"item.dtaf2026.maple_chest_boat": "Maple Boat with Chest",
 	"entity.dtaf2026.maple_chest_boat": "Maple Boat with Chest",
 
-	"item.dtaf2026.arca_nocturna": "Arca Nocturna",
-	"dtaf2026.arca_nocturna_contents.contains": "%s",
-	"dtaf2026.arca_nocturna_contents.empty": "Empty",
+	"item.dtaf2026.cerulean_bark": "Cerulean Bark",
+
+	"block.dtaf2026.cerulean_sapling": "Cerulean Sapling",
+
+	"block.dtaf2026.cerulean_log": "Cerulean Log",
+	"block.dtaf2026.stripped_cerulean_log": "Stripped Cerulean Log",
+	"block.dtaf2026.twice_stripped_cerulean_log": "Twice Stripped Cerulean Log",
+
+	"block.dtaf2026.creative_cerulean_log": "Cerulean Log (Creative)",
+	"block.dtaf2026.creative_stripped_cerulean_log": "Stripped Cerulean Log (Creative)",
+	"block.dtaf2026.creative_twice_stripped_cerulean_log": "Twice Stripped Cerulean Log (Creative)",
+
+	"block.dtaf2026.cerulean_wood": "Cerulean Wood",
+	"block.dtaf2026.stripped_cerulean_wood": "Stripped Cerulean Wood",
+	"block.dtaf2026.twice_stripped_cerulean_wood": "Twice Stripped Cerulean Wood",
+
+	"block.dtaf2026.creative_cerulean_wood": "Cerulean Wood (Creative)",
+	"block.dtaf2026.creative_stripped_cerulean_wood": "Stripped Cerulean Wood (Creative)",
+	"block.dtaf2026.creative_twice_stripped_cerulean_wood": "Twice Stripped Cerulean Wood (Creative)",
+
+	"block.dtaf2026.cerulean_planks": "Cerulean Planks",
+	"block.dtaf2026.creative_cerulean_planks": "Cerulean Planks (Creative)",
+
+	"block.dtaf2026.cerulean_slab": "Cerulean Slab",
+	"block.dtaf2026.creative_cerulean_slab": "Cerulean Slab (Creative)",
+
+	"block.dtaf2026.cerulean_stairs": "Cerulean Stairs",
+	"block.dtaf2026.creative_cerulean_stairs": "Cerulean Stairs (Creative)",
+
+	"block.dtaf2026.cerulean_fence": "Cerulean Fence",
+	"block.dtaf2026.creative_cerulean_fence": "Cerulean Fence (Creative)",
+
+	"block.dtaf2026.cerulean_fence_gate": "Cerulean Fence Gate",
+	"block.dtaf2026.creative_cerulean_fence_gate": "Cerulean Fence Gate (Creative)",
+
+	"block.dtaf2026.cerulean_leaves": "Cerulean Leaves",
+	"block.dtaf2026.creative_cerulean_leaves": "Cerulean Leaves (Creative)",
+
+	"block.dtaf2026.cerulean_door": "Cerulean Door",
+
+	"block.dtaf2026.cerulean_trapdoor": "Cerulean Trapdoor",
+
+	"block.dtaf2026.cerulean_pressure_plate": "Cerulean Pressure Plate",
+
+	"block.dtaf2026.cerulean_button": "Cerulean Button",
+
+	"item.dtaf2026.cerulean_boat": "Cerulean Boat",
+	"entity.dtaf2026.cerulean_boat": "Cerulean Boat",
+
+	"item.dtaf2026.cerulean_chest_boat": "Cerulean Boat with Chest",
+	"entity.dtaf2026.cerulean_chest_boat": "Cerulean Boat with Chest",
+
+	"item.dtaf2026.night_relic_bundle": "Night Relic Bundle",
+	"item.dtaf2026.day_relic_bundle": "Day Relic Bundle",
+	"item.dtaf2026.relic_bundle": "Relic Bundle",
+	"dtaf2026.relic_bundle_contents.contains": "%s",
+	"dtaf2026.relic_bundle_contents.empty": "Empty",
 	"dtaf2026.relic": "%s",
 	"dtaf2026.relic.none": "Unknown Relic!",
 	"dtaf2026.relic.obfuscated": "I... AM STEVE!",
 
 	"item.dtaf2026.jasper": "Jasper",
-	"dtaf2026.relic.jasper": "Grants Resistance V when active inside an Arca Nocturna",
+	"dtaf2026.relic.jasper": "Grants a high level of Resistance when active inside an active Relic Bundle",
+
+	"block.dtaf2026.red_egg": "Red Egg",
+	"block.dtaf2026.large_red_egg": "Large Red Egg",
+	"block.dtaf2026.gray_egg": "Gray Egg",
+	"block.dtaf2026.large_gray_egg": "Large Gray Egg",
+
+	"block.dtaf2026.maple_creaking_heart": "Maple Creaking Heart",
+	"block.dtaf2026.cerulean_creaking_heart": "Cerulean Creaking Heart",
+
+	"item.dtaf2026.junglefowl_spawn_egg": "Junglefowl Spawn Egg",
+
+	"item.dtaf2026.junglefowl": "Raw Junglefowl",
+	"item.dtaf2026.cooked_junglefowl": "Cooked Junglefowl",
+
+	"entity.dtaf2026.junglefowl": "Junglefowl",
+
+	"item.dtaf2026.boar_spawn_egg": "Boar Spawn Egg",
+
+	"entity.dtaf2026.boar": "Boar",
 
 	"tag.block.dtaf2026.supported_leaves": "Supported Leaves",
 	"tag.block.dtaf2026.supported_logs": "Supported Logs",
@@ -60,24 +204,79 @@
 
 	"tag.enchantment.dtaf2026.fully_breaks_supported_logs": "Fully Breaks Supported Logs",
 
-	"tag.item.dtaf2026.arca_nocturna": "Arca Nocturna",
+	"tag.item.dtaf2026.night_relic_bundle": "Night Relic Bundles",
+	"tag.item.dtaf2026.day_relic_bundle": "Day Relic Bundles",
+	"tag.item.dtaf2026.relic_bundle": "Relic Bundles",
 	"tag.item.dtaf2026.bark": "Bark",
 	"tag.item.dtaf2026.relic": "Relic",
 	"tag.item.dtaf2026.supported_logs": "Supported Logs",
 
 	"tag.worldgen.biome.dtaf2026.is_somnium_reale": "Is Somnium Reale",
 
-	"minecraft.relic.amethyst_shard": "Grants Regeneration when active inside an Arca Nocturna",
-	"minecraft.relic.diamond": "Grants Resistance when active inside an Arca Nocturna",
-	"minecraft.relic.emerald": "Grants Hero of the Village when active inside an Arca Nocturna",
-	"minecraft.relic.heart_of_the_sea": "Grants Conduit Power when active inside an Arca Nocturna",
-	"minecraft.relic.lapis_lazuli": "Grants Enchanting when active inside an Arca Nocturna",
-	"minecraft.relic.prismarine_shard": "Grants Water Breathing when active inside an Arca Nocturna",
-	"minecraft.relic.quartz": "Grants Fire Resistance when active inside an Arca Nocturna",
-	"minecraft.relic.redstone": "Grants Speed when active inside an Arca Nocturna",
+	"minecraft.relic.amethyst_shard": "Grants Regeneration when active inside an active Relic Bundle",
+	"minecraft.relic.diamond": "Grants Resistance when active inside an active Relic Bundle",
+	"minecraft.relic.emerald": "Grants Hero of the Village when active inside an active Relic Bundle",
+	"minecraft.relic.heart_of_the_sea": "Grants Conduit Power when active inside an active Relic Bundle",
+	"minecraft.relic.lapis_lazuli": "Grants Enchanting when active inside an active Relic Bundle",
+	"minecraft.relic.prismarine_shard": "Grants Water Breathing when active inside an active Relic Bundle",
+	"minecraft.relic.quartz": "Grants Fire Resistance when active inside an active Relic Bundle",
+	"minecraft.relic.redstone": "Grants Speed when active inside an active Relic Bundle",
 
 	"effect.dtaf2026.enchanted": "Enchanted",
 	"effect.dtaf2026.safe_landing": "Safe Landing",
 	"effect.dtaf2026.growth": "Growth",
-	"effect.dtaf2026.shrink": "Shrink"
+	"effect.dtaf2026.shrink": "Shrink",
+
+	"item.dtaf2026.fleecifer_spawn_egg": "Fleecifer Spawn Egg",
+	"item.dtaf2026.fleecifer_boss_spawn_egg": "Mega Fleecifer Spawn Egg",
+
+	"item.dtaf2026.fleecifer_wool": "Fleecifer Wool",
+	"item.dtaf2026.fleecifer_eye": "Eye of Fleecifer",
+
+	"dtaf2026.fleecifer_eye.not_in_biome": "You must be in The Terrorlands to summon Mega Fleecifer.",
+
+	"sound.dtaf2026.portal_ambient": "Terrorlands Portal screams",
+	"sound.dtaf2026.portal_teleport": "Terrorlands Portal teleports",
+	"sound.dtaf2026.summon_fleecifer_boss": "Summoned Fleecifer Boss",
+
+	"entity.dtaf2026.fleecifer": "Fleecifer",
+	"entity.dtaf2026.fleecifer_boss": "Mega Fleecifer",
+	"entity.dtaf2026.fleecifer_boss.1": "%s",
+	"entity.dtaf2026.fleecifer_boss.2": "%s",
+	"entity.dtaf2026.fleecifer_boss.3": "%s",
+	"entity.dtaf2026.fleecifer_boss.4": "%s",
+	"entity.dtaf2026.fleecifer_boss.5": "%s",
+	"entity.dtaf2026.fleecifer_boss.6": "%s",
+	"entity.dtaf2026.fleecifer_boss.7": "%s",
+	"entity.dtaf2026.fleecifer_boss.8": "%s",
+	"entity.dtaf2026.fleecifer_boss.9": "%s",
+	"entity.dtaf2026.fleecifer_boss.10": "%s",
+
+	"stat.dtaf2026.fleecifer_boss_phases": "Mega Fleecifer Phases",
+
+	"stat.dtaf2026.fleecifer_boss_won": "Mega Fleecifers Defeated",
+
+	"advancements.adventure.enter_somnium_reale.title": "It Begins...",
+	"advancements.adventure.enter_somnium_reale.description": "Is this real or is this a dream?",
+
+	"advancements.somnium_reale.root.title": "Somnium Reale",
+	"advancements.somnium_reale.root.description": "Good night",
+
+	"advancements.somnium_reale.obtain_relic_bundle.title": "What's in your magic bag?",
+	"advancements.somnium_reale.obtain_relic_bundle.description": "Obtain a Relic Bundle",
+
+	"advancements.somnium_reale.obtain_every_relic.title": "Shiny Magic Rocks",
+	"advancements.somnium_reale.obtain_every_relic.description": "Obtain every Relic",
+
+	"advancements.somnium_reale.obtain_fleecifer_wool.title": "Woolly Rainbows",
+	"advancements.somnium_reale.obtain_fleecifer_wool.description": "Obtain Fleecifer Wool",
+
+	"advancements.somnium_reale.enter_the_terrorlands.title": "Terrorlands?",
+	"advancements.somnium_reale.enter_the_terrorlands.description": "Enter the Terrorlands Portal",
+
+	"advancements.somnium_reale.fleecifer_fight.title": "Your Worst Nightmare",
+	"advancements.somnium_reale.fleecifer_fight.description": "Encounter Mega Fleecifer after using a Eye of Fleecifer in The Terrorlands",
+
+	"advancements.somnium_reale.kill_fleecifer_boss.title": "It was all just a bad dream",
+	"advancements.somnium_reale.kill_fleecifer_boss.description": "It's time to wake up now"
 }

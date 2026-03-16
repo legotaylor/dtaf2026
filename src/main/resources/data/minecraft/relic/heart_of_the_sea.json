@@ -6,11 +6,11 @@
 			"value": {
 				"amplifier": 0,
 				"show_particles": false,
-				"show_icon": false
+				"show_icon": true
 			}
 		}
 	],
 	"conditions": [
-		{ "type": "dtaf2026:arca_nocturna" }
+		{ "type": "dtaf2026:in_active_relic_bundle" }
 	]
 }

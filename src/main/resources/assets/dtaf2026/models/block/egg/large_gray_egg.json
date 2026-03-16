@@ -1,0 +1,7 @@
+{
+	"parent": "dtaf2026:block/egg/large_egg",
+	"textures": {
+		"all": "dtaf2026:block/egg/large_gray_egg",
+		"particle": "dtaf2026:item/egg/large_gray_egg"
+	}
+}

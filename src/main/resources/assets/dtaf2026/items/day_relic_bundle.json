@@ -1,0 +1,31 @@
+{
+	"model": {
+		"type": "minecraft:select",
+		"property": "minecraft:display_context",
+		"cases": [
+			{
+				"when": "gui",
+				"model": {
+					"type": "minecraft:composite",
+					"models": [
+						{
+							"type": "minecraft:model",
+							"model": "dtaf2026:item/relic_bundle/day_relic_bundle_back"
+						},
+						{
+							"type": "dtaf2026:relic_bundle/item"
+						},
+						{
+							"type": "minecraft:model",
+							"model": "dtaf2026:item/relic_bundle/day_relic_bundle_front"
+						}
+					]
+				}
+			}
+		],
+		"fallback": {
+			"type": "minecraft:model",
+			"model": "dtaf2026:item/relic_bundle/day_relic_bundle"
+		}
+	}
+}

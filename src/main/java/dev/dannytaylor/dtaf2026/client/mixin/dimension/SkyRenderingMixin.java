@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -14,19 +14,23 @@ import com.mojang.blaze3d.systems.RenderPass;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.textures.GpuTextureView;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import dev.dannytaylor.dtaf2026.client.data.ClientData;
 import dev.dannytaylor.dtaf2026.client.registry.ClientDimensionRegistry;
 import dev.dannytaylor.dtaf2026.client.registry.PipelineRegistry;
+import dev.dannytaylor.dtaf2026.client.registry.pipeline.PostEffectRegistry;
+import dev.dannytaylor.dtaf2026.common.data.Data;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.BuiltBuffer;
-import net.minecraft.client.render.SkyRendering;
-import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.render.*;
 import net.minecraft.client.util.BufferAllocator;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.random.Random;
 import org.joml.*;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -38,6 +42,7 @@ import java.util.OptionalInt;
 
 @Mixin(SkyRendering.class)
 public abstract class SkyRenderingMixin {
+	@Shadow protected abstract void renderStars(float brightness, MatrixStack matrices);
 	@Unique private GpuBuffer somniumRealeStarVertexBuffer;
 	@Unique private int somniumRealeStarIndexCount;
 	@Unique private GpuBuffer somniumRealeStarVertexBuffer2;
@@ -49,6 +54,11 @@ public abstract class SkyRenderingMixin {
 	private void dtaf2026$scaleStars(CallbackInfo ci) {
 		this.somniumRealeStarVertexBuffer = this.createSomniumRealeStars(true);
 		this.somniumRealeStarVertexBuffer2 = this.createSomniumRealeStars(false);
+	}
+
+	@Inject(method = "renderStars", at = @At("HEAD"), cancellable = true)
+	private void dtaf2026$preventStars(float brightness, MatrixStack matrices, CallbackInfo ci) {
+		if (ClientDimensionRegistry.isSomniaMetus()) ci.cancel();
 	}
 
 	@Inject(method = "renderStars", at = @At("RETURN"))
@@ -95,9 +105,36 @@ public abstract class SkyRenderingMixin {
 		updatePipeline(instance, pipeline, PipelineRegistry.sky);
 	}
 
+	@Inject(method = "renderCelestialBodies", at = @At("HEAD"), cancellable = true)
+	public void dtaf2026$renderCelestialBodies(MatrixStack matrices, VertexConsumerProvider.Immediate vertexConsumers, float rot, int phase, float alpha, float starBrightness, CallbackInfo ci) {
+		if (ClientDimensionRegistry.isAbstractSomniumReale()) {
+			matrices.push();
+			matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-90.0f));
+			this.renderStars(0.5F, matrices);
+			for (PostEffectRegistry.PostEffect postEffect : PostEffectRegistry.postEffects) if (postEffect.getType().equals(PostEffectRegistry.PostEffect.Type.SOMNIUM_REALE_STARS)) postEffect.render(ClientData.getMinecraft());
+			if (ClientDimensionRegistry.isSomniumReale()) this.renderCelestial(40.0F, 1.0F, vertexConsumers, matrices, this.moonTexture);
+			if (ClientDimensionRegistry.isSomniaMetus()) this.renderCelestial(60.0F, 1.0F, vertexConsumers, matrices, this.sunTexture);
+			vertexConsumers.draw();
+			matrices.pop();
+			ci.cancel();
+		}
+	}
+	
+	@Unique
+	private void renderCelestial(float size, float alpha, VertexConsumerProvider vertexConsumers, MatrixStack matrices, Identifier texture) {
+		float y = 100.0F;
+		VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getCelestial(texture));
+		int color = ColorHelper.getWhite(alpha);
+		Matrix4f posMatrix = matrices.peek().getPositionMatrix();
+		vertexConsumer.vertex(posMatrix, -size, y, -size).texture(0.0F, 0.0F).color(color);
+		vertexConsumer.vertex(posMatrix, size, y, -size).texture(1.0F, 0.0F).color(color);
+		vertexConsumer.vertex(posMatrix, size, y, size).texture(1.0F, 1.0F).color(color);
+		vertexConsumer.vertex(posMatrix, -size, y, size).texture(0.0F, 1.0F).color(color);
+	}
+
 	@Unique
 	private void updatePipeline(RenderPass renderPass, RenderPipeline pipeline, RenderPipeline somniumRealePipeline) {
-		renderPass.setPipeline(ClientDimensionRegistry.isSomniumReale() ? somniumRealePipeline : pipeline);
+		renderPass.setPipeline(ClientDimensionRegistry.isAbstractSomniumReale() ? somniumRealePipeline : pipeline);
 	}
 
 	@Unique
@@ -136,4 +173,7 @@ public abstract class SkyRenderingMixin {
 	private float getSomniumRealeScale(boolean isBig) {
 		return isBig ? 2.0F : 0.5F;
 	}
+
+	@Unique private final Identifier moonTexture = Data.idOf("textures/environment/moon.png");
+	@Unique private final Identifier sunTexture = Data.idOf("textures/environment/sun.png");
 }

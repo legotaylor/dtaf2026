@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "dtaf2026:item/relic_bundle/night_relic_bundle"
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"asset_id": "dtaf2026:entity/junglefowl/gray_junglefowl",
+	"baby_asset_id": "dtaf2026:entity/junglefowl/gray_junglefowl_baby",
+	"model": "small",
+	"spawn_conditions": [
+		{
+			"priority": 0
+		}
+	]
+}

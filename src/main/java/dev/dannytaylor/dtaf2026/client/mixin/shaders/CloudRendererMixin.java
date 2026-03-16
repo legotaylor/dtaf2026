@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -21,6 +21,6 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public abstract class CloudRendererMixin {
 	@ModifyArg(at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/systems/RenderPass;setPipeline(Lcom/mojang/blaze3d/pipeline/RenderPipeline;)V"), method = "renderClouds")
 	private RenderPipeline dtaf2026$renderClouds(RenderPipeline pipeline) {
-		return ClientDimensionRegistry.isSomniumReale(ClientData.getMinecraft().world) ? (ClientData.getMinecraft().options.getCloudRenderModeValue() == CloudRenderMode.FANCY ? PipelineRegistry.clouds : PipelineRegistry.flatClouds) : pipeline;
+		return ClientDimensionRegistry.isAbstractSomniumReale(ClientData.getMinecraft().world) ? (ClientData.getMinecraft().options.getCloudRenderModeValue() == CloudRenderMode.FANCY ? PipelineRegistry.clouds : PipelineRegistry.flatClouds) : pipeline;
 	}
 }

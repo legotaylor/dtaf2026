@@ -1,0 +1,7 @@
+{
+	"parent": "dtaf2026:block/egg/small_egg",
+	"textures": {
+		"all": "dtaf2026:block/egg/red_egg",
+		"particle": "dtaf2026:item/egg/red_egg"
+	}
+}

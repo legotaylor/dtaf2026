@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -19,22 +19,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostEffectRegistry {
-	public static List<PostEffect> postEffects = new ArrayList<>();
+	public static final List<PostEffect> postEffects = new ArrayList<>();
 
 	public static void bootstrap() {
-		postEffects.add(new PostEffect(Data.getSomniumRealeId(), (client) -> ClientDimensionRegistry.isSomniumReale()));
+		postEffects.add(new PostEffect(Data.getSomniumRealeId(), (client) -> ClientDimensionRegistry.isAbstractSomniumReale(), PostEffect.Type.SOMNIUM_REALE_STARS));
+		postEffects.add(new PostEffect(Data.idOf("title"), (client) -> true, PostEffect.Type.PANORAMA));
 	}
 
 	// Update to use Luminance once Luminance is updated. (depth shaders would be cool)
+	// Having the bloom be depth based would be quite nice.
 	public static class PostEffect {
 		private final Pool pool;
 		private final Identifier id;
 		private final ShouldRender shouldRender;
+		private final Type type;
 
-		public PostEffect(Identifier id, ShouldRender shouldRender) {
+		public PostEffect(Identifier id, ShouldRender shouldRender, Type type) {
 			this.pool = new Pool(3);
 			this.id = id;
 			this.shouldRender = shouldRender;
+			this.type = type;
 		}
 
 		@SuppressWarnings("deprecation")
@@ -57,8 +61,18 @@ public class PostEffectRegistry {
 			this.pool.clear();
 		}
 
+		public Type getType() {
+			return this.type;
+		}
+
 		public interface ShouldRender {
 			boolean shouldRender(MinecraftClient client);
+		}
+
+		public enum Type {
+			GAME,
+			SOMNIUM_REALE_STARS,
+			PANORAMA
 		}
 	}
 }

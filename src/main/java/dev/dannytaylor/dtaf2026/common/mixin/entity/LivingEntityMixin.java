@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -55,8 +55,8 @@ public abstract class LivingEntityMixin extends Entity implements SomniumRealeLi
 
 	@Unique
 	private void dtaf2026$updateStatusEffects() {
-		dtaf2026$updateAttribute(EntityAttributes.SCALE, AttributeModifierRegistry.growthEffectModifier, StatusEffectRegistry.growth);
-		dtaf2026$updateAttribute(EntityAttributes.SCALE, AttributeModifierRegistry.shrinkEffectModifier, StatusEffectRegistry.shrink);
+		dtaf2026$updateAttribute(EntityAttributes.SCALE, AttributeModifierRegistry.growth, StatusEffectRegistry.growth);
+		dtaf2026$updateAttribute(EntityAttributes.SCALE, AttributeModifierRegistry.shrink, StatusEffectRegistry.shrink);
 	}
 
 	public void dtaf2026$updateAttribute(RegistryEntry<EntityAttribute> attribute, EntityAttributeModifier modifier, ShouldApply shouldApply) {
@@ -71,7 +71,15 @@ public abstract class LivingEntityMixin extends Entity implements SomniumRealeLi
 		dtaf2026$updateAttribute(attribute, modifier, () -> this.hasStatusEffect(statusEffect));
 	}
 
+	public boolean dtaf2026$isInAbstractSomniumReale() {
+		return TagRegistry.WorldGen.Biome.isIn(this.getWorld(), this.getBlockPos(), TagRegistry.WorldGen.Biome.abstractSomniumReale);
+	}
+
 	public boolean dtaf2026$isInSomniumReale() {
-		return TagRegistry.WorldGen.Biome.isIn(this.getWorld(), this.getBlockPos(), TagRegistry.WorldGen.Biome.somnium_reale);
+		return TagRegistry.WorldGen.Biome.isIn(this.getWorld(), this.getBlockPos(), TagRegistry.WorldGen.Biome.somniumReale);
+	}
+
+	public boolean dtaf2026$isInTheTerrorlands() {
+		return TagRegistry.WorldGen.Biome.isIn(this.getWorld(), this.getBlockPos(), TagRegistry.WorldGen.Biome.theTerrorlands);
 	}
 }

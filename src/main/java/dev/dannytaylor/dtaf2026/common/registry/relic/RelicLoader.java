@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -21,23 +21,23 @@ import java.util.Map;
 import java.util.Optional;
 
 public class RelicLoader implements SimpleSynchronousResourceReloadListener {
-	private static final Map<Identifier, Relic> registry = new HashMap<>();
+	private final Map<Identifier, Relic> registry = new HashMap<>();
 	private final String path;
 
 	public RelicLoader(String path) {
 		this.path = path;
 	}
 
-	public static void reset() {
+	public void reset() {
 		registry.clear();
 	}
 
-	public static Optional<Relic> get(Identifier id) {
+	public Optional<Relic> get(Identifier id) {
 		Relic relic = registry.get(id);
 		return relic != null ? Optional.of(relic) : Optional.empty();
 	}
 
-	public static Map<Identifier, Relic> getAll() {
+	public Map<Identifier, Relic> getAll() {
 		return registry;
 	}
 

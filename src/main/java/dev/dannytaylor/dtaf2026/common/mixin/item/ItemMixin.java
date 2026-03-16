@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -10,7 +10,7 @@ package dev.dannytaylor.dtaf2026.common.mixin.item;
 import dev.dannytaylor.dtaf2026.common.registry.item.ComponentTypeRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.item.component.RelicComponent;
 import dev.dannytaylor.dtaf2026.common.registry.item.tooltip.RelicTooltipData;
-import dev.dannytaylor.dtaf2026.common.registry.relic.RelicLoader;
+import dev.dannytaylor.dtaf2026.common.registry.relic.Relic;
 import net.minecraft.component.ComponentMap;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.TooltipDisplayComponent;
@@ -31,7 +31,7 @@ public abstract class ItemMixin {
 	@Inject(method = "getComponents", at = @At("RETURN"), cancellable = true)
 	private void dtaf2026$getDefaultStack(CallbackInfoReturnable<ComponentMap> cir) {
 		Identifier id = Registries.ITEM.getId((Item) (Object) this);
-		if (RelicLoader.get(id).isPresent()) {
+		if (Relic.data.get(id).isPresent()) {
 			ComponentMap components = cir.getReturnValue();
 			if (!components.contains(ComponentTypeRegistry.relic)) cir.setReturnValue(ComponentMap.of(components, ComponentMap.builder().add(ComponentTypeRegistry.relic, new RelicComponent(id)).build()));
 		}
@@ -40,7 +40,7 @@ public abstract class ItemMixin {
 	@Inject(method = "getTooltipData", at = @At("RETURN"), cancellable = true)
 	public void dtaf2026$getTooltipData(ItemStack stack, CallbackInfoReturnable<Optional<TooltipData>> cir) {
 		Identifier id = Registries.ITEM.getId((Item) (Object) this);
-		if (RelicLoader.get(id).isPresent()) {
+		if (Relic.data.get(id).isPresent()) {
 			if (cir.getReturnValue().isEmpty()) {
 				TooltipDisplayComponent tooltipDisplayComponent = stack.getOrDefault(DataComponentTypes.TOOLTIP_DISPLAY, TooltipDisplayComponent.DEFAULT);
 				cir.setReturnValue(!tooltipDisplayComponent.shouldDisplay(ComponentTypeRegistry.relic) ? Optional.empty() : Optional.ofNullable(stack.get(ComponentTypeRegistry.relic)).map(RelicTooltipData::new));

@@ -1,0 +1,26 @@
+{
+	"summon_fleecifer_boss": {
+		"subtitle": "sound.dtaf2026.summon_fleecifer_boss",
+		"sounds": [
+			"dtaf2026:summon_fleecifer_boss"
+		]
+	},
+	"fleecifer_eye_break": {
+		"sounds": [
+			"dtaf2026:fleecifer_eye_break"
+		]
+	},
+	"portal_ambient": {
+		"subtitle": "sound.dtaf2026.portal_ambient",
+		"sounds": [
+			"dtaf2026:portal_ambient",
+			"dtaf2026:portal_ambient2"
+		]
+	},
+	"portal_teleport": {
+		"subtitle": "sound.dtaf2026.portal_teleport",
+		"sounds": [
+			"dtaf2026:portal_teleport"
+		]
+	}
+}

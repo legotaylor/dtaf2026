@@ -3,10 +3,19 @@
 	"package": "dev.dannytaylor.dtaf2026.common.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
+		"block.CreakingHeartBlockEntityMixin",
+		"block.CreakingHeartBlockMixin",
+		"block.FenceBlockMixin",
+		"block.FluidBlockMixin",
+		"block.LavaFluidMixin",
+		"block.StairsBlockMixin",
+		"entity.CreakingEntityMixin",
 		"entity.LivingEntityMixin",
 		"entity.PlayerEntityMixin",
-		"item.ItemMixin",
-		"screen.AnvilScreenHandlerMixin"
+		"entity.ServerPlayerEntityMixin",
+		"entity.ZombieEntityMixin",
+		"gui.screen.AnvilScreenHandlerMixin",
+		"item.ItemMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
