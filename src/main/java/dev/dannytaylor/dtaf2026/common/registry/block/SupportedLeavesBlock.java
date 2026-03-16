@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -9,7 +9,6 @@ package dev.dannytaylor.dtaf2026.common.registry.block;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.dannytaylor.dtaf2026.common.registry.TagRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -20,6 +19,8 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.particle.ParticleUtil;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
@@ -35,7 +36,13 @@ import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.ScheduledTickView;
 
 public class SupportedLeavesBlock extends SupportedBlock implements Waterloggable {
-	public static final MapCodec<SupportedLeavesBlock> codec = RecordCodecBuilder.mapCodec((instance) -> instance.group(Codecs.rangedInclusiveFloat(0.0F, 1.0F).fieldOf("leaf_particle_chance").forGetter((SupportedLeavesBlock) -> SupportedLeavesBlock.leafParticleChance), ParticleTypes.TYPE_CODEC.fieldOf("leaf_particle").forGetter((SupportedLeavesBlock) -> SupportedLeavesBlock.leafParticleEffect), createSettingsCodec()).apply(instance, SupportedLeavesBlock::new));
+	public static final MapCodec<SupportedLeavesBlock> codec = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+		Codecs.rangedInclusiveFloat(0.0F, 1.0F).fieldOf("leaf_particle_chance").forGetter((SupportedLeavesBlock) -> SupportedLeavesBlock.leafParticleChance),
+		ParticleTypes.TYPE_CODEC.fieldOf("leaf_particle").forGetter((SupportedLeavesBlock) -> SupportedLeavesBlock.leafParticleEffect),
+		TagKey.codec(RegistryKeys.BLOCK).fieldOf("isOf").forGetter(block -> block.isOf),
+		createSettingsCodec()).apply(instance, SupportedLeavesBlock::new)
+	);
+
 	protected final float leafParticleChance;
 	protected final ParticleEffect leafParticleEffect;
 	public static final BooleanProperty waterlogged = Properties.WATERLOGGED;
@@ -44,8 +51,8 @@ public class SupportedLeavesBlock extends SupportedBlock implements Waterloggabl
 		return codec;
 	}
 
-	public SupportedLeavesBlock(float leafParticleChance, ParticleEffect leafParticleEffect, AbstractBlock.Settings settings) {
-		super(settings);
+	public SupportedLeavesBlock(float leafParticleChance, ParticleEffect leafParticleEffect, TagKey<Block> isOf, AbstractBlock.Settings settings) {
+		super(isOf, settings);
 		this.leafParticleChance = leafParticleChance;
 		this.leafParticleEffect = leafParticleEffect;
 	}
@@ -66,7 +73,8 @@ public class SupportedLeavesBlock extends SupportedBlock implements Waterloggabl
 	}
 
 	public BlockState getPlacementState(ItemPlacementContext ctx) {
-		return super.getPlacementState(ctx).with(waterlogged, ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER);
+		BlockState state = super.getPlacementState(ctx);
+		return state != null ? state.with(waterlogged, ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER) : null;
 	}
 
 	protected FluidState getFluidState(BlockState state) {
@@ -101,9 +109,5 @@ public class SupportedLeavesBlock extends SupportedBlock implements Waterloggabl
 
 	public void spawnLeafParticle(World world, BlockPos pos, Random random) {
 		ParticleUtil.spawnParticle(world, pos, random, this.leafParticleEffect);
-	}
-
-	public IsOfBlock isOf() {
-		return (state -> state.isIn(TagRegistry.Block.supportsSupportedLeaves));
 	}
 }

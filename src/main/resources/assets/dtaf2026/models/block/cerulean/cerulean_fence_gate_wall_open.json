@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/template_fence_gate_wall_open",
+	"textures": {
+		"texture": "dtaf2026:block/cerulean/cerulean_planks"
+	}
+}

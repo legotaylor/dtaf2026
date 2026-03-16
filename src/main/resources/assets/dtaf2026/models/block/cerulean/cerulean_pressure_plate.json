@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/pressure_plate_up",
+	"textures": {
+		"texture": "dtaf2026:block/cerulean/cerulean_planks"
+	}
+}

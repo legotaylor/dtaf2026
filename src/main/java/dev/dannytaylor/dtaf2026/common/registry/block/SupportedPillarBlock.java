@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -8,10 +8,13 @@
 package dev.dannytaylor.dtaf2026.common.registry.block;
 
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
@@ -19,15 +22,22 @@ import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.Direction;
 
 public class SupportedPillarBlock extends SupportedBlock {
-	public static final MapCodec<SupportedPillarBlock> codec = createCodec(SupportedPillarBlock::new);
+	public static final MapCodec<SupportedPillarBlock> codec = RecordCodecBuilder.mapCodec(
+		instance -> instance.group(
+				TagKey.codec(RegistryKeys.BLOCK).fieldOf("isOf").forGetter(block -> block.isOf),
+				createSettingsCodec()
+			)
+			.apply(instance, SupportedPillarBlock::new)
+	);
+
 	public static final EnumProperty<Direction.Axis> axis = Properties.AXIS;
 
 	public MapCodec<? extends SupportedPillarBlock> getCodec() {
 		return codec;
 	}
 
-	public SupportedPillarBlock(Settings settings) {
-		super(settings);
+	public SupportedPillarBlock(TagKey<Block> isOf, Settings settings) {
+		super(isOf, settings);
 		this.setDefaultState(this.stateManager.getDefaultState().with(axis, Direction.Axis.Y));
 	}
 

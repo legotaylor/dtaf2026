@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"group": "fleecifer_eye",
+	"key": {
+		"W": "dtaf2026:fleecifer_wool",
+		"E": "minecraft:ender_pearl"
+	},
+	"pattern": [
+		" W ",
+		"WEW",
+		" W "
+	],
+	"result": {
+		"count": 1,
+		"id": "dtaf2026:fleecifer_eye"
+	}
+}

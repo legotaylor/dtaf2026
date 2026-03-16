@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"powered=false": {
+			"model": "dtaf2026:block/cerulean/cerulean_pressure_plate"
+		},
+		"powered=true": {
+			"model": "dtaf2026:block/cerulean/cerulean_pressure_plate_down"
+		}
+	}
+}

@@ -1,0 +1,33 @@
+{
+	"parent": "dtaf2026:somnium_reale/root",
+	"criteria": {
+		"relic_bundle": {
+			"conditions": {
+				"items": [
+					{
+						"items": "#dtaf2026:relic_bundle"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"display": {
+		"description": {
+			"translate": "advancements.somnium_reale.obtain_relic_bundle.description"
+		},
+		"icon": {
+			"count": 1,
+			"id": "dtaf2026:night_relic_bundle"
+		},
+		"title": {
+			"translate": "advancements.somnium_reale.obtain_relic_bundle.title"
+		}
+	},
+	"requirements": [
+		[
+			"relic_bundle"
+		]
+	],
+	"sends_telemetry_event": false
+}

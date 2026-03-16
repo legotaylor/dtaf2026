@@ -11,6 +11,7 @@ out vec4 fragColor;
 
 void main() {
 	// Depth based bloom would be cool :)
+	// Could probably update this in v1.1 when Luminance is updated.
 	vec3 baseColor = texture(InSampler, texCoord).rgb;
 	vec3 mixColor = texture(MergeSampler, texCoord).rgb;
 	fragColor = vec4(mix(mixColor, baseColor, mix(1.0, 0.5, SmoothBlockLight) * SmoothBloomAlpha), 1.0);

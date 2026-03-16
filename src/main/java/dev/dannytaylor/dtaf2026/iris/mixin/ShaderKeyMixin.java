@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -7,9 +7,9 @@
 
 package dev.dannytaylor.dtaf2026.iris.mixin;
 
+import dev.dannytaylor.dtaf2026.client.util.UnsafeEnum;
 import dev.dannytaylor.dtaf2026.common.data.Data;
 import dev.dannytaylor.dtaf2026.iris.IrisMain;
-import dev.dannytaylor.dtaf2026.client.util.UnsafeEnum;
 import net.irisshaders.iris.pipeline.programs.ShaderKey;
 import net.irisshaders.iris.pipeline.programs.SomniumRealeShader;
 import net.irisshaders.iris.shaderpack.loading.ProgramId;

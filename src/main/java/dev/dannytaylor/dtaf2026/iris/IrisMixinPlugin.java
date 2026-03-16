@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3

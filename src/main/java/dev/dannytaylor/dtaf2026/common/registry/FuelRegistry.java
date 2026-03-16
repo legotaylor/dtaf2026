@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -15,8 +15,10 @@ public class FuelRegistry {
 	}
 
 	public static void bootstrap() {
-		register((builder, context) -> {
-			builder.add(TagRegistry.Item.bark, context.baseSmeltTime());
-		});
+		register(FuelRegistry::build);
+	}
+
+	private static void build(net.minecraft.item.FuelRegistry.Builder builder, FuelRegistryEvents.Context context) {
+		builder.add(TagRegistry.Item.bark, context.baseSmeltTime());
 	}
 }

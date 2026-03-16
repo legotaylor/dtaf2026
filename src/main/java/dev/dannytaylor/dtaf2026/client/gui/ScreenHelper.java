@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -7,18 +7,24 @@
 
 package dev.dannytaylor.dtaf2026.client.gui;
 
+import com.mojang.blaze3d.pipeline.RenderPipeline;
 import dev.dannytaylor.dtaf2026.client.config.Config;
 import dev.dannytaylor.dtaf2026.client.data.ClientData;
 import dev.dannytaylor.dtaf2026.client.gui.screen.LogoConfirmScreen;
 import dev.dannytaylor.dtaf2026.common.data.Data;
+import dev.dannytaylor.dtaf2026.common.registry.BlockRegistry;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.client.gl.RenderPipelines;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.profiler.Profilers;
 
 import java.util.List;
 import java.util.function.Function;
@@ -26,7 +32,6 @@ import java.util.function.Function;
 public class ScreenHelper {
 	private static float prevSleepAlpha;
 	private static float sleepAlpha;
-	private static Sprite somniumRealePortalSprite;
 
 	public static int getTitleYOffset() {
 		return -18;
@@ -75,11 +80,28 @@ public class ScreenHelper {
 	}
 
 	public static Sprite getSomniumRealePortalSprite() {
-		if (somniumRealePortalSprite == null) somniumRealePortalSprite = ClientData.getMinecraft().getBlockRenderManager().getModels().getModelParticleSprite(getSomniumRealePortalBlockState());
-		return somniumRealePortalSprite;
+		return ClientData.getMinecraft().getBlockRenderManager().getModels().getModelParticleSprite(getSomniumRealePortalBlockState());
 	}
 
 	public static BlockState getSomniumRealePortalBlockState() {
-		return Blocks.NETHER_PORTAL.getDefaultState();
+		return BlockRegistry.terrorlandsPortal.getDefaultState();
+	}
+
+	public static void renderSleepPortalOverlay(DrawContext context, RenderTickCounter tickCounter) {
+		ScreenHelper.setSleepAlpha(MathHelper.lerp(tickCounter.getTickProgress(true), ScreenHelper.getPrevSleepAlpha(), ScreenHelper.getSleepAlpha()));
+		renderSleepPortalOverlay(context, ScreenHelper.getSleepAlpha());
+	}
+
+	public static void renderSleepPortalOverlay(DrawContext context, RenderPipeline pipeline, float alpha) {
+		if (alpha > 0) {
+			Profilers.get().push(Data.idOf("sleep").toUnderscoreSeparatedString());
+			context.createNewRootLayer();
+			context.drawSpriteStretched(pipeline, ScreenHelper.getSomniumRealePortalSprite(), 0, 0, context.getScaledWindowWidth(), context.getScaledWindowHeight(), ((int) (Math.max(0, Math.min(alpha / 100.0F, 1.0F)) * 255.0F) << 24) | 0xFFFFFF);
+			Profilers.get().pop();
+		}
+	}
+
+	public static void renderSleepPortalOverlay(DrawContext context, float alpha) {
+		renderSleepPortalOverlay(context, RenderPipelines.GUI_TEXTURED, alpha);
 	}
 }

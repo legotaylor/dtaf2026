@@ -1,0 +1,141 @@
+{
+	"parent": "dtaf2026:somnium_reale/obtain_relic_bundle",
+	"criteria": {
+		"minecraft:redstone": {
+			"conditions": {
+				"items": [
+					{
+						"items": "minecraft:redstone"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		},
+		"minecraft:emerald": {
+			"conditions": {
+				"items": [
+					{
+						"items": "minecraft:emerald"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		},
+		"minecraft:lapis_lazuli": {
+			"conditions": {
+				"items": [
+					{
+						"items": "minecraft:lapis_lazuli"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		},
+		"minecraft:diamond": {
+			"conditions": {
+				"items": [
+					{
+						"items": "minecraft:diamond"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		},
+		"minecraft:quartz": {
+			"conditions": {
+				"items": [
+					{
+						"items": "minecraft:quartz"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		},
+		"minecraft:amethyst_shard": {
+			"conditions": {
+				"items": [
+					{
+						"items": "minecraft:amethyst_shard"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		},
+		"minecraft:prismarine_shard": {
+			"conditions": {
+				"items": [
+					{
+						"items": "minecraft:prismarine_shard"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		},
+		"minecraft:heart_of_the_sea": {
+			"conditions": {
+				"items": [
+					{
+						"items": "minecraft:heart_of_the_sea"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		},
+		"dtaf2026:jasper": {
+			"conditions": {
+				"items": [
+					{
+						"items": "dtaf2026:jasper"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"display": {
+		"description": {
+			"translate": "advancements.somnium_reale.obtain_every_relic.description"
+		},
+		"frame": "challenge",
+		"icon": {
+			"count": 1,
+			"id": "dtaf2026:jasper"
+		},
+		"title": {
+			"translate": "advancements.somnium_reale.obtain_every_relic.title"
+		}
+	},
+	"requirements": [
+		[
+			"minecraft:redstone"
+		],
+		[
+			"minecraft:emerald"
+		],
+		[
+			"minecraft:lapis_lazuli"
+		],
+		[
+			"minecraft:diamond"
+		],
+		[
+			"minecraft:quartz"
+		],
+		[
+			"minecraft:amethyst_shard"
+		],
+		[
+			"minecraft:prismarine_shard"
+		],
+		[
+			"minecraft:heart_of_the_sea"
+		],
+		[
+			"dtaf2026:jasper"
+		]
+	],
+	"rewards": {
+		"experience": 50
+	},
+	"sends_telemetry_event": false
+}

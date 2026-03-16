@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/fence_post",
+	"textures": {
+		"texture": "dtaf2026:block/cerulean/cerulean_planks"
+	}
+}

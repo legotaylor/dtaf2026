@@ -1,0 +1,21 @@
+{
+	"variants": {
+		"": [
+			{
+				"model": "dtaf2026:block/stone"
+			},
+			{
+				"model": "dtaf2026:block/stone",
+				"y": 90
+			},
+			{
+				"model": "dtaf2026:block/stone",
+				"y": 180
+			},
+			{
+				"model": "dtaf2026:block/stone",
+				"y": 270
+			}
+		]
+	}
+}

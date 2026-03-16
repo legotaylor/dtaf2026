@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -16,6 +16,6 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public abstract class AccessibilityOnboardingScreenMixin {
 	@ModifyArg(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/Positioner;margin(I)Lnet/minecraft/client/gui/widget/Positioner;"), method = "init")
 	private int dtaf2026$adjustMargin(int value) {
-		return 2;
+		return value - 2;
 	}
 }

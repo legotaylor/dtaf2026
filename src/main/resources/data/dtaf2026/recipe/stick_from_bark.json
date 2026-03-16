@@ -1,0 +1,12 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"category": "misc",
+	"group": "sticks",
+	"ingredients": [
+		"#dtaf2026:bark"
+	],
+	"result": {
+		"count": 1,
+		"id": "minecraft:stick"
+	}
+}

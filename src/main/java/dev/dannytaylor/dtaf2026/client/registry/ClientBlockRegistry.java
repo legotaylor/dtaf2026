@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -14,7 +14,14 @@ import net.minecraft.client.render.BlockRenderLayer;
 
 public class ClientBlockRegistry {
 	public static void bootstrap() {
-		BlockRenderLayer saplingRenderLayer = BlockRenderLayer.CUTOUT;
-		for (SupportedWoodBlockSet woodBlockSet : BlockRegistry.woodBlockSets) BlockRenderLayerMap.putBlock(woodBlockSet.sapling, saplingRenderLayer);
+		BlockRenderLayer cutout = BlockRenderLayer.CUTOUT;
+		for (SupportedWoodBlockSet woodBlockSet : BlockRegistry.woodBlockSets) {
+			BlockRenderLayerMap.putBlock(woodBlockSet.sapling, cutout);
+			BlockRenderLayerMap.putBlock(woodBlockSet.door, cutout);
+			BlockRenderLayerMap.putBlock(woodBlockSet.trapdoor, cutout);
+		}
+		BlockRenderLayerMap.putBlock(BlockRegistry.violet, cutout);
+		BlockRenderLayerMap.putBlock(BlockRegistry.pottedViolet, cutout);
+		BlockRenderLayerMap.putBlock(BlockRegistry.terrorlandsPortal, BlockRenderLayer.TRANSLUCENT);
 	}
 }

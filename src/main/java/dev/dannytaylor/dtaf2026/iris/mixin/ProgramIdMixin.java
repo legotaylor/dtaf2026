@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -7,8 +7,9 @@
 
 package dev.dannytaylor.dtaf2026.iris.mixin;
 
-import dev.dannytaylor.dtaf2026.iris.IrisMain;
 import dev.dannytaylor.dtaf2026.client.util.UnsafeEnum;
+import dev.dannytaylor.dtaf2026.common.data.Data;
+import dev.dannytaylor.dtaf2026.iris.IrisMain;
 import net.irisshaders.iris.pipeline.programs.SomniumRealeShader;
 import net.irisshaders.iris.shaderpack.loading.ProgramId;
 import org.spongepowered.asm.mixin.Mixin;
@@ -36,8 +37,7 @@ public abstract class ProgramIdMixin {
 					System.out.println("Using fallback programId for program with id '" + id  + "': " + error.getLocalizedMessage());
 				}
 
-				Map<String, Object> options = new HashMap<>();
-				options.putAll(Map.of("group", programId.group(), "sourceName", programId.sourceName(), "fallback", fallback));
+				Map<String, Object> options = new HashMap<>(Map.of("group", programId.group(), "sourceName", programId.sourceName(), "fallback", fallback));
 				if (programId.defaultBlendOverride() != null) options.put("defaultBlendOverride", programId.defaultBlendOverride());
 
 				ProgramId customProgramId = UnsafeEnum.createEnumInstance(ProgramId.class, id, oldValues.length, options);
@@ -46,7 +46,7 @@ public abstract class ProgramIdMixin {
 				newValues[newValues.length - 1] = customProgramId;
 				UnsafeEnum.UNSAFE.putObject(ProgramId.class, UnsafeEnum.UNSAFE.staticFieldOffset(Arrays.stream(ProgramId.class.getDeclaredFields()).filter(f -> f.getType().equals(ProgramId[].class)).findFirst().orElseThrow()), newValues);
 			} catch (Exception error) {
-				error.printStackTrace();
+				Data.getLogger().error("Error whilst adding custom program id: {}", String.valueOf(error));
 			}
 		});
 	}

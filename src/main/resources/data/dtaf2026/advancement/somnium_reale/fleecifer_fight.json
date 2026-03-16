@@ -1,0 +1,34 @@
+{
+	"parent": "dtaf2026:somnium_reale/enter_the_terrorlands",
+	"criteria": {
+		"fleecifer_fight": {
+			"conditions": {
+				"fight": [
+					{
+						"condition": "dtaf2026:fleecifer_fight_finished",
+						"finished": false
+					}
+				]
+			},
+			"trigger": "dtaf2026:fleecifer_fight"
+		}
+	},
+	"display": {
+		"description": {
+			"translate": "advancements.somnium_reale.fleecifer_fight.description"
+		},
+		"icon": {
+			"count": 1,
+			"id": "dtaf2026:fleecifer_eye"
+		},
+		"title": {
+			"translate": "advancements.somnium_reale.fleecifer_fight.title"
+		}
+	},
+	"requirements": [
+		[
+			"fleecifer_fight"
+		]
+	],
+	"sends_telemetry_event": false
+}

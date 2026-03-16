@@ -1,0 +1,112 @@
+{
+	"carvers": [
+		"minecraft:cave",
+		"minecraft:cave_extra_underground",
+		"dtaf2026:canyon"
+	],
+	"downfall": 0.0,
+	"effects": {
+		"fog_color": 16777215,
+		"mood_sound": {
+			"block_search_extent": 8,
+			"offset": 2.0,
+			"sound": "minecraft:ambient.cave",
+			"tick_delay": 6000
+		},
+		"music_volume": 1.0,
+		"sky_color": 787724,
+		"water_color": 4159204,
+		"water_fog_color": 329011,
+		"grass_color": 5622079,
+		"foliage_color": 2865935,
+		"dry_foliage_color": 10707526
+	},
+	"features": [
+		[],
+		[
+			"dtaf2026:lake_lava_underground"
+		],
+		[
+			"dtaf2026:air_pocket"
+		],
+		[
+			"minecraft:monster_room",
+			"minecraft:monster_room_deep"
+		],
+		[],
+		[],
+		[
+			"dtaf2026:ore_dirt",
+			"minecraft:ore_gravel",
+			"minecraft:ore_coal_upper",
+			"minecraft:ore_coal_lower",
+			"minecraft:ore_iron_upper",
+			"minecraft:ore_iron_middle",
+			"minecraft:ore_iron_small",
+			"minecraft:ore_gold",
+			"minecraft:ore_gold_lower",
+			"minecraft:ore_redstone",
+			"minecraft:ore_redstone_lower",
+			"dtaf2026:ore_jasper",
+			"dtaf2026:ore_jasper_medium",
+			"dtaf2026:ore_jasper_large",
+			"dtaf2026:ore_jasper_buried",
+			"minecraft:ore_lapis",
+			"minecraft:ore_lapis_buried",
+			"minecraft:ore_copper",
+			"minecraft:underwater_magma",
+			"minecraft:disk_sand",
+			"minecraft:disk_clay",
+			"minecraft:disk_gravel"
+		],
+		[],
+		[
+			"minecraft:spring_water",
+			"minecraft:spring_lava"
+		],
+		[
+			"dtaf2026:glow_lichen",
+			"dtaf2026:violets",
+			"minecraft:patch_bush",
+			"dtaf2026:patch_grass",
+			"minecraft:patch_firefly_bush_near_water",
+			"dtaf2026:leaf_litter",
+			"dtaf2026:trees_cerulean"
+		],
+		[
+			"minecraft:freeze_top_layer"
+		]
+	],
+	"has_precipitation": false,
+	"spawn_costs": {},
+	"spawners": {
+		"ambient": [],
+		"axolotls": [],
+		"creature": [
+			{
+				"type": "dtaf2026:boar",
+				"maxCount": 4,
+				"minCount": 4,
+				"weight": 10
+			},
+			{
+				"type": "dtaf2026:junglefowl",
+				"maxCount": 4,
+				"minCount": 4,
+				"weight": 10
+			},
+			{
+				"type": "minecraft:cow",
+				"maxCount": 4,
+				"minCount": 4,
+				"weight": 8
+			}
+		],
+		"misc": [],
+		"monster": [],
+		"underground_water_creature": [],
+		"water_ambient": [],
+		"water_creature": []
+	},
+	"temperature": 0.6
+}

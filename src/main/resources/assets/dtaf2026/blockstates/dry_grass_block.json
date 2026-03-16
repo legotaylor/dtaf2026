@@ -1,0 +1,21 @@
+{
+	"variants": {
+		"": [
+			{
+				"model": "dtaf2026:block/dry_grass_block"
+			},
+			{
+				"model": "dtaf2026:block/dry_grass_block",
+				"y": 90
+			},
+			{
+				"model": "dtaf2026:block/dry_grass_block",
+				"y": 180
+			},
+			{
+				"model": "dtaf2026:block/dry_grass_block",
+				"y": 270
+			}
+		]
+	}
+}

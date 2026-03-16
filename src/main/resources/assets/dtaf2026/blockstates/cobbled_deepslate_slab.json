@@ -1,0 +1,13 @@
+{
+	"variants": {
+		"type=bottom": {
+			"model": "dtaf2026:block/cobbled_deepslate_slab"
+		},
+		"type=double": {
+			"model": "dtaf2026:block/cobbled_deepslate"
+		},
+		"type=top": {
+			"model": "dtaf2026:block/cobbled_deepslate_slab_top"
+		}
+	}
+}

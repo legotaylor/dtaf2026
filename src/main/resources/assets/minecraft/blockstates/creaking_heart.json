@@ -1,0 +1,112 @@
+{
+	"variants": {
+		"axis=x,creaking_heart_state=awake,dtaf2026_creaking_variant=minecraft_creaking": {
+			"model": "minecraft:block/creaking_heart_awake_horizontal",
+			"x": 90,
+			"y": 90
+		},
+		"axis=x,creaking_heart_state=dormant,dtaf2026_creaking_variant=minecraft_creaking": {
+			"model": "minecraft:block/creaking_heart_dormant_horizontal",
+			"x": 90,
+			"y": 90
+		},
+		"axis=x,creaking_heart_state=uprooted,dtaf2026_creaking_variant=minecraft_creaking": {
+			"model": "minecraft:block/creaking_heart_horizontal",
+			"x": 90,
+			"y": 90
+		},
+		"axis=y,creaking_heart_state=awake,dtaf2026_creaking_variant=minecraft_creaking": {
+			"model": "minecraft:block/creaking_heart_awake"
+		},
+		"axis=y,creaking_heart_state=dormant,dtaf2026_creaking_variant=minecraft_creaking": {
+			"model": "minecraft:block/creaking_heart_dormant"
+		},
+		"axis=y,creaking_heart_state=uprooted,dtaf2026_creaking_variant=minecraft_creaking": {
+			"model": "minecraft:block/creaking_heart"
+		},
+		"axis=z,creaking_heart_state=awake,dtaf2026_creaking_variant=minecraft_creaking": {
+			"model": "minecraft:block/creaking_heart_awake_horizontal",
+			"x": 90
+		},
+		"axis=z,creaking_heart_state=dormant,dtaf2026_creaking_variant=minecraft_creaking": {
+			"model": "minecraft:block/creaking_heart_dormant_horizontal",
+			"x": 90
+		},
+		"axis=z,creaking_heart_state=uprooted,dtaf2026_creaking_variant=minecraft_creaking": {
+			"model": "minecraft:block/creaking_heart_horizontal",
+			"x": 90
+		},
+		"axis=x,creaking_heart_state=awake,dtaf2026_creaking_variant=dtaf2026_maple": {
+			"model": "dtaf2026:block/creaking_heart_awake_horizontal_maple",
+			"x": 90,
+			"y": 90
+		},
+		"axis=x,creaking_heart_state=dormant,dtaf2026_creaking_variant=dtaf2026_maple": {
+			"model": "dtaf2026:block/creaking_heart_dormant_horizontal_maple",
+			"x": 90,
+			"y": 90
+		},
+		"axis=x,creaking_heart_state=uprooted,dtaf2026_creaking_variant=dtaf2026_maple": {
+			"model": "dtaf2026:block/creaking_heart_horizontal_maple",
+			"x": 90,
+			"y": 90
+		},
+		"axis=y,creaking_heart_state=awake,dtaf2026_creaking_variant=dtaf2026_maple": {
+			"model": "dtaf2026:block/creaking_heart_awake_maple"
+		},
+		"axis=y,creaking_heart_state=dormant,dtaf2026_creaking_variant=dtaf2026_maple": {
+			"model": "dtaf2026:block/creaking_heart_dormant_maple"
+		},
+		"axis=y,creaking_heart_state=uprooted,dtaf2026_creaking_variant=dtaf2026_maple": {
+			"model": "dtaf2026:block/creaking_heart_maple"
+		},
+		"axis=z,creaking_heart_state=awake,dtaf2026_creaking_variant=dtaf2026_maple": {
+			"model": "dtaf2026:block/creaking_heart_awake_horizontal_maple",
+			"x": 90
+		},
+		"axis=z,creaking_heart_state=dormant,dtaf2026_creaking_variant=dtaf2026_maple": {
+			"model": "dtaf2026:block/creaking_heart_dormant_horizontal_maple",
+			"x": 90
+		},
+		"axis=z,creaking_heart_state=uprooted,dtaf2026_creaking_variant=dtaf2026_maple": {
+			"model": "dtaf2026:block/creaking_heart_horizontal_maple",
+			"x": 90
+		},
+		"axis=x,creaking_heart_state=awake,dtaf2026_creaking_variant=dtaf2026_cerulean": {
+			"model": "dtaf2026:block/creaking_heart_awake_horizontal_cerulean",
+			"x": 90,
+			"y": 90
+		},
+		"axis=x,creaking_heart_state=dormant,dtaf2026_creaking_variant=dtaf2026_cerulean": {
+			"model": "dtaf2026:block/creaking_heart_dormant_horizontal_cerulean",
+			"x": 90,
+			"y": 90
+		},
+		"axis=x,creaking_heart_state=uprooted,dtaf2026_creaking_variant=dtaf2026_cerulean": {
+			"model": "dtaf2026:block/creaking_heart_horizontal_cerulean",
+			"x": 90,
+			"y": 90
+		},
+		"axis=y,creaking_heart_state=awake,dtaf2026_creaking_variant=dtaf2026_cerulean": {
+			"model": "dtaf2026:block/creaking_heart_awake_cerulean"
+		},
+		"axis=y,creaking_heart_state=dormant,dtaf2026_creaking_variant=dtaf2026_cerulean": {
+			"model": "dtaf2026:block/creaking_heart_dormant_cerulean"
+		},
+		"axis=y,creaking_heart_state=uprooted,dtaf2026_creaking_variant=dtaf2026_cerulean": {
+			"model": "dtaf2026:block/creaking_heart_cerulean"
+		},
+		"axis=z,creaking_heart_state=awake,dtaf2026_creaking_variant=dtaf2026_cerulean": {
+			"model": "dtaf2026:block/creaking_heart_awake_horizontal_cerulean",
+			"x": 90
+		},
+		"axis=z,creaking_heart_state=dormant,dtaf2026_creaking_variant=dtaf2026_cerulean": {
+			"model": "dtaf2026:block/creaking_heart_dormant_horizontal_cerulean",
+			"x": 90
+		},
+		"axis=z,creaking_heart_state=uprooted,dtaf2026_creaking_variant=dtaf2026_cerulean": {
+			"model": "dtaf2026:block/creaking_heart_horizontal_cerulean",
+			"x": 90
+		}
+	}
+}

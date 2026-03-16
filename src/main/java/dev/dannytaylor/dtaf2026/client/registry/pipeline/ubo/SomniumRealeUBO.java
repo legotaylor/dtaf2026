@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -49,7 +49,7 @@ public class SomniumRealeUBO extends UBOSettings {
 
 	public void update(float light, float skyLight, float blockLight, float bloomAlpha, long time) {
 		float worldTime = time % 24000L;
-		float tickProgress = ClientData.getMinecraft().getRenderTickCounter().getTickProgress(false);
+		float tickProgress = ClientData.getMinecraft().getRenderTickCounter().getTickProgress(true);
 		float gameTime = (worldTime + tickProgress) / 24000.0F;
 
 		this.prevLight = this.light;

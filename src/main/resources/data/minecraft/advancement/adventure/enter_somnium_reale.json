@@ -1,0 +1,29 @@
+{
+	"parent": "minecraft:adventure/sleep_in_bed",
+	"criteria": {
+		"entered_somnium_reale": {
+			"conditions": {
+				"to": "dtaf2026:somnium_reale"
+			},
+			"trigger": "minecraft:changed_dimension"
+		}
+	},
+	"display": {
+		"description": {
+			"translate": "advancements.adventure.enter_somnium_reale.description"
+		},
+		"icon": {
+			"count": 1,
+			"id": "dtaf2026:maple_boat"
+		},
+		"title": {
+			"translate": "advancements.adventure.enter_somnium_reale.title"
+		}
+	},
+	"requirements": [
+		[
+			"entered_somnium_reale"
+		]
+	],
+	"sends_telemetry_event": false
+}

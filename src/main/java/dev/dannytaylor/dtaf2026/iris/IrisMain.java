@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -27,15 +27,22 @@ public class IrisMain {
 		return isIrisInstalled() && IrisApi.getInstance().isShaderPackInUse();
 	}
 	public static void registerShaderKeys() {
-		SomniumRealeShader.registerKey("DTAF2026TinyStars", new SomniumRealeShaderKey("DTAF2026TinyStars", AlphaTests.OFF, VertexFormats.POSITION, FogMode.OFF, SomniumRealeShader.LightingModel.FULLBRIGHT, PipelineRegistry.tinyStars));
-		SomniumRealeShader.registerKey("DTAF2026Stars", new SomniumRealeShaderKey("DTAF2026Stars", AlphaTests.OFF, VertexFormats.POSITION, FogMode.OFF, SomniumRealeShader.LightingModel.FULLBRIGHT, PipelineRegistry.stars));
-		SomniumRealeShader.registerKey("DTAF2026BigStars", new SomniumRealeShaderKey("DTAF2026BigStars", AlphaTests.OFF, VertexFormats.POSITION, FogMode.OFF, SomniumRealeShader.LightingModel.FULLBRIGHT, PipelineRegistry.bigStars));
+		SomniumRealeShader.registerKey("dtaf2026_stars_tiny", new SomniumRealeShaderKey("dtaf2026_stars_tiny", AlphaTests.OFF, VertexFormats.POSITION, FogMode.OFF, SomniumRealeShader.LightingModel.FULLBRIGHT, PipelineRegistry.tinyStars));
+		SomniumRealeShader.registerKey("dtaf2026_stars", new SomniumRealeShaderKey("dtaf2026_stars", AlphaTests.OFF, VertexFormats.POSITION, FogMode.OFF, SomniumRealeShader.LightingModel.FULLBRIGHT, PipelineRegistry.stars));
+		SomniumRealeShader.registerKey("dtaf2026_stars_big", new SomniumRealeShaderKey("dtaf2026_stars_big", AlphaTests.OFF, VertexFormats.POSITION, FogMode.OFF, SomniumRealeShader.LightingModel.FULLBRIGHT, PipelineRegistry.bigStars));
 		IrisPipelines.copyPipeline(RenderPipelines.POSITION_SKY, PipelineRegistry.sky);
+		IrisPipelines.copyPipeline(RenderPipelines.CLOUDS, PipelineRegistry.clouds);
+		IrisPipelines.copyPipeline(RenderPipelines.FLAT_CLOUDS, PipelineRegistry.flatClouds);
+		IrisPipelines.copyPipeline(RenderPipelines.SOLID, PipelineRegistry.solid);
+		IrisPipelines.copyPipeline(RenderPipelines.WIREFRAME, PipelineRegistry.wireframe);
+		IrisPipelines.copyPipeline(RenderPipelines.CUTOUT, PipelineRegistry.cutout);
+		IrisPipelines.copyPipeline(RenderPipelines.CUTOUT_MIPPED, PipelineRegistry.cutoutMipped);
+		IrisPipelines.copyPipeline(RenderPipelines.TRANSLUCENT, PipelineRegistry.translucent);
 	}
 
 	public static void registerPrograms() {
-		SomniumRealeShader.registerProgram("DTAF2026TinyStars", new SomniumRealeProgramId(ProgramGroup.Gbuffers, "dtaf2026_stars_tiny", ProgramId.SkyBasic, null));
-		SomniumRealeShader.registerProgram("DTAF2026Stars", new SomniumRealeProgramId(ProgramGroup.Gbuffers, "dtaf2026_stars", ProgramId.SkyBasic, null));
-		SomniumRealeShader.registerProgram("DTAF2026BigStars", new SomniumRealeProgramId(ProgramGroup.Gbuffers, "dtaf2026_stars_big", ProgramId.SkyBasic, null));
+		SomniumRealeShader.registerProgram("dtaf2026_stars_tiny", new SomniumRealeProgramId(ProgramGroup.Gbuffers, "dtaf2026_stars_tiny", ProgramId.SkyBasic, null));
+		SomniumRealeShader.registerProgram("dtaf2026_stars", new SomniumRealeProgramId(ProgramGroup.Gbuffers, "dtaf2026_stars", ProgramId.SkyBasic, null));
+		SomniumRealeShader.registerProgram("dtaf2026_stars_big", new SomniumRealeProgramId(ProgramGroup.Gbuffers, "dtaf2026_stars_big", ProgramId.SkyBasic, null));
 	}
 }

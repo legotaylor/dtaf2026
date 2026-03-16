@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -8,6 +8,7 @@
 package dev.dannytaylor.dtaf2026.common.registry.block;
 
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.dannytaylor.dtaf2026.common.data.Data;
 import dev.dannytaylor.dtaf2026.common.registry.BlockRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.TagRegistry;
@@ -22,6 +23,8 @@ import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.Identifier;
@@ -33,15 +36,22 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 public class SupportedLogBlock extends SupportedPillarBlock {
-	public static final MapCodec<? extends SupportedLogBlock> codec = createCodec(SupportedLogBlock::new);
+	public static final MapCodec<SupportedLogBlock> codec = RecordCodecBuilder.mapCodec(
+		instance -> instance.group(
+				TagKey.codec(RegistryKeys.BLOCK).fieldOf("isOf").forGetter(block -> block.isOf),
+				createSettingsCodec()
+			)
+			.apply(instance, SupportedLogBlock::new)
+	);
+
 	public static final IntProperty variant = IntProperty.of(Data.idOf("variant").toUnderscoreSeparatedString(), 0, 2);
 
 	public MapCodec<? extends SupportedLogBlock> getCodec() {
 		return codec;
 	}
 
-	public SupportedLogBlock(Settings settings) {
-		super(settings);
+	public SupportedLogBlock(TagKey<Block> isOf, Settings settings) {
+		super(isOf, settings);
 		this.setDefaultState(this.stateManager.getDefaultState().with(variant, 0));
 	}
 
@@ -56,11 +66,8 @@ public class SupportedLogBlock extends SupportedPillarBlock {
 	}
 
 	public BlockState getPlacementState(ItemPlacementContext ctx) {
-		return super.getPlacementState(ctx).with(variant, 0);
-	}
-
-	public IsOfBlock isOf() {
-		return (state -> state.isIn(TagRegistry.Block.supportedLogs));
+		BlockState state = super.getPlacementState(ctx);
+		return state != null ? state.with(variant, 0) : null;
 	}
 
 	protected ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state, boolean includeData) {

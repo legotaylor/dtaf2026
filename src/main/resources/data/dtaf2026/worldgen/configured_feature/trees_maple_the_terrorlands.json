@@ -1,0 +1,8 @@
+{
+	"type": "minecraft:random_selector",
+	"config": {
+		"default": "dtaf2026:maple_tree_the_terrorlands",
+		"features": [
+		]
+	}
+}

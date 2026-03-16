@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UBORegistry {
+	private static long time;
 	private static final List<UBO<?>> registry = new ArrayList<>();
 
 	public static void bootstrap() {
@@ -32,7 +33,7 @@ public class UBORegistry {
 				skyLight = ClientData.getMinecraft().world.getLightLevel(LightType.SKY, blockPos);
 				blockLight = ClientData.getMinecraft().world.getLightLevel(LightType.BLOCK, blockPos);
 			}
-			settings.update(light, skyLight, blockLight, Config.instance.bloomAlpha.value(), ClientData.getMinecraft().world == null ? 0L : ClientData.getMinecraft().world.getTime());
+			settings.update(light, skyLight, blockLight, Config.instance.bloomAlpha.value(), ClientData.getMinecraft().world == null ? time : ClientData.getMinecraft().world.getTime());
 		}));
 	}
 
@@ -50,6 +51,7 @@ public class UBORegistry {
 
 	public static void tick(MinecraftClient client) {
 		for (UBO<?> ubo : registry) ubo.tick(client);
+		if (ClientData.getMinecraft().world == null) time = time + 1 % 24000;
 	}
 
 	public static void close() {

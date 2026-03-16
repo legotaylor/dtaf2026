@@ -1,0 +1,31 @@
+{
+	"criteria": {
+		"entered_somnium_reale": {
+			"conditions": {
+				"to": "dtaf2026:somnium_reale"
+			},
+			"trigger": "minecraft:changed_dimension"
+		}
+	},
+	"display": {
+		"announce_to_chat": false,
+		"background": "dtaf2026:gui/advancements/backgrounds/somnium_reale",
+		"description": {
+			"translate": "advancements.somnium_reale.root.description"
+		},
+		"icon": {
+			"count": 1,
+			"id": "dtaf2026:grass_block"
+		},
+		"show_toast": false,
+		"title": {
+			"translate": "advancements.somnium_reale.root.title"
+		}
+	},
+	"requirements": [
+		[
+			"entered_somnium_reale"
+		]
+	],
+	"sends_telemetry_event": false
+}

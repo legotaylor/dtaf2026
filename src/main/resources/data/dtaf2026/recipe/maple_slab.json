@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "building",
+	"group": "wooden_slab",
+	"key": {
+		"#": "dtaf2026:maple_planks"
+	},
+	"pattern": [
+		"###"
+	],
+	"result": {
+		"count": 6,
+		"id": "dtaf2026:maple_slab"
+	}
+}

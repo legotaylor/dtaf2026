@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "building",
+	"group": "bark",
+	"key": {
+		"#": "dtaf2026:maple_log"
+	},
+	"pattern": [
+		"##",
+		"##"
+	],
+	"result": {
+		"count": 3,
+		"id": "dtaf2026:maple_wood"
+	}
+}

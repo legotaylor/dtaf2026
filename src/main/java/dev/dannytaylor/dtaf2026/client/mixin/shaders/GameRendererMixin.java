@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -57,13 +57,15 @@ public abstract class GameRendererMixin {
 		for (PostEffectRegistry.PostEffect postEffect : PostEffectRegistry.postEffects) postEffect.onResized();
 	}
 
+	@Unique
+	private static float dtaf2026$nightVisionStrength = 0.0F;
+
 	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/WorldRenderer;drawEntityOutlinesFramebuffer()V", shift = At.Shift.AFTER), method = "render")
 	private void dtaf2026$shaders_render(RenderTickCounter tickCounter, boolean tick, CallbackInfo ci) {
-		for (PostEffectRegistry.PostEffect postEffect : PostEffectRegistry.postEffects) postEffect.render(ClientData.getMinecraft());
+		for (PostEffectRegistry.PostEffect postEffect : PostEffectRegistry.postEffects)
+			if (postEffect.getType().equals(PostEffectRegistry.PostEffect.Type.GAME))
+				postEffect.render(ClientData.getMinecraft());
 	}
-
-	@Unique
-	private static float dtaf2026$nightVisionStrength = 1.0F;
 
 	@Inject(at = @At("HEAD"), method = "getNightVisionStrength", cancellable = true)
 	private static void dtaf2026$getNightVisionStrength(LivingEntity entity, float tickProgress, CallbackInfoReturnable<Float> cir) {

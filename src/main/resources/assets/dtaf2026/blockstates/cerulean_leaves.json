@@ -1,0 +1,21 @@
+{
+	"variants": {
+		"": [
+			{
+				"model": "dtaf2026:block/cerulean/cerulean_leaves"
+			},
+			{
+				"model": "dtaf2026:block/cerulean/cerulean_leaves",
+				"y": 90
+			},
+			{
+				"model": "dtaf2026:block/cerulean/cerulean_leaves",
+				"y": 180
+			},
+			{
+				"model": "dtaf2026:block/cerulean/cerulean_leaves",
+				"y": 270
+			}
+		]
+	}
+}

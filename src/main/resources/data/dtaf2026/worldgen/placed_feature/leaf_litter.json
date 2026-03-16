@@ -1,0 +1,23 @@
+{
+	"feature": "dtaf2026:leaf_litter",
+	"placement": [
+		{
+			"type": "minecraft:count",
+			"count": 12
+		},
+		{
+			"type": "minecraft:rarity_filter",
+			"chance": 2
+		},
+		{
+			"type": "minecraft:in_square"
+		},
+		{
+			"type": "minecraft:heightmap",
+			"heightmap": "MOTION_BLOCKING"
+		},
+		{
+			"type": "minecraft:biome"
+		}
+	]
+}

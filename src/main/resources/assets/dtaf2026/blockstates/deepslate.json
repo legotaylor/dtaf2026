@@ -1,0 +1,21 @@
+{
+	"variants": {
+		"": [
+			{
+				"model": "dtaf2026:block/deepslate"
+			},
+			{
+				"model": "dtaf2026:block/deepslate",
+				"y": 90
+			},
+			{
+				"model": "dtaf2026:block/deepslate",
+				"y": 180
+			},
+			{
+				"model": "dtaf2026:block/deepslate",
+				"y": 270
+			}
+		]
+	}
+}

@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -8,6 +8,7 @@
 package dev.dannytaylor.dtaf2026.common.registry.block;
 
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -20,7 +21,9 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
@@ -37,7 +40,14 @@ import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 
 public class SupportedSlabBlock extends SupportedBlock implements Waterloggable {
-	public static final MapCodec<? extends SupportedSlabBlock> codec = createCodec(SupportedSlabBlock::new);
+	public static final MapCodec<SupportedSlabBlock> codec = RecordCodecBuilder.mapCodec(
+		instance -> instance.group(
+				TagKey.codec(RegistryKeys.BLOCK).fieldOf("isOf").forGetter(block -> block.isOf),
+				createSettingsCodec()
+			)
+			.apply(instance, SupportedSlabBlock::new)
+	);
+
 	public static final EnumProperty<SlabType> type;
 	public static final BooleanProperty waterlogged;
 	private static final VoxelShape bottomShape;
@@ -47,8 +57,8 @@ public class SupportedSlabBlock extends SupportedBlock implements Waterloggable 
 		return codec;
 	}
 
-	public SupportedSlabBlock(Settings settings) {
-		super(settings);
+	public SupportedSlabBlock(TagKey<Block> isOf, Settings settings) {
+		super(isOf, settings);
 	}
 
 	protected boolean hasSidedTransparency(BlockState state) {
@@ -78,10 +88,14 @@ public class SupportedSlabBlock extends SupportedBlock implements Waterloggable 
 		if (state.isOf(this)) {
 			return state.with(type, SlabType.DOUBLE).with(waterlogged, false);
 		} else {
-			state = super.getPlacementState(ctx).with(type, SlabType.BOTTOM).with(waterlogged, ctx.getWorld().getFluidState(blockPos).getFluid() == Fluids.WATER);
-			Direction direction = ctx.getSide();
-			return direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double)blockPos.getY() > (double)0.5F)) ? state : state.with(type, SlabType.TOP);
+			state = super.getPlacementState(ctx);
+			if (state != null) {
+				state = state.with(type, SlabType.BOTTOM).with(waterlogged, ctx.getWorld().getFluidState(blockPos).getFluid() == Fluids.WATER);
+				Direction direction = ctx.getSide();
+				return direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getHitPos().y - (double) blockPos.getY() > (double) 0.5F)) ? state : state.with(type, SlabType.TOP);
+			}
 		}
+		return null;
 	}
 
 	protected boolean canReplace(BlockState state, ItemPlacementContext context) {
@@ -131,10 +145,6 @@ public class SupportedSlabBlock extends SupportedBlock implements Waterloggable 
 
 	protected boolean canPathfindThrough(BlockState state, NavigationType type) {
 		return type.equals(NavigationType.WATER) && state.getFluidState().isIn(FluidTags.WATER);
-	}
-
-	public IsOfBlock isOf() {
-		return (state -> state.isOf(this));
 	}
 
 	static {

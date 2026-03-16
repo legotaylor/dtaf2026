@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -8,17 +8,22 @@
 package dev.dannytaylor.dtaf2026.common.registry.block;
 
 import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.dannytaylor.dtaf2026.common.data.Data;
 import dev.dannytaylor.dtaf2026.common.registry.BlockRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.TagRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.SideShapeType;
 import net.minecraft.entity.FallingBlockEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -34,17 +39,25 @@ import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.ScheduledTickView;
 
 public class SupportedBlock extends Block {
-	public static final MapCodec<? extends SupportedBlock> codec = createCodec(SupportedBlock::new);
+	public static final MapCodec<SupportedBlock> codec = RecordCodecBuilder.mapCodec(
+		instance -> instance.group(
+				TagKey.codec(RegistryKeys.BLOCK).fieldOf("isOf").forGetter(block -> block.isOf),
+				createSettingsCodec()
+			)
+			.apply(instance, SupportedBlock::new)
+	);
 	public static final int distance_max = Properties.DISTANCE_0_7_MAX;
 	public static final IntProperty distance = Properties.DISTANCE_0_7;
 	public static final BooleanProperty gravity = BooleanProperty.of(Data.idOf("gravity").toUnderscoreSeparatedString());
+	public final TagKey<Block> isOf;
 
 	public MapCodec<? extends SupportedBlock> getCodec() {
 		return codec;
 	}
 
-	public SupportedBlock(AbstractBlock.Settings settings) {
+	public SupportedBlock(TagKey<Block> isOf, AbstractBlock.Settings settings) {
 		super(settings);
+		this.isOf = isOf;
 		this.setDefaultState(this.stateManager.getDefaultState().with(distance, distance_max).with(gravity, true));
 	}
 
@@ -53,8 +66,24 @@ public class SupportedBlock extends Block {
 		builder.add(distance, gravity);
 	}
 
-	public BlockState getPlacementState(ItemPlacementContext ctx) {
-		return super.getPlacementState(ctx).with(distance, distance_max);
+	public static int calculateDistance(BlockView world, BlockPos pos, IsOfBlock isOfBlock, boolean gravity) {
+		if (!gravity) return 0;
+		BlockPos downPos = pos.offset(Direction.DOWN);
+		BlockState downState = world.getBlockState(downPos);
+		int distance = downState.isIn(TagRegistry.Block.alwaysSupportsSupportedBlocks) ? 0 : distance_max;
+		if (isOfBlock.call(downState) && !downState.isIn(TagRegistry.Block.alwaysSupportsSupportedBlocks)) {
+			distance = downState.isSideSolid(world, downPos, Direction.DOWN, SideShapeType.CENTER) ? downState.get(SupportedBlock.distance) : distance_max;
+		} else if (!downState.isReplaceable()) return 0;
+
+		for (Direction direction : Direction.Type.HORIZONTAL) {
+			BlockPos offsetPos = pos.offset(direction);
+			BlockState offsetState = world.getBlockState(offsetPos);
+			if (offsetState.isIn(TagRegistry.Block.alwaysSupportsSupportedBlocks)) distance = 1;
+			else if (isOfBlock.call(offsetState))
+				distance = Math.min(distance, offsetState.get(SupportedBlock.distance) + 1);
+			if (distance <= 1) break;
+		}
+		return Math.clamp(distance, 0, 7);
 	}
 
 	protected void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
@@ -83,31 +112,13 @@ public class SupportedBlock extends Block {
 		return state;
 	}
 
-	public static int calculateDistance(BlockView world, BlockPos pos, IsOfBlock isOfBlock, boolean gravity) {
-		if (!gravity) return 0;
-		BlockPos downPos = pos.offset(Direction.DOWN);
-		BlockState blockState = world.getBlockState(downPos);
-		int distance = distance_max;
-		if (isOfBlock.call(blockState)) {
-			distance = blockState.isSideSolidFullSquare(world, downPos, Direction.UP) ? blockState.get(SupportedBlock.distance) : distance_max;
-		} else if (!blockState.isReplaceable()) {
-			return 0;
-		}
-
-		for (Direction direction : Direction.Type.HORIZONTAL) {
-			BlockState blockState2 = world.getBlockState(pos.offset(direction));
-			if (isOfBlock.call(blockState2)) {
-				distance = Math.min(distance, blockState2.get(SupportedBlock.distance) + 1);
-				if (distance == 1) {
-					break;
-				}
-			}
-		}
-		return Math.clamp(distance, 0, 7);
+	public BlockState getPlacementState(ItemPlacementContext ctx) {
+		BlockState state = super.getPlacementState(ctx);
+		return state != null ? state.with(distance, distance_max) : null;
 	}
 
 	public IsOfBlock isOf() {
-		return (state -> state.isOf(this));
+		return (state -> this.isOf != null ? state.isIn(this.isOf) : state.isOf(this));
 	}
 
 	@FunctionalInterface

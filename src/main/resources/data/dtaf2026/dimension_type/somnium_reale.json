@@ -8,10 +8,10 @@
 	"has_ceiling": false,
 	"has_raids": false,
 	"has_skylight": true,
-	"height": 256,
+	"height": 384,
 	"infiniburn": "#dtaf2026:infiniburn_somnium_reale",
-	"logical_height": 256,
-	"min_y": 0,
+	"logical_height": 384,
+	"min_y": -64,
 	"monster_spawn_block_light_limit": 0,
 	"monster_spawn_light_level": {
 		"type": "minecraft:uniform",

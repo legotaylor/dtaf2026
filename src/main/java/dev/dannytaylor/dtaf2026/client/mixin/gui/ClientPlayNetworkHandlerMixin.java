@@ -1,5 +1,5 @@
 /*
-    dtaf2026
+    Somnium Reale
     Contributor(s): dannytaylor
     Github: https://github.com/legotaylor/dtaf2026
     Licence: GNU LGPLv3
@@ -8,7 +8,7 @@
 package dev.dannytaylor.dtaf2026.client.mixin.gui;
 
 import dev.dannytaylor.dtaf2026.client.gui.SomniumRealeWorldEntryReason;
-import dev.dannytaylor.dtaf2026.common.registry.DimensionRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.worldgen.DimensionRegistry;
 import net.minecraft.client.gui.screen.DownloadingTerrainScreen;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.registry.RegistryKey;

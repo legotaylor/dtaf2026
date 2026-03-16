@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/outer_stairs",
+	"textures": {
+		"bottom": "dtaf2026:block/stone",
+		"side": "dtaf2026:block/stone",
+		"top": "dtaf2026:block/stone"
+	}
+}

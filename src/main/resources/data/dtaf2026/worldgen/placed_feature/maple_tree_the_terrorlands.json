@@ -1,0 +1,17 @@
+{
+	"feature": "dtaf2026:maple_tree_the_terrorlands",
+	"placement": [
+		{
+			"type": "minecraft:block_predicate_filter",
+			"predicate": {
+				"type": "minecraft:would_survive",
+				"state": {
+					"Name": "dtaf2026:maple_sapling",
+					"Properties": {
+						"stage": "0"
+					}
+				}
+			}
+		}
+	]
+}

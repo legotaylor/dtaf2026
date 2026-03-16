@@ -1,0 +1,72 @@
+{
+	"carvers": [
+		"dtaf2026:lower_cave",
+		"minecraft:cave_extra_underground"
+	],
+	"downfall": 0.0,
+	"effects": {
+		"fog_color": 16777215,
+		"mood_sound": {
+			"block_search_extent": 8,
+			"offset": 2.0,
+			"sound": "minecraft:ambient.cave",
+			"tick_delay": 6000
+		},
+		"music_volume": 1.0,
+		"sky_color": 12490340,
+		"water_color": 4159204,
+		"water_fog_color": 329011,
+		"grass_color": 5622079,
+		"foliage_color": 2865935,
+		"dry_foliage_color": 10707526
+	},
+	"features": [
+		[],
+		[
+			"minecraft:lake_lava_underground"
+		],
+		[
+			"dtaf2026:air_pocket"
+		],
+		[],
+		[],
+		[],
+		[
+			"dtaf2026:ore_dirt",
+			"minecraft:ore_gravel",
+			"dtaf2026:ore_jasper",
+			"dtaf2026:ore_jasper_medium",
+			"dtaf2026:ore_jasper_large",
+			"dtaf2026:ore_jasper_buried",
+			"minecraft:underwater_magma",
+			"minecraft:disk_sand",
+			"minecraft:disk_clay",
+			"minecraft:disk_gravel"
+		],
+		[],
+		[],
+		[
+			"minecraft:glow_lichen",
+			"dtaf2026:trees_cerulean_the_terrorlands",
+			"dtaf2026:trees_maple_the_terrorlands",
+			"dtaf2026:patch_dry_grass",
+			"minecraft:patch_dead_bush_2"
+		],
+		[
+			"minecraft:freeze_top_layer"
+		]
+	],
+	"has_precipitation": false,
+	"spawn_costs": {},
+	"spawners": {
+		"ambient": [],
+		"axolotls": [],
+		"creature": [],
+		"misc": [],
+		"monster": [],
+		"underground_water_creature": [],
+		"water_ambient": [],
+		"water_creature": []
+	},
+	"temperature": 2.0
+}

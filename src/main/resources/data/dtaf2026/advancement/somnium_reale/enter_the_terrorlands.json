@@ -1,0 +1,29 @@
+{
+	"parent": "dtaf2026:somnium_reale/obtain_fleecifer_wool",
+	"criteria": {
+		"entered_terrorlands": {
+			"conditions": {
+				"to": "dtaf2026:the_terrorlands"
+			},
+			"trigger": "minecraft:changed_dimension"
+		}
+	},
+	"display": {
+		"description": {
+			"translate": "advancements.somnium_reale.enter_the_terrorlands.description"
+		},
+		"icon": {
+			"count": 1,
+			"id": "dtaf2026:dry_grass_block"
+		},
+		"title": {
+			"translate": "advancements.somnium_reale.enter_the_terrorlands.title"
+		}
+	},
+	"requirements": [
+		[
+			"entered_terrorlands"
+		]
+	],
+	"sends_telemetry_event": false
+}

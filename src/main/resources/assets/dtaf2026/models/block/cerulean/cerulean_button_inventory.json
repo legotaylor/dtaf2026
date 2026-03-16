@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/button_inventory",
+	"textures": {
+		"texture": "dtaf2026:block/cerulean/cerulean_planks"
+	}
+}

@@ -1,0 +1,33 @@
+{
+	"parent": "dtaf2026:somnium_reale/root",
+	"criteria": {
+		"fleecifer_wool": {
+			"conditions": {
+				"items": [
+					{
+						"items": "dtaf2026:fleecifer_wool"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"display": {
+		"description": {
+			"translate": "advancements.somnium_reale.obtain_fleecifer_wool.description"
+		},
+		"icon": {
+			"count": 1,
+			"id": "dtaf2026:fleecifer_wool"
+		},
+		"title": {
+			"translate": "advancements.somnium_reale.obtain_fleecifer_wool.title"
+		}
+	},
+	"requirements": [
+		[
+			"fleecifer_wool"
+		]
+	],
+	"sends_telemetry_event": false
+}

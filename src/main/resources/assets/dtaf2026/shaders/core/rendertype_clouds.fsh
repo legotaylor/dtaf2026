@@ -15,7 +15,7 @@ in vec3 PlayerPos;
 out vec4 fragColor;
 
 void main() {
-	vec4 color = getCloudsColor(vertexColor); // dtaf2026 uses <dtaf2026:somnium_reale.glsl>$getCloudsColor(vertexColor) instead of vertexColor
+	vec4 color = getCloudsColor(vertexColor);// somnium_reale uses <somnium_reale:somnium_reale.glsl>$getCloudsColor(vertexColor) instead of vertexColor
 	color = mix(color, FogColor, 0.5);
 	float fadeDirection = (PlayerPos.y+5)/10;
 	float fadeIntensity = abs(PlayerPos.y/40);

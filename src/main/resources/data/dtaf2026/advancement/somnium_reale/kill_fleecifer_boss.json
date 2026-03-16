@@ -1,0 +1,34 @@
+{
+	"parent": "dtaf2026:somnium_reale/fleecifer_fight",
+	"criteria": {
+		"killed_fleecifer_boss": {
+			"conditions": {
+				"fight": [
+					{
+						"condition": "dtaf2026:fleecifer_fight_finished",
+						"finished": true
+					}
+				]
+			},
+			"trigger": "dtaf2026:fleecifer_fight"
+		}
+	},
+	"display": {
+		"description": {
+			"translate": "advancements.somnium_reale.kill_fleecifer_boss.description"
+		},
+		"icon": {
+			"count": 1,
+			"id": "dtaf2026:relic_bundle"
+		},
+		"title": {
+			"translate": "advancements.somnium_reale.kill_fleecifer_boss.title"
+		}
+	},
+	"requirements": [
+		[
+			"killed_fleecifer_boss"
+		]
+	],
+	"sends_telemetry_event": false
+}

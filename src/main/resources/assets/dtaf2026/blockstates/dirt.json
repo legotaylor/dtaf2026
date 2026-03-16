@@ -1,0 +1,21 @@
+{
+	"variants": {
+		"": [
+			{
+				"model": "dtaf2026:block/dirt"
+			},
+			{
+				"model": "dtaf2026:block/dirt",
+				"y": 90
+			},
+			{
+				"model": "dtaf2026:block/dirt",
+				"y": 180
+			},
+			{
+				"model": "dtaf2026:block/dirt",
+				"y": 270
+			}
+		]
+	}
+}

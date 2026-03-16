@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/wall_inventory",
+	"textures": {
+		"wall": "dtaf2026:block/cobbled_deepslate"
+	}
+}

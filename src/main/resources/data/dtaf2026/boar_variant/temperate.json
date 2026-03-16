@@ -1,0 +1,10 @@
+{
+	"asset_id": "dtaf2026:entity/boar/temperate_boar",
+	"baby_asset_id": "dtaf2026:entity/boar/temperate_boar",
+	"model": "temperate",
+	"spawn_conditions": [
+		{
+			"priority": 0
+		}
+	]
+}

@@ -40,7 +40,7 @@ dependencies {
 
 	modImplementation libs.fl
 	modImplementation libs.fapi
-	modImplementation libs.modmenu
+	modCompileOnly libs.modmenu
 	modImplementation libs.kaleido
 	include libs.kaleido
 	modCompileOnly libs.iris

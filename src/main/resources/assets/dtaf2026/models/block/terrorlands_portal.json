@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/slab",
+	"textures": {
+		"bottom": "dtaf2026:block/terrorlands_portal",
+		"side": "dtaf2026:block/terrorlands_portal",
+		"top": "dtaf2026:block/terrorlands_portal"
+	}
+}
