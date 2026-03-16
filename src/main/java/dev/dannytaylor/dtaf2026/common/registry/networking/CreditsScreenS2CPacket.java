@@ -7,7 +7,6 @@
 
 package dev.dannytaylor.dtaf2026.common.registry.networking;
 
-import dev.dannytaylor.dtaf2026.common.registry.NetworkingRegistry;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;

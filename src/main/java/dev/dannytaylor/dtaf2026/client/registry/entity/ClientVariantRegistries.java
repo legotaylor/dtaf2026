@@ -8,11 +8,11 @@
 package dev.dannytaylor.dtaf2026.client.registry.entity;
 
 import dev.dannytaylor.dtaf2026.common.data.Data;
-import dev.dannytaylor.dtaf2026.common.registry.RegistryTypes;
 import dev.dannytaylor.dtaf2026.common.registry.entity.boar.BoarVariant;
 import dev.dannytaylor.dtaf2026.common.registry.entity.boar.BoarVariants;
 import dev.dannytaylor.dtaf2026.common.registry.entity.junglefowl.JunglefowlVariant;
 import dev.dannytaylor.dtaf2026.common.registry.entity.junglefowl.JunglefowlVariants;
+import dev.dannytaylor.dtaf2026.common.util.RegistryTypes;
 import net.minecraft.util.Identifier;
 
 import java.util.Map;

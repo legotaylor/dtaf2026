@@ -7,8 +7,7 @@
 
 package dev.dannytaylor.dtaf2026.common.registry.item;
 
-import dev.dannytaylor.dtaf2026.common.registry.BlockRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.ItemRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.block.BlockRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.block.SupportedWoodBlockSet;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.minecraft.entity.EntityType;

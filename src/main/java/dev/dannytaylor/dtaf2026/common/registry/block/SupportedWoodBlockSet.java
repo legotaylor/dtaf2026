@@ -8,9 +8,7 @@
 package dev.dannytaylor.dtaf2026.common.registry.block;
 
 import dev.dannytaylor.dtaf2026.common.data.Data;
-import dev.dannytaylor.dtaf2026.common.registry.BlockRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.ParticleRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.WoodTypeRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.particle.ParticleRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.worldgen.SaplingGeneratorRegistry;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;

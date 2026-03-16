@@ -9,8 +9,8 @@ package dev.dannytaylor.dtaf2026.client.mixin.shaders;
 
 import com.mojang.blaze3d.pipeline.RenderPipeline;
 import dev.dannytaylor.dtaf2026.client.data.ClientData;
-import dev.dannytaylor.dtaf2026.client.registry.ClientDimensionRegistry;
-import dev.dannytaylor.dtaf2026.client.registry.PipelineRegistry;
+import dev.dannytaylor.dtaf2026.client.registry.dimension.ClientDimensionRegistry;
+import dev.dannytaylor.dtaf2026.client.registry.pipeline.PipelineRegistry;
 import net.minecraft.client.option.CloudRenderMode;
 import net.minecraft.client.render.CloudRenderer;
 import org.spongepowered.asm.mixin.Mixin;

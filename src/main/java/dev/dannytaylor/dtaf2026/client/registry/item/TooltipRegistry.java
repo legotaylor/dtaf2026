@@ -9,13 +9,13 @@ package dev.dannytaylor.dtaf2026.client.registry.item;
 
 import dev.dannytaylor.dtaf2026.client.data.ClientData;
 import dev.dannytaylor.dtaf2026.common.data.Data;
-import dev.dannytaylor.dtaf2026.common.registry.TagRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.item.component.RelicBundleContentsComponent;
 import dev.dannytaylor.dtaf2026.common.registry.item.component.RelicComponent;
 import dev.dannytaylor.dtaf2026.common.registry.item.tooltip.RelicBundleTooltipData;
 import dev.dannytaylor.dtaf2026.common.registry.item.tooltip.RelicTooltipData;
 import dev.dannytaylor.dtaf2026.common.registry.relic.Relic;
 import dev.dannytaylor.dtaf2026.common.registry.relic.RelicLoader;
+import dev.dannytaylor.dtaf2026.common.registry.tagkey.TagRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.minecraft.client.gui.tooltip.OrderedTextTooltipComponent;
 import net.minecraft.text.Text;

@@ -7,7 +7,7 @@
 
 package dev.dannytaylor.dtaf2026.client.mixin.enchanted_status_effect;
 
-import dev.dannytaylor.dtaf2026.common.registry.StatusEffectRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.effect.StatusEffectRegistry;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.EnchantmentScreen;
 import net.minecraft.text.MutableText;

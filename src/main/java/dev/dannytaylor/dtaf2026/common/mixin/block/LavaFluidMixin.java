@@ -7,8 +7,8 @@
 
 package dev.dannytaylor.dtaf2026.common.mixin.block;
 
-import dev.dannytaylor.dtaf2026.common.registry.BlockRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.TagRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.block.BlockRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.tagkey.TagRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.LavaFluid;
 import net.minecraft.util.math.BlockPos;

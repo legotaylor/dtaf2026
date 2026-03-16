@@ -11,7 +11,7 @@ import dev.dannytaylor.dtaf2026.client.registry.entity.renderer.BoarEntityRender
 import dev.dannytaylor.dtaf2026.client.registry.entity.renderer.FleeciferBossEntityRenderer;
 import dev.dannytaylor.dtaf2026.client.registry.entity.renderer.FleeciferEntityRenderer;
 import dev.dannytaylor.dtaf2026.client.registry.entity.renderer.JunglefowlEntityRenderer;
-import dev.dannytaylor.dtaf2026.common.registry.EntityRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.entity.EntityRegistry;
 import net.minecraft.client.render.entity.BoatEntityRenderer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 

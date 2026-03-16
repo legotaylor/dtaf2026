@@ -7,11 +7,11 @@
 
 package dev.dannytaylor.dtaf2026.common.registry.entity.fleecifer;
 
-import dev.dannytaylor.dtaf2026.common.registry.EntityRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.ItemRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.NetworkingRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.SoundEventRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.entity.EntityRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.item.ItemRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.networking.Events;
+import dev.dannytaylor.dtaf2026.common.registry.networking.NetworkingRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.sound.SoundEventRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FlyingItemEntity;

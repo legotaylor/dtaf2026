@@ -8,7 +8,11 @@
 package dev.dannytaylor.dtaf2026.common.registry.entity.junglefowl;
 
 import dev.dannytaylor.dtaf2026.common.data.Data;
-import dev.dannytaylor.dtaf2026.common.registry.*;
+import dev.dannytaylor.dtaf2026.common.registry.entity.DataComponentRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.entity.EntityRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.entity.TrackedDataRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.tagkey.TagRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.worldgen.LootTableRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.component.ComponentType;
 import net.minecraft.component.ComponentsAccess;

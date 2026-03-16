@@ -7,8 +7,8 @@
 
 package dev.dannytaylor.dtaf2026.common.mixin.entity;
 
-import dev.dannytaylor.dtaf2026.common.registry.AttributeModifierRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.StatusEffectRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.effect.StatusEffectRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.entity.AttributeModifierRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.entity.SomniumRealeLivingEntity;
 import dev.dannytaylor.dtaf2026.common.registry.worldgen.DimensionRegistry;
 import net.minecraft.block.BedBlock;

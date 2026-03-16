@@ -12,7 +12,7 @@ import dev.dannytaylor.dtaf2026.client.config.Config;
 import dev.dannytaylor.dtaf2026.client.data.ClientData;
 import dev.dannytaylor.dtaf2026.client.gui.screen.LogoConfirmScreen;
 import dev.dannytaylor.dtaf2026.common.data.Data;
-import dev.dannytaylor.dtaf2026.common.registry.BlockRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.block.BlockRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;

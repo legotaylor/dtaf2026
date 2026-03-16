@@ -7,7 +7,7 @@
 
 package dev.dannytaylor.dtaf2026.client.mixin.dimension;
 
-import dev.dannytaylor.dtaf2026.client.registry.ClientDimensionRegistry;
+import dev.dannytaylor.dtaf2026.client.registry.dimension.ClientDimensionRegistry;
 import net.minecraft.client.world.ClientWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

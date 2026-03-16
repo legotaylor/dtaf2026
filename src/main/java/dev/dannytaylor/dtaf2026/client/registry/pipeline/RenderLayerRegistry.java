@@ -7,7 +7,6 @@
 
 package dev.dannytaylor.dtaf2026.client.registry.pipeline;
 
-import dev.dannytaylor.dtaf2026.client.registry.PipelineRegistry;
 import dev.dannytaylor.dtaf2026.common.data.Data;
 import net.minecraft.client.render.RenderLayer;
 

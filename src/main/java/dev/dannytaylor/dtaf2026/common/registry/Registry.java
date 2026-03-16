@@ -7,8 +7,18 @@
 
 package dev.dannytaylor.dtaf2026.common.registry;
 
-import dev.dannytaylor.dtaf2026.common.registry.entity.Timer;
+import dev.dannytaylor.dtaf2026.common.registry.advancement.AdvancementRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.block.BlockRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.block.FlammableRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.effect.StatusEffectRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.entity.*;
+import dev.dannytaylor.dtaf2026.common.registry.item.FuelRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.item.ItemRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.networking.NetworkingRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.particle.ParticleRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.relic.Relic;
+import dev.dannytaylor.dtaf2026.common.registry.sound.SoundEventRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.stats.StatRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.worldgen.WorldGenRegistry;
 import net.minecraft.server.world.ServerWorld;
 

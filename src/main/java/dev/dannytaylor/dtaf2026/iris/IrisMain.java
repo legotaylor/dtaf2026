@@ -7,7 +7,7 @@
 
 package dev.dannytaylor.dtaf2026.iris;
 
-import dev.dannytaylor.dtaf2026.client.registry.PipelineRegistry;
+import dev.dannytaylor.dtaf2026.client.registry.pipeline.PipelineRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.irisshaders.iris.api.v0.IrisApi;
 import net.irisshaders.iris.gl.blending.AlphaTests;

@@ -7,7 +7,7 @@
 
 package dev.dannytaylor.dtaf2026.common.registry.item;
 
-import dev.dannytaylor.dtaf2026.common.registry.BlockRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.block.BlockRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.block.CreakingVariant;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

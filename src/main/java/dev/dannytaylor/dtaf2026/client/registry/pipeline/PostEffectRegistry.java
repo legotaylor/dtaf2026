@@ -7,7 +7,7 @@
 
 package dev.dannytaylor.dtaf2026.client.registry.pipeline;
 
-import dev.dannytaylor.dtaf2026.client.registry.ClientDimensionRegistry;
+import dev.dannytaylor.dtaf2026.client.registry.dimension.ClientDimensionRegistry;
 import dev.dannytaylor.dtaf2026.common.data.Data;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.PostEffectProcessor;

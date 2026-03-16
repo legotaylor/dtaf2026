@@ -10,7 +10,7 @@ package dev.dannytaylor.dtaf2026.common.registry.worldgen.decorators;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import dev.dannytaylor.dtaf2026.common.registry.BlockRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.block.BlockRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.block.CreakingVariant;
 import dev.dannytaylor.dtaf2026.common.registry.worldgen.DecoratorRegistry;
 import net.minecraft.block.Blocks;

@@ -7,7 +7,7 @@
 
 package dev.dannytaylor.dtaf2026.common.mixin.entity;
 
-import dev.dannytaylor.dtaf2026.common.registry.TrackedDataRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.entity.TrackedDataRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.entity.creaking.TerrorlandsCreaking;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.data.DataTracker;

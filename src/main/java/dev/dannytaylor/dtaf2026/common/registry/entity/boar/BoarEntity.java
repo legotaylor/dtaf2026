@@ -8,10 +8,10 @@
 package dev.dannytaylor.dtaf2026.common.registry.entity.boar;
 
 import dev.dannytaylor.dtaf2026.common.data.Data;
-import dev.dannytaylor.dtaf2026.common.registry.DataComponentRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.EntityRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.TagRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.TrackedDataRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.entity.DataComponentRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.entity.EntityRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.entity.TrackedDataRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.tagkey.TagRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.component.ComponentType;
 import net.minecraft.component.ComponentsAccess;

@@ -9,8 +9,8 @@ package dev.dannytaylor.dtaf2026.client.mixin.gui;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
-import dev.dannytaylor.dtaf2026.common.registry.ItemRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.WaypointStyleRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.entity.WaypointStyleRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.item.ItemRegistry;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.bar.LocatorBar;
 import net.minecraft.util.Identifier;

@@ -8,7 +8,7 @@
 package dev.dannytaylor.dtaf2026.client.mixin.shaders;
 
 import dev.dannytaylor.dtaf2026.client.data.ClientData;
-import dev.dannytaylor.dtaf2026.client.registry.ClientDimensionRegistry;
+import dev.dannytaylor.dtaf2026.client.registry.dimension.ClientDimensionRegistry;
 import dev.dannytaylor.dtaf2026.client.registry.pipeline.RenderLayerRegistry;
 import net.minecraft.client.render.RenderLayer;
 import org.spongepowered.asm.mixin.Mixin;

@@ -7,8 +7,8 @@
 
 package dev.dannytaylor.dtaf2026.common.registry.entity.fleecifer;
 
-import dev.dannytaylor.dtaf2026.common.registry.EntityRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.WaypointStyleRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.entity.EntityRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.entity.WaypointStyleRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

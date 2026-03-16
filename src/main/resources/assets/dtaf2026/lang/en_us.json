@@ -278,5 +278,9 @@
 	"advancements.somnium_reale.fleecifer_fight.description": "Encounter Mega Fleecifer after using a Eye of Fleecifer in The Terrorlands",
 
 	"advancements.somnium_reale.kill_fleecifer_boss.title": "It was all just a bad dream",
-	"advancements.somnium_reale.kill_fleecifer_boss.description": "It's time to wake up now"
+	"advancements.somnium_reale.kill_fleecifer_boss.description": "It's time to wake up now",
+	"gui.dtaf2026.keybindings.category.dtaf2026": "Somnium Reale",
+	"gui.dtaf2026.keybinding.hold_perspective_back": "Hold Behind View",
+	"gui.dtaf2026.keybinding.hold_perspective_front": "Hold Front View",
+	"gui.dtaf2026.keybinding.zoom": "Zoom"
 }

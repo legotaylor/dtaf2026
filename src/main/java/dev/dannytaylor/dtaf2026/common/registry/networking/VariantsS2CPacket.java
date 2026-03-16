@@ -7,7 +7,6 @@
 
 package dev.dannytaylor.dtaf2026.common.registry.networking;
 
-import dev.dannytaylor.dtaf2026.common.registry.NetworkingRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.entity.boar.BoarVariant;
 import dev.dannytaylor.dtaf2026.common.registry.entity.junglefowl.JunglefowlVariant;
 import net.minecraft.network.RegistryByteBuf;

@@ -9,7 +9,7 @@ package dev.dannytaylor.dtaf2026.common.registry.block;
 
 import com.mojang.serialization.MapCodec;
 import dev.dannytaylor.dtaf2026.client.data.ClientData;
-import dev.dannytaylor.dtaf2026.common.registry.SoundEventRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.sound.SoundEventRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.worldgen.DimensionRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

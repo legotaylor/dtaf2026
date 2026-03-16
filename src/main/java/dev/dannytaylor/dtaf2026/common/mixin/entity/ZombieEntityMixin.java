@@ -7,9 +7,9 @@
 
 package dev.dannytaylor.dtaf2026.common.mixin.entity;
 
-import dev.dannytaylor.dtaf2026.common.registry.BlockRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.ItemRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.block.BlockRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.entity.goal.DestroyJunglefowlEggGoal;
+import dev.dannytaylor.dtaf2026.common.registry.item.ItemRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.ZombieEntity;

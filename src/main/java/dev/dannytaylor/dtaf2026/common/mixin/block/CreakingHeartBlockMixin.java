@@ -7,10 +7,10 @@
 
 package dev.dannytaylor.dtaf2026.common.mixin.block;
 
-import dev.dannytaylor.dtaf2026.common.registry.BlockRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.ItemRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.TagRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.block.BlockRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.block.CreakingVariant;
+import dev.dannytaylor.dtaf2026.common.registry.item.ItemRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.tagkey.TagRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.worldgen.DimensionRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

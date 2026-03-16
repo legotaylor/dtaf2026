@@ -7,7 +7,7 @@
 
 package dev.dannytaylor.dtaf2026.common.mixin.block;
 
-import dev.dannytaylor.dtaf2026.common.registry.BlockRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.block.BlockRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.entity.creaking.TerrorlandsCreaking;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.CreakingHeartBlockEntity;

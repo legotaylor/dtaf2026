@@ -8,12 +8,12 @@
 package dev.dannytaylor.dtaf2026.common.registry.entity.fleecifer;
 
 import com.google.common.collect.Sets;
-import dev.dannytaylor.dtaf2026.common.registry.EntityRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.ItemRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.NetworkingRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.StatRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.advancement.CriteriaRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.entity.EntityRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.entity.SomniumRealeServerPlayerEntity;
+import dev.dannytaylor.dtaf2026.common.registry.item.ItemRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.networking.NetworkingRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.stats.StatRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;

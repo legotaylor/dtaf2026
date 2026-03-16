@@ -7,7 +7,7 @@
 
 package dev.dannytaylor.dtaf2026.common.mixin.gui.screen;
 
-import dev.dannytaylor.dtaf2026.common.registry.StatusEffectRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.effect.StatusEffectRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.AnvilScreenHandler;
 import org.spongepowered.asm.mixin.Mixin;

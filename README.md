@@ -22,6 +22,7 @@ Some of these could be added in a future update.
 	- Stone and Basalt Bricks
 	- Entity Observer Block
 		- Outputs redstone power when an entity is detected in front of it, power level depends on distance.
+		- Could be used in a new underground structure
 - **Shaders**
 	- Coloured Lighting
 	- Luminance Shaders

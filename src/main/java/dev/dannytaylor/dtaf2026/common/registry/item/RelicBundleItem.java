@@ -7,12 +7,12 @@
 
 package dev.dannytaylor.dtaf2026.common.registry.item;
 
-import dev.dannytaylor.dtaf2026.common.registry.TagRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.item.component.RelicBundleContentsComponent;
 import dev.dannytaylor.dtaf2026.common.registry.item.component.RelicComponent;
 import dev.dannytaylor.dtaf2026.common.registry.item.tooltip.RelicBundleTooltipData;
 import dev.dannytaylor.dtaf2026.common.registry.relic.Relic;
 import dev.dannytaylor.dtaf2026.common.registry.relic.RelicLoader;
+import dev.dannytaylor.dtaf2026.common.registry.tagkey.TagRegistry;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.entity.Entity;

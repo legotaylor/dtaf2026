@@ -8,7 +8,7 @@
 package dev.dannytaylor.dtaf2026.client.registry.item;
 
 import dev.dannytaylor.dtaf2026.common.data.Data;
-import dev.dannytaylor.dtaf2026.common.registry.ItemRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.item.ItemRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.item.SupportedWoodItemSet;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;

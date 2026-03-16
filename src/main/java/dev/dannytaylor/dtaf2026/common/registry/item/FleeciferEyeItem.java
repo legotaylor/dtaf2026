@@ -8,9 +8,9 @@
 package dev.dannytaylor.dtaf2026.common.registry.item;
 
 import dev.dannytaylor.dtaf2026.client.data.ClientData;
-import dev.dannytaylor.dtaf2026.common.registry.SoundEventRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.TagRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.entity.fleecifer.FleeciferEyeEntity;
+import dev.dannytaylor.dtaf2026.common.registry.sound.SoundEventRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.tagkey.TagRegistry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
