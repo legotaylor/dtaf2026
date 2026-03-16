@@ -8,7 +8,9 @@
 package dev.dannytaylor.dtaf2026.client.registry.keybinds;
 
 import dev.dannytaylor.dtaf2026.common.data.Data;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
@@ -25,7 +27,12 @@ public class KeybindRegistry {
 	}
 
 	public static void bootstrap() {
-		HoldPerspective.bootstrap();
+		ClientTickEvents.END_CLIENT_TICK.register(KeybindRegistry::tick);
+	}
+
+	public static void tick(MinecraftClient client) {
+		HoldPerspective.tick(client);
+		Zoom.tick(client);
 	}
 
 	public static KeyBinding register(String namespace, String category, String key, int keyCode) {

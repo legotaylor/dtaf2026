@@ -30,7 +30,9 @@
 		"shaders.GameRendererMixin",
 		"shaders.LightmapTextureManagerMixin",
 		"shaders.RenderLayerMixin",
-		"shaders.RenderSystemMixin"
+		"shaders.RenderSystemMixin",
+		"zoom.GameRendererMixin",
+		"zoom.MouseMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

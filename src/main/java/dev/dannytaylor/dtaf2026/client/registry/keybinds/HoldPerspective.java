@@ -7,7 +7,6 @@
 
 package dev.dannytaylor.dtaf2026.client.registry.keybinds;
 
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.Perspective;
 
@@ -16,11 +15,7 @@ public class HoldPerspective {
 	private static boolean wasBackPressed;
 	private static boolean wasFrontPressed;
 
-	public static void bootstrap() {
-		ClientTickEvents.END_CLIENT_TICK.register(HoldPerspective::tick);
-	}
-
-	private static void tick(MinecraftClient client) {
+	public static void tick(MinecraftClient client) {
 		// Back
 		if (!wasBackPressed && KeybindRegistry.holdPerspectiveBack.isPressed()) {
 			wasBackPressed = true;

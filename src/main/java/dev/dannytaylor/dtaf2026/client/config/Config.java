@@ -20,6 +20,8 @@ public class Config extends ReflectiveConfig {
 
 	public final TrackedValue<Boolean> skipFlashingLightsWarning = this.value(false);
 	public final TrackedValue<EffectType> photosensitiveMode = this.value(EffectType.full);
+	public final TrackedValue<Float> zoomLevel = this.value(40.0F);
+	public final TrackedValue<Float> zoomAdjustmentMultiplier = this.value(2.0F);
 
 	@FloatRange(min = 0.0F, max = 1.0F)
 	public final TrackedValue<Float> bloomAlpha = this.value(0.5F);
