@@ -1,0 +1,11 @@
+{
+	"type": "dtaf2026:mineshaft",
+	"biomes": "dtaf2026:cerulean_forest",
+	"mineshaft_data": {
+		"log": "dtaf2026:cerulean_log",
+		"planks": "dtaf2026:cerulean_planks",
+		"fence": "dtaf2026:cerulean_fence"
+	},
+	"spawn_overrides": {},
+	"step": "underground_structures"
+}

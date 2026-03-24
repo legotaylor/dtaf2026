@@ -1,0 +1,11 @@
+{
+	"type": "dtaf2026:mineshaft",
+	"biomes": "dtaf2026:maple_forest",
+	"mineshaft_data": {
+		"log": "dtaf2026:maple_log",
+		"planks": "dtaf2026:maple_planks",
+		"fence": "dtaf2026:maple_fence"
+	},
+	"spawn_overrides": {},
+	"step": "underground_structures"
+}

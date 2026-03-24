@@ -12,9 +12,9 @@
 	"options.dtaf2026.photosensitive_mode": "Photosensitivity Mode",
 	"options.dtaf2026.photosensitive_mode.full": "OFF",
 	"options.dtaf2026.photosensitive_mode.reduced": "Minimal",
-	"options.dtaf2026.photosensitive_mode.reduced.tooltip": "Stars won't twinkle.",
+	"options.dtaf2026.photosensitive_mode.reduced.tooltip": "Stars won't twinkle, and clouds cycle colors slower.",
 	"options.dtaf2026.photosensitive_mode.none": "ON",
-	"options.dtaf2026.photosensitive_mode.none.tooltip": "Stars won't twinkle, and tiny stars won't be rendered.",
+	"options.dtaf2026.photosensitive_mode.none.tooltip": "Stars won't twinkle, tiny stars won't be rendered, and clouds cycle colors slower.",
 
 	"itemGroup.dtaf2026": "%s",
 	"itemGroup.dtaf2026Creative": "%s (Creative)",

@@ -9,6 +9,7 @@ package dev.dannytaylor.dtaf2026.common.registry.worldgen;
 
 public class WorldGenRegistry {
 	public static void bootstrap() {
+		StructureRegistry.bootstrap();
 		DimensionRegistry.bootstrap();
 		DecoratorRegistry.bootstrap();
 		SaplingGeneratorRegistry.bootstrap();

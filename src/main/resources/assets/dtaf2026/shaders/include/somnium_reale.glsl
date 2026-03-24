@@ -33,7 +33,7 @@ float Multiplier = PhotosensitiveMode < 2 ? (PhotosensitiveMode > 0 ? 0.125 : 1.
 // Uses SmoothTime to cycle color between pink and blue, depending on PhotosensitiveMode; Used in <somnium_reale:rendertype_clouds.fsh>
 vec4 getCloudsColor(vec4 color) {
 	if (PhotosensitiveMode < 2) {
-		float multi = PhotosensitiveMode > 0 ? 0.25 : 1.0;
+		float multi = PhotosensitiveMode > 0 ? 0.5 : 1.5;
 		color.rgb = mix(color.rgb, mix(vec3(0.8392, 0.0078, 0.4392), vec3(0.0, 0.2196, 0.6588), (sin(SmoothTime * (24.0 * multi)) + 1.0) / 2.0), 0.24);
 		color.a *= (0.2 + (((sin(SmoothTime * 2.0) * multi) + 1.0) / 2.0) * 0.1);
 	}

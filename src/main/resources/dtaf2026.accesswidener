@@ -12,3 +12,5 @@ accessible method net/minecraft/client/gui/screen/Screen addDrawableChild (Lnet/
 accessible field net/minecraft/loot/context/LootContextTypes MAP Lcom/google/common/collect/BiMap;
 accessible field net/minecraft/entity/LivingEntity waypointConfig Lnet/minecraft/world/waypoint/Waypoint$Config;
 accessible method net/minecraft/block/entity/CreakingHeartBlockEntity getCreakingPuppet ()Ljava/util/Optional;
+accessible method net/minecraft/loot/LootTables registerLootTable (Lnet/minecraft/registry/RegistryKey;)Lnet/minecraft/registry/RegistryKey;
+
