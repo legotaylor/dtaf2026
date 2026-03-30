@@ -71,7 +71,7 @@ public class SupportedBlock extends Block {
 		BlockState downState = world.getBlockState(downPos);
 		int distance = downState.isIn(TagRegistry.Block.alwaysSupportsSupportedBlocks) ? 0 : distance_max;
 		if (isOfBlock.call(downState) && !downState.isIn(TagRegistry.Block.alwaysSupportsSupportedBlocks)) {
-			distance = downState.isSideSolid(world, downPos, Direction.DOWN, SideShapeType.CENTER) ? downState.get(SupportedBlock.distance) : distance_max;
+			distance = downState.isSideSolid(world, downPos, Direction.UP, SideShapeType.CENTER) ? downState.get(SupportedBlock.distance) : distance_max;
 		} else if (!downState.isReplaceable()) return 0;
 
 		for (Direction direction : Direction.Type.HORIZONTAL) {

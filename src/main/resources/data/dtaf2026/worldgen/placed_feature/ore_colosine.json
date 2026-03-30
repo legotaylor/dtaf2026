@@ -1,9 +1,9 @@
 {
-	"feature": "dtaf2026:ore_amber_buried",
+	"feature": "dtaf2026:ore_colosine",
 	"placement": [
 		{
 			"type": "minecraft:count",
-			"count": 8
+			"count": 6
 		},
 		{
 			"type": "minecraft:in_square"
@@ -11,12 +11,12 @@
 		{
 			"type": "minecraft:height_range",
 			"height": {
-				"type": "minecraft:uniform",
+				"type": "minecraft:trapezoid",
 				"max_inclusive": {
-					"absolute": 48
+					"absolute": 64
 				},
 				"min_inclusive": {
-					"absolute": -48
+					"absolute": -64
 				}
 			}
 		},

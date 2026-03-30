@@ -1,0 +1,16 @@
+{
+	"placement": {
+		"type": "minecraft:concentric_rings",
+		"count": 64,
+		"distance": 48,
+		"preferred_biomes": "#dtaf2026:terrorlands_portal_biased_to",
+		"salt": 23302048,
+		"spread": 6
+	},
+	"structures": [
+		{
+			"structure": "dtaf2026:terrorlands_portal",
+			"weight": 1
+		}
+	]
+}

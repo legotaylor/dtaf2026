@@ -25,7 +25,7 @@ public class Data {
 		return idOf("somnium_reale");
 	}
 
-	public static Identifier getSomniaMetusId() {
+	public static Identifier getTerrorlandsId() {
 		return idOf("the_terrorlands");
 	}
 

@@ -17,6 +17,7 @@ public class ClientBlockRegistry {
 		BlockRenderLayer cutout = BlockRenderLayer.CUTOUT;
 		for (SupportedWoodBlockSet woodBlockSet : BlockRegistry.woodBlockSets) {
 			BlockRenderLayerMap.putBlock(woodBlockSet.sapling, cutout);
+			BlockRenderLayerMap.putBlock(woodBlockSet.pottedSapling, cutout);
 			BlockRenderLayerMap.putBlock(woodBlockSet.door, cutout);
 			BlockRenderLayerMap.putBlock(woodBlockSet.trapdoor, cutout);
 		}

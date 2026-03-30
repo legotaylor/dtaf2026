@@ -29,10 +29,7 @@
 		[
 			"dtaf2026:air_pocket"
 		],
-		[
-			"minecraft:monster_room",
-			"minecraft:monster_room_deep"
-		],
+		[],
 		[],
 		[],
 		[
@@ -40,20 +37,16 @@
 			"minecraft:ore_gravel",
 			"dtaf2026:ore_aerostone_upper",
 			"dtaf2026:ore_aerostone_lower",
-			"minecraft:ore_iron_upper",
-			"minecraft:ore_iron_middle",
-			"minecraft:ore_iron_small",
-			"minecraft:ore_gold",
-			"minecraft:ore_gold_lower",
-			"minecraft:ore_redstone",
-			"minecraft:ore_redstone_lower",
+			"dtaf2026:ore_amber",
+			"dtaf2026:ore_amber_buried",
+			"dtaf2026:ore_colosine",
+			"dtaf2026:ore_colosine_buried",
 			"dtaf2026:ore_jasper",
 			"dtaf2026:ore_jasper_medium",
 			"dtaf2026:ore_jasper_large",
 			"dtaf2026:ore_jasper_buried",
-			"dtaf2026:ore_amber",
-			"dtaf2026:ore_amber_buried",
-			"minecraft:ore_copper",
+			"dtaf2026:ore_ruby",
+			"dtaf2026:ore_ruby_buried",
 			"minecraft:underwater_magma",
 			"minecraft:disk_sand",
 			"minecraft:disk_clay",

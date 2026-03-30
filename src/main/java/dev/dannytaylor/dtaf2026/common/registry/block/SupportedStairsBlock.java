@@ -164,7 +164,7 @@ public class SupportedStairsBlock extends SupportedBlock implements Waterloggabl
 			tickView.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
 		}
 
-		return direction.getAxis().isHorizontal() ? state.with(shape, getStairShape(state, world, pos)) : super.getStateForNeighborUpdate(state, world, tickView, pos, direction, neighborPos, neighborState, random);
+		return super.getStateForNeighborUpdate(direction.getAxis().isHorizontal() ? state.with(shape, getStairShape(state, world, pos)) : state, world, tickView, pos, direction, neighborPos, neighborState, random);
 	}
 
 	protected BlockState rotate(BlockState state, BlockRotation rotation) {

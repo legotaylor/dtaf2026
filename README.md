@@ -33,10 +33,6 @@ implementation for config.
 
 //todo
 
-- remove vanilla ores from somnium gen (almost done!)
-- make house structure with extractor in it (sign that says all the cows went to the moon)
 - check recipes and loot tables (VERY IMPORTANT)
 - advancements (if i have time!!!!)
 - recipe book (probably will in future version, add important ones!)
-- portal structure (built, but needs torches/lanterns updated and structure added to the pack)
-- nightmare house structure (for bed so players don't get trapped)

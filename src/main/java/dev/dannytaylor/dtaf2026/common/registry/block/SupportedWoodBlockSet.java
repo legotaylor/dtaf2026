@@ -38,6 +38,7 @@ public class SupportedWoodBlockSet {
 	public final SupportedStairsBlock stairs;
 	public final SupportedLeavesBlock leaves;
 	public final SaplingBlock sapling;
+	public final FlowerPotBlock pottedSapling;
 	public final DoorBlock door;
 	public final TrapdoorBlock trapdoor;
 	public final SupportedFenceBlock fence;
@@ -56,6 +57,7 @@ public class SupportedWoodBlockSet {
 								  SupportedStairsBlock stairs,
 								  SupportedLeavesBlock leaves,
 								  SaplingBlock sapling,
+								  FlowerPotBlock pottedSapling,
 								  DoorBlock door,
 								  TrapdoorBlock trapdoor,
 								  SupportedFenceBlock fence,
@@ -73,6 +75,7 @@ public class SupportedWoodBlockSet {
 		this.stairs = stairs;
 		this.leaves = leaves;
 		this.sapling = sapling;
+		this.pottedSapling = pottedSapling;
 		this.door = door;
 		this.trapdoor = trapdoor;
 		this.fence = fence;
@@ -328,13 +331,14 @@ public class SupportedWoodBlockSet {
 			SupportedStairsBlock stairs = BlockRegistry.register(this.id.withSuffixedPath("_stairs"), (settings) -> new SupportedStairsBlock(planks.getDefaultState(), tagKey, settings), this.stairsSettings);
 			SupportedLeavesBlock leaves = BlockRegistry.register(this.id.withSuffixedPath("_leaves"), (settings) -> new SupportedLeavesBlock(leafParticleChance, this.leafParticles, tagKey, settings), this.leavesSettings);
 			SaplingBlock sapling = BlockRegistry.register(this.id.withSuffixedPath("_sapling"), (settings) -> new SaplingBlock(this.saplingGenerator, settings), this.saplingSettings);
+			FlowerPotBlock pottedSapling = BlockRegistry.register(this.id.withPrefixedPath("potted_").withSuffixedPath("_sapling"), (settings) -> new FlowerPotBlock(sapling, settings), Blocks.createFlowerPotSettings());
 			DoorBlock door = BlockRegistry.register(this.id.withSuffixedPath("_door"), (settings) -> new DoorBlock(blockSetType, settings), AbstractBlock.Settings.create().mapColor(planks.getDefaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(3.0F).nonOpaque().burnable().pistonBehavior(PistonBehavior.DESTROY));
 			TrapdoorBlock trapdoor = BlockRegistry.register(this.id.withSuffixedPath("_trapdoor"), (settings) -> new TrapdoorBlock(blockSetType, settings), AbstractBlock.Settings.create().mapColor(planks.getDefaultMapColor()).instrument(NoteBlockInstrument.BASS).strength(3.0F).nonOpaque().allowsSpawning(Blocks::never).burnable());
 			SupportedFenceBlock fence = BlockRegistry.register(this.id.withSuffixedPath("_fence"), (settings) -> new SupportedFenceBlock(tagKey, settings), this.fenceSettings);
 			SupportedFenceGateBlock fenceGate = BlockRegistry.register(this.id.withSuffixedPath("_fence_gate"), (settings) -> new SupportedFenceGateBlock(woodType, tagKey, settings), this.fenceGateSettings);
 			PressurePlateBlock pressurePlate = BlockRegistry.register(this.id.withSuffixedPath("_pressure_plate"), (settings) -> new PressurePlateBlock(blockSetType, settings), AbstractBlock.Settings.create().mapColor(planks.getDefaultMapColor()).solid().instrument(NoteBlockInstrument.BASS).noCollision().strength(0.5F).burnable().pistonBehavior(PistonBehavior.DESTROY));
 			ButtonBlock button = BlockRegistry.register(this.id.withSuffixedPath("_button"), (settings) -> new ButtonBlock(blockSetType, 30, settings), Blocks.createButtonSettings());
-			return new SupportedWoodBlockSet(this.id, blockSetType, woodType, log, wood, planks, slab, stairs, leaves, sapling, door, trapdoor, fence, fenceGate, pressurePlate, button, this.flammable);
+			return new SupportedWoodBlockSet(this.id, blockSetType, woodType, log, wood, planks, slab, stairs, leaves, sapling, pottedSapling, door, trapdoor, fence, fenceGate, pressurePlate, button, this.flammable);
 		}
 	}
 	public record LogMapColor(Pair<MapColor, MapColor> zeroMapColor, Pair<MapColor, MapColor> oneMapColor, Pair<MapColor, MapColor> twoMapColor) {}

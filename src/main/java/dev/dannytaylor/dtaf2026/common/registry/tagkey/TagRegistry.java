@@ -12,7 +12,6 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldView;
-import net.minecraft.world.gen.structure.Structure;
 
 public class TagRegistry {
 	public static class Block {
@@ -85,7 +84,7 @@ public class TagRegistry {
 			static {
 				abstractSomniumReale = TagKey.of(RegistryKeys.BIOME, Data.getSomniumRealeId().withPrefixedPath("is_abstract_"));
 				somniumReale = TagKey.of(RegistryKeys.BIOME, Data.getSomniumRealeId().withPrefixedPath("is_"));
-				theTerrorlands = TagKey.of(RegistryKeys.BIOME, Data.getSomniaMetusId().withPrefixedPath("is_"));
+				theTerrorlands = TagKey.of(RegistryKeys.BIOME, Data.getTerrorlandsId().withPrefixedPath("is_"));
 			}
 		}
 

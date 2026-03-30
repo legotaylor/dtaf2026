@@ -27,7 +27,7 @@ public class DimensionRegistry {
 	static {
 		isAlwaysNight = new ArrayList<>();
 		somniumReale = new Dimension(Data.getSomniumRealeId());
-		theTerrorlands = new Dimension(Data.getSomniaMetusId());
+		theTerrorlands = new Dimension(Data.getTerrorlandsId());
 	}
 
 	public static void bootstrap() {

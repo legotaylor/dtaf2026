@@ -1,5 +1,5 @@
 {
-	"feature": "dtaf2026:ore_amber_buried",
+	"feature": "dtaf2026:ore_quarite_buried",
 	"placement": [
 		{
 			"type": "minecraft:count",
@@ -13,10 +13,10 @@
 			"height": {
 				"type": "minecraft:uniform",
 				"max_inclusive": {
-					"absolute": 48
+					"absolute": 16
 				},
 				"min_inclusive": {
-					"absolute": -48
+					"absolute": -64
 				}
 			}
 		},

@@ -1,0 +1,14 @@
+{
+	"placement": {
+		"type": "minecraft:random_spread",
+		"salt": 16152322,
+		"separation": 3,
+		"spacing": 60
+	},
+	"structures": [
+		{
+			"structure": "dtaf2026:abandoned_house",
+			"weight": 1
+		}
+	]
+}

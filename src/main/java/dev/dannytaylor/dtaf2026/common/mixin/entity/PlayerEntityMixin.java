@@ -56,16 +56,17 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
 	@Inject(method = "tick", at = @At("RETURN"))
 	private void dtaf2026$tick(CallbackInfo ci) {
-		RegistryKey<World> currentWorld = this.getWorld().getRegistryKey();
-		TeleportTarget teleportTarget = null;
-		if (currentWorld.equals(World.OVERWORLD)) {
-			teleportTarget = dtaf2026$createTeleportTarget(DimensionRegistry.somniumReale.world(), false);
-		} else if (currentWorld.equals(DimensionRegistry.somniumReale.world()) || currentWorld.equals(DimensionRegistry.theTerrorlands.world())) {
-			teleportTarget = dtaf2026$createTeleportTarget(World.OVERWORLD, true);
-		}
-		if (teleportTarget != null) {
-			if (this.isSleeping() && this.sleepTimer >= 100) {
-				if (currentWorld.equals(World.OVERWORLD) || currentWorld.equals(DimensionRegistry.somniumReale.world())) {
+		if (this.isSleeping() && this.sleepTimer == 100) {
+			RegistryKey<World> currentWorld = this.getWorld().getRegistryKey();
+			TeleportTarget teleportTarget = null;
+			System.out.println(currentWorld.getValue());
+			if (currentWorld.equals(World.OVERWORLD)) {
+				teleportTarget = dtaf2026$createTeleportTarget(DimensionRegistry.somniumReale.world(), false);
+			} else if (currentWorld.equals(DimensionRegistry.somniumReale.world()) || currentWorld.equals(DimensionRegistry.theTerrorlands.world())) {
+				teleportTarget = dtaf2026$createTeleportTarget(World.OVERWORLD, true);
+			}
+			if (teleportTarget != null) {
+				if (currentWorld.equals(World.OVERWORLD) || currentWorld.equals(DimensionRegistry.somniumReale.world()) || currentWorld.equals(DimensionRegistry.theTerrorlands.world())) {
 					// Reset block before teleporting.
 					this.getSleepingPosition().filter((blockPos) -> {
 						ChunkPos chunkPos = this.getWorld().getChunk(blockPos).getPos();
@@ -80,8 +81,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 					if (currentWorld.equals(World.OVERWORLD)) dtaf2026$setLastBedPos(this.getBlockPos());
 					this.teleportTo(teleportTarget);
 				}
-			} else {
-				if (!this.isSleeping() && !currentWorld.equals(DimensionRegistry.somniumReale.world())) dtaf2026$clearLastBedPos();
 			}
 		}
 		this.dtaf2026$updateSomniumReale();
@@ -96,7 +95,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 	private void dtaf2026$clearLastBedPos() {
 		this.dataTracker.set(lastBedPos, Optional.empty());
 	}
-
 
 	@Override
 	public void setHealth(float health) {
@@ -114,19 +112,18 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
 	@Unique
 	private TeleportTarget dtaf2026$createTeleportTarget(RegistryKey<World> registryKey, boolean toRespawnPos) {
-		if (!this.getWorld().isClient && this.getServer() != null) {
+		if (this.getServer() != null) {
 			ServerWorld serverWorld = this.getServer().getWorld(registryKey);
 			if (serverWorld != null) {
 				BlockPos blockPos = serverWorld.getSpawnPos();
-				if (!toRespawnPos) blockPos = DimensionRegistry.toHighestBlockPos(serverWorld, blockPos);
-				else {
+				if (toRespawnPos) {
 					Optional<BlockPos> lastBedPos = this.dataTracker.get(PlayerEntityMixin.lastBedPos);
 					if (lastBedPos.isPresent()) {
 						Optional<Vec3d> wakeUpPos = BedBlock.findWakeUpPosition(this.getType(), serverWorld, lastBedPos.get(), serverWorld.getBlockState(lastBedPos.get()).get(BedBlock.FACING), serverWorld.getSpawnAngle());
-						if (wakeUpPos.isPresent()) {
-							blockPos = BlockPos.ofFloored(wakeUpPos.get());
-						}
+						blockPos = wakeUpPos.isPresent() ? BlockPos.ofFloored(wakeUpPos.get()) : DimensionRegistry.toHighestBlockPos(serverWorld, blockPos);
 					}
+				} else {
+					blockPos = DimensionRegistry.toHighestBlockPos(serverWorld, blockPos);
 				}
 				return new TeleportTarget(serverWorld, blockPos.toBottomCenterPos(), Vec3d.ZERO, serverWorld.getSpawnAngle(), 0.0F, PositionFlag.combine(PositionFlag.DELTA, PositionFlag.ROT), TeleportTarget.SEND_TRAVEL_THROUGH_PORTAL_PACKET.then(TeleportTarget.ADD_PORTAL_CHUNK_TICKET));
 			}
