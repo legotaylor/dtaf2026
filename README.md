@@ -1,7 +1,7 @@
 # Somnium Reale
 
 Somnium Reale adds a new *dimension* to sleeping. Explore a new world where things aren't quite as you remember, but in
-some ways feel more real then ever.
+some ways feel more real than ever.
 
 > Somnium Reale contains some minor flashing lights and may not be suitable for some players with photosensitive medical
 > conditions.
@@ -19,4 +19,24 @@ some ways feel more real then ever.
 - Fabric Loader >=0.18.4
 - Fabric API >=0.136.1+1.21.8
 
+> The current release doesn't have every recipe findable in the Recipe Book before crafting them. This will be added in
+> the future. In the meantime I suggest using a recipe search mod such as [REI](https://modrinth.com/mod/rei).
+
+## Attributions
+
+We use a customized version of [Lezzlebit](https://bsky.app/profile/jamiemakes.art)'
+s [Gradient Clouds](https://modrinth.com/resourcepack/gradient-clouds) shader.  
+We use [Kaleido](https://github.com/sisby-folk/kaleido-config)'s [Quilt Config](https://github.com/QuiltMC/quilt-config)
+implementation for config.
+
 ![Made for April Fools 2026](https://raw.githubusercontent.com/legotaylor/dtaf2026/refs/heads/master/assets/badge/svg/cozy.svg)  
+
+//todo
+
+- remove vanilla ores from somnium gen (almost done!)
+- make house structure with extractor in it (sign that says all the cows went to the moon)
+- check recipes and loot tables (VERY IMPORTANT)
+- advancements (if i have time!!!!)
+- recipe book (probably will in future version, add important ones!)
+- portal structure (built, but needs torches/lanterns updated and structure added to the pack)
+- nightmare house structure (for bed so players don't get trapped)

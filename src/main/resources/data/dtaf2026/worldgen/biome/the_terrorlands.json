@@ -34,6 +34,10 @@
 		[
 			"dtaf2026:ore_dirt",
 			"minecraft:ore_gravel",
+			"dtaf2026:ore_aerostone_upper",
+			"dtaf2026:ore_aerostone_lower",
+			"dtaf2026:ore_amber",
+			"dtaf2026:ore_amber_buried",
 			"dtaf2026:ore_jasper",
 			"dtaf2026:ore_jasper_medium",
 			"dtaf2026:ore_jasper_large",

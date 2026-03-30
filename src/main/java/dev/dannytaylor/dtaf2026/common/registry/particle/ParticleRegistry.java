@@ -17,10 +17,12 @@ import net.minecraft.util.Identifier;
 public class ParticleRegistry {
 	public static final SimpleParticleType mapleLeaves;
 	public static final SimpleParticleType ceruleanLeaves;
+	public static final SimpleParticleType aerostoneFlame;
 
 	static {
 		mapleLeaves = register("maple_leaves", false);
 		ceruleanLeaves = register("cerulean_leaves", false);
+		aerostoneFlame = register("aerostone_flame", false);
 	}
 
 	public static void bootstrap() {

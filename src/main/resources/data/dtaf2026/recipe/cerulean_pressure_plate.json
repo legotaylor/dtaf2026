@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "redstone",
+	"group": "wooden_pressure_plate",
+	"key": {
+		"#": "dtaf2026:cerulean_planks"
+	},
+	"pattern": [
+		"##"
+	],
+	"result": {
+		"count": 1,
+		"id": "dtaf2026:cerulean_pressure_plate"
+	}
+}

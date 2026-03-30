@@ -11,6 +11,11 @@
 		}
 	],
 	"conditions": [
-		{ "type": "dtaf2026:in_active_relic_bundle" }
+		{
+			"type": "dtaf2026:in_active_relic_bundle"
+		},
+		{
+			"type": "dtaf2026:submerged_in_water"
+		}
 	]
 }

@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"group": "boat",
+	"key": {
+		"#": "dtaf2026:cerulean_planks"
+	},
+	"pattern": [
+		"# #",
+		"###"
+	],
+	"result": {
+		"count": 1,
+		"id": "dtaf2026:cerulean_boat"
+	}
+}

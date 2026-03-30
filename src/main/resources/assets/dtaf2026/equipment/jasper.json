@@ -1,0 +1,14 @@
+{
+	"layers": {
+		"humanoid": [
+			{
+				"texture": "dtaf2026:jasper"
+			}
+		],
+		"humanoid_leggings": [
+			{
+				"texture": "dtaf2026:jasper"
+			}
+		]
+	}
+}

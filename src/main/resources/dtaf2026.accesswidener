@@ -13,4 +13,7 @@ accessible field net/minecraft/loot/context/LootContextTypes MAP Lcom/google/com
 accessible field net/minecraft/entity/LivingEntity waypointConfig Lnet/minecraft/world/waypoint/Waypoint$Config;
 accessible method net/minecraft/block/entity/CreakingHeartBlockEntity getCreakingPuppet ()Ljava/util/Optional;
 accessible method net/minecraft/loot/LootTables registerLootTable (Lnet/minecraft/registry/RegistryKey;)Lnet/minecraft/registry/RegistryKey;
-
+accessible method net/minecraft/item/SmithingTemplateItem getArmorTrimEmptyAdditionsSlotTextures ()Ljava/util/List;
+accessible method net/minecraft/recipe/ServerRecipeManager cookingIngredientGetter (Lnet/minecraft/recipe/RecipeType;)Lnet/minecraft/recipe/ServerRecipeManager$SoleIngredientGetter;
+accessible field net/minecraft/recipe/ServerRecipeManager SOLE_INGREDIENT_GETTERS Ljava/util/Map;
+mutable field net/minecraft/recipe/ServerRecipeManager SOLE_INGREDIENT_GETTERS Ljava/util/Map;

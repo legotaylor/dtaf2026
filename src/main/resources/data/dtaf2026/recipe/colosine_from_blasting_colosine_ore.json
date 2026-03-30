@@ -1,0 +1,11 @@
+{
+	"type": "minecraft:blasting",
+	"category": "misc",
+	"cookingtime": 200,
+	"experience": 1.0,
+	"group": "colosine",
+	"ingredient": "dtaf2026:colosine_ore",
+	"result": {
+		"id": "dtaf2026:colosine"
+	}
+}

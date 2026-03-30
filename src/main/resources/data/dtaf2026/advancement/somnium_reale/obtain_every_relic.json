@@ -81,11 +81,61 @@
 			},
 			"trigger": "minecraft:inventory_changed"
 		},
+		"dtaf2026:aerostone": {
+			"conditions": {
+				"items": [
+					{
+						"items": "dtaf2026:aerostone"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		},
+		"dtaf2026:amber": {
+			"conditions": {
+				"items": [
+					{
+						"items": "dtaf2026:amber"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		},
+		"dtaf2026:colosine": {
+			"conditions": {
+				"items": [
+					{
+						"items": "dtaf2026:colosine"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		},
 		"dtaf2026:jasper": {
 			"conditions": {
 				"items": [
 					{
 						"items": "dtaf2026:jasper"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		},
+		"dtaf2026:quarite": {
+			"conditions": {
+				"items": [
+					{
+						"items": "dtaf2026:quarite"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		},
+		"dtaf2026:ruby": {
+			"conditions": {
+				"items": [
+					{
+						"items": "dtaf2026:ruby"
 					}
 				]
 			},
@@ -99,7 +149,7 @@
 		"frame": "challenge",
 		"icon": {
 			"count": 1,
-			"id": "dtaf2026:jasper"
+			"id": "dtaf2026:ruby"
 		},
 		"title": {
 			"translate": "advancements.somnium_reale.obtain_every_relic.title"
@@ -131,7 +181,22 @@
 			"minecraft:heart_of_the_sea"
 		],
 		[
+			"dtaf2026:aerostone"
+		],
+		[
+			"dtaf2026:amber"
+		],
+		[
+			"dtaf2026:colosine"
+		],
+		[
 			"dtaf2026:jasper"
+		],
+		[
+			"dtaf2026:quarite"
+		],
+		[
+			"dtaf2026:ruby"
 		]
 	],
 	"rewards": {

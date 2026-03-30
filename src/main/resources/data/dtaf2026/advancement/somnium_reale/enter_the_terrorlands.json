@@ -1,5 +1,5 @@
 {
-	"parent": "dtaf2026:somnium_reale/obtain_fleecifer_wool",
+	"parent": "dtaf2026:somnium_reale/locate_terrorlands_portal",
 	"criteria": {
 		"entered_terrorlands": {
 			"conditions": {

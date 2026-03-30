@@ -1,0 +1,34 @@
+{
+	"variants": {
+		"dtaf2026_active=false,facing=east": {
+			"model": "dtaf2026:block/terrorlands_portal_frame",
+			"y": 270
+		},
+		"dtaf2026_active=false,facing=north": {
+			"model": "dtaf2026:block/terrorlands_portal_frame",
+			"y": 180
+		},
+		"dtaf2026_active=false,facing=south": {
+			"model": "dtaf2026:block/terrorlands_portal_frame"
+		},
+		"dtaf2026_active=false,facing=west": {
+			"model": "dtaf2026:block/terrorlands_portal_frame",
+			"y": 90
+		},
+		"dtaf2026_active=true,facing=east": {
+			"model": "dtaf2026:block/terrorlands_portal_frame_active",
+			"y": 270
+		},
+		"dtaf2026_active=true,facing=north": {
+			"model": "dtaf2026:block/terrorlands_portal_frame_active",
+			"y": 180
+		},
+		"dtaf2026_active=true,facing=south": {
+			"model": "dtaf2026:block/terrorlands_portal_frame_active"
+		},
+		"dtaf2026_active=true,facing=west": {
+			"model": "dtaf2026:block/terrorlands_portal_frame_active",
+			"y": 90
+		}
+	}
+}

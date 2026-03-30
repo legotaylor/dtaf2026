@@ -1,0 +1,11 @@
+{
+	"type": "minecraft:blasting",
+	"category": "misc",
+	"cookingtime": 200,
+	"experience": 1.0,
+	"group": "quarite",
+	"ingredient": "dtaf2026:quarite_ore",
+	"result": {
+		"id": "dtaf2026:quarite"
+	}
+}

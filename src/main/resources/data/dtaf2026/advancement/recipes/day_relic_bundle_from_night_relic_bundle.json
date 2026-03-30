@@ -1,0 +1,32 @@
+{
+	"parent": "minecraft:recipes/root",
+	"criteria": {
+		"has_relic_dust": {
+			"conditions": {
+				"items": [
+					{
+						"items": "dtaf2026:relic_dust"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		},
+		"has_the_recipe": {
+			"conditions": {
+				"recipe": "dtaf2026:day_relic_bundle_from_night_relic_bundle"
+			},
+			"trigger": "minecraft:recipe_unlocked"
+		}
+	},
+	"requirements": [
+		[
+			"has_the_recipe",
+			"has_relic_dust"
+		]
+	],
+	"rewards": {
+		"recipes": [
+			"dtaf2026:day_relic_bundle_from_night_relic_bundle"
+		]
+	}
+}

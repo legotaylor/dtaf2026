@@ -37,7 +37,7 @@ public class TerrorlandsPortalBlock extends Block implements Portal {
 	private static final VoxelShape shape;
 
 	static {
-		shape = Block.createColumnShape(16.0F, 0.0F, 8.0F);
+		shape = Block.createColumnShape(16.0F, 4.0F, 12.0F);
 	}
 
 	public TerrorlandsPortalBlock(Settings settings) {

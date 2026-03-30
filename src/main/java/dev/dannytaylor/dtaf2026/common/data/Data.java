@@ -7,6 +7,8 @@
 
 package dev.dannytaylor.dtaf2026.common.data;
 
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +35,18 @@ public class Data {
 
 	public static Logger getLogger() {
 		return logger;
+	}
+
+	public static MutableText getText(String key, Object... args) {
+		return getText(Data.getModId(), key, args);
+	}
+
+	public static MutableText getText(String namespace, String key, Object... args) {
+		return getTranslatableText(namespace + "." + key, args);
+	}
+
+	private static MutableText getTranslatableText(String key, Object... args) {
+		return Text.translatable(key, args);
 	}
 
 	static {

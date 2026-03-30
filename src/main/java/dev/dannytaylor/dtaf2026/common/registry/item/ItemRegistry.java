@@ -21,15 +21,18 @@ import net.minecraft.component.type.FoodComponents;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.entity.vehicle.ChestBoatEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.*;
+import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.Util;
+import net.minecraft.util.math.Direction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +49,6 @@ public class ItemRegistry {
 	public static final Item dirtBlock;
 
 	public static final Item stoneBlock;
-	public static final Item amberOreBlock;
-	public static final Item jasperOreBlock;
 	public static final Item stoneStairsBlock;
 	public static final Item stoneSlabBlock;
 
@@ -56,9 +57,16 @@ public class ItemRegistry {
 	public static final Item cobblestoneSlabBlock;
 	public static final Item cobblestoneWallBlock;
 
+	public static final Item extractor;
+
+	public static final Item aerostoneOreBlock;
+	public static final Item amberOreBlock;
+	public static final Item colosineOreBlock;
+	public static final Item jasperOreBlock;
+	public static final Item quariteOreBlock;
+	public static final Item rubyOreBlock;
+
 	public static final Item deepslateBlock;
-	public static final Item deepslateAmberOreBlock;
-	public static final Item deepslateJasperOreBlock;
 	public static final Item deepslateStairsBlock;
 	public static final Item deepslateSlabBlock;
 
@@ -66,6 +74,16 @@ public class ItemRegistry {
 	public static final Item cobbledDeepslateStairsBlock;
 	public static final Item cobbledDeepslateSlabBlock;
 	public static final Item cobbledDeepslateWallBlock;
+
+	public static final Item deepslateAerostoneOreBlock;
+	public static final Item deepslateAmberOreBlock;
+	public static final Item deepslateColosineOreBlock;
+	public static final Item deepslateJasperOreBlock;
+	public static final Item deepslateQuariteOreBlock;
+	public static final Item deepslateRubyOreBlock;
+
+	public static final Item terrorlandsPortalBaseFrame;
+	public static final Item terrorlandsPortalFrame;
 
 	public static final SupportedWoodItemSet maple;
 	public static final Item mapleCreakingHeart;
@@ -79,7 +97,28 @@ public class ItemRegistry {
 	public static final Item dayRelicBundle;
 	public static final Item relicBundle;
 
+	public static final Item aerostone;
+	public static final Item amber;
+	public static final Item colosine;
 	public static final Item jasper;
+	public static final Item quarite;
+	public static final Item ruby;
+
+	public static final Item aerostoneTorch;
+	public static final Item aerostoneLantern;
+
+	public static final Item jasperHelmet;
+	public static final Item jasperChestplate;
+	public static final Item jasperLeggings;
+	public static final Item jasperBoots;
+
+	public static final Item quaritePickaxe;
+
+	public static final Item rubySword;
+
+	public static final Item relicDust;
+
+	public static final Item terrorlandsCompass;
 
 	public static final Item redEgg;
 	public static final Item largeRedEgg;
@@ -94,8 +133,9 @@ public class ItemRegistry {
 	public static final Item fleeciferBossSpawnEgg;
 	public static final Item fleeciferSpawnEgg;
 
-	public static final Item eyeOfFleecifer;
 	public static final Item fleeciferWool;
+	public static final Item eyeOfFleecifer;
+	public static final Item relicBundleUpgradeSmithingTemplate;
 
 	private static RegistryKey<Item> keyOf(Identifier path) {
 		return RegistryKey.of(RegistryKeys.ITEM, path);
@@ -115,8 +155,6 @@ public class ItemRegistry {
 		dirtBlock = register(BlockRegistry.dirt);
 
 		stoneBlock = register(BlockRegistry.stone);
-		amberOreBlock = register(BlockRegistry.amberOre);
-		jasperOreBlock = register(BlockRegistry.jasperOre);
 		stoneStairsBlock = register(BlockRegistry.stoneStairs);
 		stoneSlabBlock = register(BlockRegistry.stoneSlab);
 
@@ -125,9 +163,16 @@ public class ItemRegistry {
 		cobblestoneSlabBlock = register(BlockRegistry.cobblestoneSlab);
 		cobblestoneWallBlock = register(BlockRegistry.cobblestoneWall);
 
+		extractor = register(BlockRegistry.extractor);
+
+		aerostoneOreBlock = register(BlockRegistry.aerostoneOre);
+		amberOreBlock = register(BlockRegistry.amberOre);
+		colosineOreBlock = register(BlockRegistry.colosineOre);
+		jasperOreBlock = register(BlockRegistry.jasperOre);
+		quariteOreBlock = register(BlockRegistry.quariteOre);
+		rubyOreBlock = register(BlockRegistry.rubyOre);
+
 		deepslateBlock = register(BlockRegistry.deepslate);
-		deepslateAmberOreBlock = register(BlockRegistry.deepslateAmberOre);
-		deepslateJasperOreBlock = register(BlockRegistry.deepslateJasperOre);
 		deepslateStairsBlock = register(BlockRegistry.deepslateStairs);
 		deepslateSlabBlock = register(BlockRegistry.deepslateSlab);
 
@@ -135,6 +180,16 @@ public class ItemRegistry {
 		cobbledDeepslateStairsBlock = register(BlockRegistry.cobbledDeepslateStairs);
 		cobbledDeepslateSlabBlock = register(BlockRegistry.cobbledDeepslateSlab);
 		cobbledDeepslateWallBlock = register(BlockRegistry.cobbledDeepslateWall);
+
+		deepslateAerostoneOreBlock = register(BlockRegistry.deepslateAerostoneOre);
+		deepslateAmberOreBlock = register(BlockRegistry.deepslateAmberOre);
+		deepslateColosineOreBlock = register(BlockRegistry.deepslateColosineOre);
+		deepslateJasperOreBlock = register(BlockRegistry.deepslateJasperOre);
+		deepslateQuariteOreBlock = register(BlockRegistry.deepslateQuariteOre);
+		deepslateRubyOreBlock = register(BlockRegistry.deepslateRubyOre);
+
+		terrorlandsPortalBaseFrame = register(BlockRegistry.terrorlandsPortalBaseFrame);
+		terrorlandsPortalFrame = register(BlockRegistry.terrorlandsPortalFrame);
 
 		maple = register(SupportedWoodItemSet.builder(BlockRegistry.maple), false, EntityRegistry.mapleBoat, EntityRegistry.mapleChestBoat);
 		mapleCreakingHeart = register("maple_creaking_heart", (settings) -> new CreakingVariantHeartBlockItem(Blocks.CREAKING_HEART, CreakingVariant.MAPLE, settings), new Item.Settings().useBlockPrefixedTranslationKey());
@@ -148,7 +203,28 @@ public class ItemRegistry {
 		dayRelicBundle = register("day_relic_bundle", RelicBundleItem::new, relicBundle(new Item.Settings().maxCount(1), RelicBundleContentsComponent.empty).rarity(Rarity.RARE));
 		relicBundle = register("relic_bundle", RelicBundleItem::new, relicBundle(new Item.Settings().maxCount(1), RelicBundleContentsComponent.empty).rarity(Rarity.RARE));
 
+		aerostone = registerRelic("aerostone", Item::new, new Item.Settings());
+		amber = registerRelic("amber", Item::new, new Item.Settings());
+		colosine = registerRelic("colosine", Item::new, new Item.Settings());
 		jasper = registerRelic("jasper", Item::new, new Item.Settings());
+		quarite = registerRelic("quarite", Item::new, new Item.Settings());
+		ruby = registerRelic("ruby", Item::new, new Item.Settings());
+
+		aerostoneTorch = register(BlockRegistry.aerostoneTorch, (block, settings) -> new VerticallyAttachableBlockItem(block, BlockRegistry.aerostoneWallTorch, Direction.DOWN, settings));
+		aerostoneLantern = register(BlockRegistry.aerostoneLantern);
+
+		jasperHelmet = register("jasper_helmet", Item::new, new Item.Settings().armor(MaterialRegistry.Armor.jasper, EquipmentType.HELMET));
+		jasperChestplate = register("jasper_chestplate", Item::new, new Item.Settings().armor(MaterialRegistry.Armor.jasper, EquipmentType.CHESTPLATE));
+		jasperLeggings = register("jasper_leggings", Item::new, new Item.Settings().armor(MaterialRegistry.Armor.jasper, EquipmentType.LEGGINGS));
+		jasperBoots = register("jasper_boots", Item::new, new Item.Settings().armor(MaterialRegistry.Armor.jasper, EquipmentType.BOOTS));
+
+		quaritePickaxe = register("quarite_pickaxe", Item::new, new Item.Settings().pickaxe(MaterialRegistry.Tool.quarite, 1.0F, -2.8F));
+
+		rubySword = register("ruby_sword", Item::new, new Item.Settings().sword(MaterialRegistry.Tool.ruby, 3.0F, -2.4F));
+
+		relicDust = registerRelic("relic_dust", Item::new, new Item.Settings());
+
+		terrorlandsCompass = register("terrorlands_compass", TerrorlandsCompassItem::new, new Item.Settings().maxCount(1));
 
 		redEgg = register(BlockRegistry.redEgg);
 		largeRedEgg = register(BlockRegistry.largeRedEgg);
@@ -161,71 +237,85 @@ public class ItemRegistry {
 		junglefowlSpawnEgg = register("junglefowl_spawn_egg", (settings) -> new SpawnEggItem(EntityRegistry.junglefowl, settings), new Item.Settings());
 		boarSpawnEgg = register("boar_spawn_egg", (settings) -> new SpawnEggItem(EntityRegistry.boar, settings), new Item.Settings());
 		fleeciferSpawnEgg = register("fleecifer_spawn_egg", (settings) -> new SpawnEggItem(EntityRegistry.fleecifer, settings), new Item.Settings());
-		fleeciferBossSpawnEgg = register("fleecifer_boss_spawn_egg", (settings) -> new SpawnEggItem(EntityRegistry.fleeciferBoss, settings), new Item.Settings());
+		fleeciferBossSpawnEgg = register("fleecifer_boss_spawn_egg", (settings) -> new SpawnEggItem(EntityRegistry.fleeciferBoss, settings), new Item.Settings(), AutoItemGroup.none);
 
-		eyeOfFleecifer = register("fleecifer_eye", FleeciferEyeItem::new, new Item.Settings());
 		fleeciferWool = register("fleecifer_wool", Item::new, new Item.Settings());
+		eyeOfFleecifer = register("fleecifer_eye", FleeciferEyeItem::new, new Item.Settings());
+		relicBundleUpgradeSmithingTemplate = register("relic_bundle_upgrade_smithing_template", ItemRegistry::createRelicBundleUpgrade, new Item.Settings());
+	}
+
+	public static SmithingTemplateItem createRelicBundleUpgrade(Item.Settings settings) {
+		return new SmithingTemplateItem(
+			Text.translatable(Util.createTranslationKey("item", Data.idOf("smithing_template.relic_bundle_upgrade.applies_to"))).formatted(Formatting.BLUE),
+			Text.translatable(Util.createTranslationKey("item", Data.idOf("smithing_template.relic_bundle_upgrade.ingredients"))).formatted(Formatting.BLUE),
+			Text.translatable(Util.createTranslationKey("item", Data.idOf("smithing_template.relic_bundle_upgrade.base_slot_description"))),
+			Text.translatable(Util.createTranslationKey("item", Data.idOf("smithing_template.relic_bundle_upgrade.additions_slot_description"))),
+			List.of(Data.idOf("container/slot/relic_bundle")),
+			List.of(Identifier.ofVanilla("container/slot/redstone_dust")),
+			settings
+		);
 	}
 
 	public static Item register(Block block) {
-		return register(block, BlockItem::new, true);
+		return register(block, BlockItem::new, AutoItemGroup.survival);
 	}
 
-	public static Item register(Block block, boolean survival) {
-		return register(block, BlockItem::new, survival);
+	public static Item register(Block block, AutoItemGroup itemGroup) {
+		return register(block, BlockItem::new, itemGroup);
 	}
 
 	public static Item register(Block block, BiFunction<Block, Item.Settings, Item> factory) {
-		return register(block, factory, new Item.Settings(), true);
+		return register(block, factory, new Item.Settings(), AutoItemGroup.survival);
 	}
 
-	public static Item register(Block block, BiFunction<Block, Item.Settings, Item> factory, boolean survival) {
-		return register(block, factory, new Item.Settings(), survival);
+	public static Item register(Block block, BiFunction<Block, Item.Settings, Item> factory, AutoItemGroup itemGroup) {
+		return register(block, factory, new Item.Settings(), itemGroup);
 	}
 
 	public static Item register(Block block, BiFunction<Block, Item.Settings, Item> factory, Item.Settings settings) {
-		return register(block, factory, settings, true);
+		return register(block, factory, settings, AutoItemGroup.survival);
 	}
 
 	@SuppressWarnings("deprecation")
-	public static Item register(Block block, BiFunction<Block, Item.Settings, Item> factory, Item.Settings settings, boolean survival) {
-		return register(keyOf(block.getRegistryEntry().registryKey()), (itemSettings) -> factory.apply(block, itemSettings), settings.useBlockPrefixedTranslationKey(), survival);
+	public static Item register(Block block, BiFunction<Block, Item.Settings, Item> factory, Item.Settings settings, AutoItemGroup itemGroup) {
+		return register(keyOf(block.getRegistryEntry().registryKey()), (itemSettings) -> factory.apply(block, itemSettings), settings.useBlockPrefixedTranslationKey(), itemGroup);
 	}
 
 	public static Item register(Identifier id, Function<Item.Settings, Item> factory, Item.Settings settings) {
-		return register(id, factory, settings, true);
+		return register(id, factory, settings, AutoItemGroup.survival);
 	}
 
-	public static Item register(Identifier id, Function<Item.Settings, Item> factory, Item.Settings settings, boolean survival) {
-		return register(keyOf(id), factory, settings, survival);
+	public static Item register(Identifier id, Function<Item.Settings, Item> factory, Item.Settings settings, AutoItemGroup itemGroup) {
+		return register(keyOf(id), factory, settings, itemGroup);
 	}
 
 	public static Item register(String id, Function<Item.Settings, Item> factory, Item.Settings settings) {
-		return register(id, factory, settings, true);
+		return register(id, factory, settings, AutoItemGroup.survival);
 	}
 
-	public static Item register(String id, Function<Item.Settings, Item> factory, Item.Settings settings, boolean survival) {
-		return register(Data.idOf(id), factory, settings, survival);
+	public static Item register(String id, Function<Item.Settings, Item> factory, Item.Settings settings, AutoItemGroup itemGroup) {
+		return register(Data.idOf(id), factory, settings, itemGroup);
 	}
 
-	public static Item registerRelic(Identifier id, Function<Item.Settings, Item> factory, Item.Settings settings, Identifier relicId, boolean survival) {
-		return register(id, factory, relic(settings, relicId), survival);
+	public static Item registerRelic(Identifier id, Function<Item.Settings, Item> factory, Item.Settings settings, Identifier relicId, AutoItemGroup itemGroup) {
+		return register(id, factory, relic(settings, relicId), itemGroup);
 	}
 
 	public static Item registerRelic(String id, Function<Item.Settings, Item> factory, Item.Settings settings) {
-		return registerRelic(id, factory, settings, true);
+		return registerRelic(id, factory, settings, AutoItemGroup.survival);
 	}
 
-	public static Item registerRelic(String id, Function<Item.Settings, Item> factory, Item.Settings settings, boolean survival) {
+	public static Item registerRelic(String id, Function<Item.Settings, Item> factory, Item.Settings settings, AutoItemGroup itemGroup) {
 		Identifier identifier = Data.idOf(id);
-		return registerRelic(identifier, factory, settings, identifier, survival);
+		return registerRelic(identifier, factory, settings, identifier, itemGroup);
 	}
 
 	public static Item register(RegistryKey<Item> key, Function<Item.Settings, Item> factory, Item.Settings settings) {
-		return register(key, factory, settings, true);
+		return register(key, factory, settings, AutoItemGroup.survival);
 	}
 
 	public static void bootstrap() {
+		MaterialRegistry.bootstrap();
 		ComponentTypeRegistry.bootstrap();
 	}
 
@@ -247,11 +337,17 @@ public class ItemRegistry {
 		return settings.component(ComponentTypeRegistry.relicBundleContents, relicBundleContentsComponent).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true);
 	}
 
-	public static Item register(RegistryKey<Item> key, Function<Item.Settings, Item> factory, Item.Settings settings, boolean survival) {
+	public static Item register(RegistryKey<Item> key, Function<Item.Settings, Item> factory, Item.Settings settings, AutoItemGroup itemGroup) {
 		Item item = factory.apply(settings.registryKey(key));
 		if (item instanceof BlockItem blockItem) blockItem.appendBlocks(Item.BLOCK_ITEMS, item);
-		if (survival) items.add(item);
-		else creativeItems.add(item);
+		if (itemGroup.equals(AutoItemGroup.survival)) items.add(item);
+		else if (itemGroup.equals(AutoItemGroup.creative)) creativeItems.add(item);
 		return Registry.register(Registries.ITEM, key, item);
+	}
+
+	public enum AutoItemGroup {
+		survival,
+		creative,
+		none;
 	}
 }

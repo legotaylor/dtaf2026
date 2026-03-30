@@ -38,21 +38,19 @@
 		[
 			"dtaf2026:ore_dirt",
 			"minecraft:ore_gravel",
-			"minecraft:ore_coal_upper",
-			"minecraft:ore_coal_lower",
+			"dtaf2026:ore_aerostone_upper",
+			"dtaf2026:ore_aerostone_lower",
 			"minecraft:ore_iron_upper",
 			"minecraft:ore_iron_middle",
 			"minecraft:ore_iron_small",
 			"minecraft:ore_gold",
 			"minecraft:ore_gold_lower",
-			"minecraft:ore_redstone",
-			"minecraft:ore_redstone_lower",
 			"dtaf2026:ore_jasper",
 			"dtaf2026:ore_jasper_medium",
 			"dtaf2026:ore_jasper_large",
 			"dtaf2026:ore_jasper_buried",
-			"minecraft:ore_lapis",
-			"minecraft:ore_lapis_buried",
+			"dtaf2026:ore_amber",
+			"dtaf2026:ore_amber_buried",
 			"minecraft:ore_copper",
 			"minecraft:underwater_magma",
 			"minecraft:disk_sand",
@@ -94,12 +92,6 @@
 				"maxCount": 4,
 				"minCount": 4,
 				"weight": 10
-			},
-			{
-				"type": "minecraft:cow",
-				"maxCount": 4,
-				"minCount": 4,
-				"weight": 8
 			}
 		],
 		"misc": [],

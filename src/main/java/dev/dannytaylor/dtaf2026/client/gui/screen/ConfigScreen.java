@@ -11,6 +11,7 @@ import com.mojang.serialization.Codec;
 import dev.dannytaylor.dtaf2026.client.config.Config;
 import dev.dannytaylor.dtaf2026.client.config.value.EffectType;
 import dev.dannytaylor.dtaf2026.client.data.ClientData;
+import dev.dannytaylor.dtaf2026.common.data.Data;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.Screen;
@@ -40,7 +41,7 @@ public class ConfigScreen extends GameOptionsScreen {
 	);
 
 	public ConfigScreen(Screen parent) {
-		super(parent, ClientData.getMinecraft().options, ClientData.getText("name"));
+		super(parent, ClientData.getMinecraft().options, Data.getText("name"));
 	}
 
 	private static SimpleOption<?>[] getOptions() {

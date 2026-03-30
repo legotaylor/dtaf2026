@@ -1,0 +1,33 @@
+{
+	"parent": "dtaf2026:somnium_reale/root",
+	"criteria": {
+		"relic_dust": {
+			"conditions": {
+				"items": [
+					{
+						"items": "dtaf2026:relic_dust"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		}
+	},
+	"display": {
+		"description": {
+			"translate": "advancements.somnium_reale.obtain_relic_dust.description"
+		},
+		"icon": {
+			"count": 1,
+			"id": "dtaf2026:relic_dust"
+		},
+		"title": {
+			"translate": "advancements.somnium_reale.obtain_relic_dust.title"
+		}
+	},
+	"requirements": [
+		[
+			"relic_dust"
+		]
+	],
+	"sends_telemetry_event": false
+}

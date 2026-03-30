@@ -1,0 +1,10 @@
+{
+	"type": "minecraft:crafting_transmute",
+	"category": "equipment",
+	"group": "relic_bundle",
+	"input": "#dtaf2026:day_relic_bundle",
+	"material": "dtaf2026:relic_dust",
+	"result": {
+		"id": "dtaf2026:night_relic_bundle"
+	}
+}

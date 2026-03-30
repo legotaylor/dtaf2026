@@ -9,6 +9,7 @@ package dev.dannytaylor.dtaf2026.client.mixin.gui;
 
 import com.terraformersmc.modmenu.config.ModMenuConfig;
 import dev.dannytaylor.dtaf2026.client.data.ClientData;
+import dev.dannytaylor.dtaf2026.common.data.Data;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
@@ -46,7 +47,7 @@ public abstract class TitleScreenMixin extends Screen {
 
 	@Redirect(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawTextWithShadow(Lnet/minecraft/client/font/TextRenderer;Ljava/lang/String;III)V"))
 	private void dtaf2026$addNotAssociatedText(DrawContext context, TextRenderer textRenderer, String text, int x, int y, int color) {
-		Text notAssociatedText = ClientData.getText("not_associated", ClientData.getText("name"));
+		Text notAssociatedText = Data.getText("not_associated", Data.getText("name"));
 		context.drawTextWithShadow(textRenderer, notAssociatedText, this.width - textRenderer.getWidth(notAssociatedText) - 2, this.height - 20, color);
 		context.drawTextWithShadow(textRenderer, text, x, y, color);
 	}

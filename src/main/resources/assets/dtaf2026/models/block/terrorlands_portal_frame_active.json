@@ -1,0 +1,6 @@
+{
+	"parent": "dtaf2026:block/terrorlands_portal_base_frame",
+	"textures": {
+		"1": "dtaf2026:block/terrorlands_portal_frame_active"
+	}
+}

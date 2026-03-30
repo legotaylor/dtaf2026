@@ -146,7 +146,7 @@ public class CreditsScreen extends Screen {
 			int i;
 			String string2;
 			String string3;
-			for (string = string.replaceAll("MODNAME", ClientData.getText("name").getString()).replaceAll("PLAYERTIME", this.playerTime).replaceAll("PLAYERNAME", this.client != null ? this.client.getSession().getUsername() : "Steve"); (i = string.indexOf(OBFUSCATION_PLACEHOLDER)) != -1; string = string2 + Formatting.WHITE + Formatting.OBFUSCATED + "XXXXXXXX".substring(0, random.nextInt(4) + 3) + string3) {
+			for (string = string.replaceAll("MODNAME", Data.getText("name").getString()).replaceAll("PLAYERTIME", this.playerTime).replaceAll("PLAYERNAME", this.client != null ? this.client.getSession().getUsername() : "Steve"); (i = string.indexOf(OBFUSCATION_PLACEHOLDER)) != -1; string = string2 + Formatting.WHITE + Formatting.OBFUSCATED + "XXXXXXXX".substring(0, random.nextInt(4) + 3) + string3) {
 				string2 = string.substring(0, i);
 				string3 = string.substring(i + OBFUSCATION_PLACEHOLDER.length());
 			}

@@ -47,7 +47,7 @@ public abstract class AlwaysSpreadableBlock extends net.minecraft.block.Spreadab
 
 	public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
 		if (!canSurvive(state, world, pos)) {
-			world.setBlockState(pos, this.baseBlock.getDefaultState());
+			if (this.baseBlock != null) world.setBlockState(pos, this.baseBlock.getDefaultState());
 		} else {
 			BlockState blockState = this.getDefaultState();
 			for (int i = 0; i < 4; ++i) {

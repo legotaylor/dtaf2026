@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"L": "dtaf2026:maple_log",
+		"R": "minecraft:resin_block"
+	},
+	"pattern": [
+		" L ",
+		" R ",
+		" L "
+	],
+	"result": {
+		"count": 1,
+		"id": "dtaf2026:maple_creaking_heart"
+	}
+}

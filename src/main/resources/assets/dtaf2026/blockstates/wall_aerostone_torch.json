@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=east": {
+			"model": "dtaf2026:block/wall_aerostone_torch"
+		},
+		"facing=north": {
+			"model": "dtaf2026:block/wall_aerostone_torch",
+			"y": 270
+		},
+		"facing=south": {
+			"model": "dtaf2026:block/wall_aerostone_torch",
+			"y": 90
+		},
+		"facing=west": {
+			"model": "dtaf2026:block/wall_aerostone_torch",
+			"y": 180
+		}
+	}
+}

@@ -7,6 +7,7 @@
 
 package dev.dannytaylor.dtaf2026.common.registry.item;
 
+import dev.dannytaylor.dtaf2026.common.data.Data;
 import dev.dannytaylor.dtaf2026.common.registry.item.component.RelicBundleContentsComponent;
 import dev.dannytaylor.dtaf2026.common.registry.item.component.RelicComponent;
 import dev.dannytaylor.dtaf2026.common.registry.item.tooltip.RelicBundleTooltipData;
@@ -28,6 +29,8 @@ import net.minecraft.item.tooltip.TooltipData;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.ClickType;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,6 +44,15 @@ public class RelicBundleItem extends Item {
 
 	public static RelicBundleContentsComponent getContents(ItemStack relicBundle) {
 		return relicBundle.get(ComponentTypeRegistry.relicBundleContents);
+	}
+
+	@Override
+	public Text getName(ItemStack relicBundle) {
+		MutableText text = super.getName(relicBundle).copy();
+		RelicBundleContentsComponent contents = getContents(relicBundle);
+		if (contents.isPresent())
+			text.append(Text.translatable(Data.getModId() + ".relic_bundle.filled", contents.getStack().getName()));
+		return text;
 	}
 
 	public void inventoryTick(ItemStack relicBundle, ServerWorld world, Entity entity, @Nullable EquipmentSlot slot) {

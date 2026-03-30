@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"hanging=false": {
+			"model": "dtaf2026:block/aerostone_lantern"
+		},
+		"hanging=true": {
+			"model": "dtaf2026:block/aerostone_lantern_hanging"
+		}
+	}
+}

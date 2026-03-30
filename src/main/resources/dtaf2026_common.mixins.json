@@ -15,7 +15,9 @@
 		"entity.ServerPlayerEntityMixin",
 		"entity.ZombieEntityMixin",
 		"gui.screen.AnvilScreenHandlerMixin",
-		"item.ItemMixin"
+		"item.ItemMixin",
+		"item.ItemStackMixin",
+		"recipe.ServerRecipeManagerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

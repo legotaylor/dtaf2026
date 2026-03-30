@@ -12,6 +12,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.gen.structure.Structure;
 
 public class TagRegistry {
 	public static class Block {
@@ -19,12 +20,17 @@ public class TagRegistry {
 		public static final TagKey<net.minecraft.block.Block> junglefowlEggHatchBooster;
 		public static final TagKey<net.minecraft.block.Block> isCreakingHeartLog;
 		public static final TagKey<net.minecraft.block.Block> alwaysSupportsSupportedBlocks;
+		public static final TagKey<net.minecraft.block.Block> incorrectForQuariteTool;
+		public static final TagKey<net.minecraft.block.Block> incorrectForRubyTool;
+
 
 		static {
 			supportedWoodSetMaple = TagKey.of(RegistryKeys.BLOCK, Data.idOf("supported/wood_set/maple"));
 			junglefowlEggHatchBooster = TagKey.of(RegistryKeys.BLOCK, Data.idOf("junglefowl_egg_hatch_booster"));
 			isCreakingHeartLog = TagKey.of(RegistryKeys.BLOCK, Data.idOf("is_creaking_heart_log"));
 			alwaysSupportsSupportedBlocks = TagKey.of(RegistryKeys.BLOCK, Data.idOf("always_supports_supported_blocks"));
+			incorrectForQuariteTool = TagKey.of(RegistryKeys.BLOCK, Data.idOf("incorrect_for_quarite_tool"));
+			incorrectForRubyTool = TagKey.of(RegistryKeys.BLOCK, Data.idOf("incorrect_for_ruby_tool"));
 		}
 	}
 
@@ -46,6 +52,9 @@ public class TagRegistry {
 		public static final TagKey<net.minecraft.item.Item> nightRelicBundle;
 		public static final TagKey<net.minecraft.item.Item> relic;
 		public static final TagKey<net.minecraft.item.Item> relicBundle;
+		public static final TagKey<net.minecraft.item.Item> repairsAmberArmor;
+		public static final TagKey<net.minecraft.item.Item> quariteToolMaterials;
+		public static final TagKey<net.minecraft.item.Item> rubyToolMaterials;
 
 		static {
 			alwaysRelicBundle = TagKey.of(RegistryKeys.ITEM, Data.idOf("always_relic_bundle"));
@@ -57,6 +66,9 @@ public class TagRegistry {
 			nightRelicBundle = TagKey.of(RegistryKeys.ITEM, Data.idOf("night_relic_bundle"));
 			relic = TagKey.of(RegistryKeys.ITEM, Data.idOf("relic"));
 			relicBundle = TagKey.of(RegistryKeys.ITEM, Data.idOf("relic_bundle"));
+			repairsAmberArmor = TagKey.of(RegistryKeys.ITEM, Data.idOf("repairs_amber_armor"));
+			quariteToolMaterials = TagKey.of(RegistryKeys.ITEM, Data.idOf("quarite_tool_materials"));
+			rubyToolMaterials = TagKey.of(RegistryKeys.ITEM, Data.idOf("ruby_tool_materials"));
 		}
 	}
 
@@ -74,6 +86,18 @@ public class TagRegistry {
 				abstractSomniumReale = TagKey.of(RegistryKeys.BIOME, Data.getSomniumRealeId().withPrefixedPath("is_abstract_"));
 				somniumReale = TagKey.of(RegistryKeys.BIOME, Data.getSomniumRealeId().withPrefixedPath("is_"));
 				theTerrorlands = TagKey.of(RegistryKeys.BIOME, Data.getSomniaMetusId().withPrefixedPath("is_"));
+			}
+		}
+
+		public static class Structure {
+			public static final TagKey<net.minecraft.world.gen.structure.Structure> terrorlandsPortal;
+
+			public static boolean isIn(WorldView world, BlockPos blockPos, TagKey<net.minecraft.world.biome.Biome> tag) {
+				return world.getBiome(blockPos).isIn(tag);
+			}
+
+			static {
+				terrorlandsPortal = TagKey.of(RegistryKeys.STRUCTURE, Data.idOf("terrorlands_portal"));
 			}
 		}
 	}

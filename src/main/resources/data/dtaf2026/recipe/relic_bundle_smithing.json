@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:smithing_transform",
+	"addition": "dtaf2026:relic_dust",
+	"base": "#dtaf2026:time_relic_bundle",
+	"result": {
+		"id": "dtaf2026:relic_bundle"
+	},
+	"template": "dtaf2026:relic_bundle_upgrade_smithing_template"
+}

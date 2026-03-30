@@ -1,0 +1,11 @@
+{
+	"type": "minecraft:smelting",
+	"category": "misc",
+	"cookingtime": 200,
+	"experience": 1.0,
+	"group": "ruby",
+	"ingredient": "dtaf2026:deepslate_ruby_ore",
+	"result": {
+		"id": "dtaf2026:ruby"
+	}
+}

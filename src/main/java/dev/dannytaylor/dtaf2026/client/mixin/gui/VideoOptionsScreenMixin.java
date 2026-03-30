@@ -9,6 +9,7 @@ package dev.dannytaylor.dtaf2026.client.mixin.gui;
 
 import dev.dannytaylor.dtaf2026.client.data.ClientData;
 import dev.dannytaylor.dtaf2026.client.gui.screen.ConfigScreen;
+import dev.dannytaylor.dtaf2026.common.data.Data;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.option.GameOptionsScreen;
 import net.minecraft.client.gui.screen.option.VideoOptionsScreen;
@@ -29,6 +30,6 @@ public abstract class VideoOptionsScreenMixin extends GameOptionsScreen {
 	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/OptionListWidget;addAll([Lnet/minecraft/client/option/SimpleOption;)V"), method = "addOptions")
 	private void dtaf2026$addConfigButton(CallbackInfo ci) {
 		if (this.body != null)
-			this.body.addWidgetEntry(ButtonWidget.builder(ClientData.getText("name"), (button) -> ClientData.getMinecraft().setScreen(new ConfigScreen(this))).width(this.body.getRowWidth()).build(), null);
+			this.body.addWidgetEntry(ButtonWidget.builder(Data.getText("name"), (button) -> ClientData.getMinecraft().setScreen(new ConfigScreen(this))).width(this.body.getRowWidth()).build(), null);
 	}
 }

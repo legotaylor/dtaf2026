@@ -10,6 +10,7 @@ package dev.dannytaylor.dtaf2026.client.registry;
 import dev.dannytaylor.dtaf2026.client.registry.block.ClientBlockRegistry;
 import dev.dannytaylor.dtaf2026.client.registry.dimension.ClientDimensionRegistry;
 import dev.dannytaylor.dtaf2026.client.registry.entity.ClientEntityRegistry;
+import dev.dannytaylor.dtaf2026.client.registry.gui.ClientScreenHandlerRegistry;
 import dev.dannytaylor.dtaf2026.client.registry.item.ClientItemRegistry;
 import dev.dannytaylor.dtaf2026.client.registry.keybinds.KeybindRegistry;
 import dev.dannytaylor.dtaf2026.client.registry.networking.ClientNetworkingRegistry;
@@ -22,6 +23,7 @@ public class ClientRegistry {
 		ClientEntityRegistry.bootstrap();
 		ClientBlockRegistry.bootstrap();
 		ClientItemRegistry.bootstrap();
+		ClientScreenHandlerRegistry.bootstrap();
 		ClientDimensionRegistry.bootstrap();
 		PipelineRegistry.bootstrap();
 		ClientNetworkingRegistry.bootstrap();

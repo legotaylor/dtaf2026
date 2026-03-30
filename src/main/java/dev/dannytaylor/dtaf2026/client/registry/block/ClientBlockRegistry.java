@@ -22,6 +22,7 @@ public class ClientBlockRegistry {
 		}
 		BlockRenderLayerMap.putBlock(BlockRegistry.violet, cutout);
 		BlockRenderLayerMap.putBlock(BlockRegistry.pottedViolet, cutout);
+		BlockRenderLayerMap.putBlock(BlockRegistry.aerostoneLantern, cutout);
 		BlockRenderLayerMap.putBlock(BlockRegistry.terrorlandsPortal, BlockRenderLayer.TRANSLUCENT);
 	}
 }

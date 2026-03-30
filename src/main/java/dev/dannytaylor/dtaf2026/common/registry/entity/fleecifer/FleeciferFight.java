@@ -20,6 +20,7 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.boss.BossBar;
 import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -140,7 +141,7 @@ public class FleeciferFight {
 			} else {
 				for (ServerPlayerEntity player : this.bossBar.getPlayers()) {
 					increaseStat(player, StatRegistry.fleeciferBossWon);
-					player.giveOrDropStack(ItemRegistry.relicBundle.getDefaultStack());
+					player.giveOrDropStack(new ItemStack(ItemRegistry.relicBundleUpgradeSmithingTemplate, 1));
 					SomniumRealeServerPlayerEntity somniumRealeServerPlayerEntity = ((SomniumRealeServerPlayerEntity) player);
 					somniumRealeServerPlayerEntity.dtaf2026$setTimeRunning(false);
 					NetworkingRegistry.sendCreditsScreen(player, somniumRealeServerPlayerEntity.dtaf2026$getTime());

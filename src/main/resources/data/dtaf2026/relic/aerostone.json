@@ -1,0 +1,18 @@
+{
+	"type": "dtaf2026:status_effect",
+	"value": [
+		{
+			"type": "dtaf2026:safe_landing",
+			"value": {
+				"amplifier": 0,
+				"show_particles": false,
+				"show_icon": true
+			}
+		}
+	],
+	"conditions": [
+		{
+			"type": "dtaf2026:in_active_relic_bundle"
+		}
+	]
+}

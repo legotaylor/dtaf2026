@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/orientable",
+	"textures": {
+		"front": "dtaf2026:block/extractor_front_on",
+		"side": "dtaf2026:block/extractor_side",
+		"top": "dtaf2026:block/extractor_side"
+	}
+}

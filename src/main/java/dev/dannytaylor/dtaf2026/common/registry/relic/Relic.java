@@ -470,6 +470,64 @@ public class Relic {
 		}
 	}
 
+	public abstract static class BasicCondition implements RelicCondition {
+		public final Identifier identifier;
+		public final Test test;
+
+		public BasicCondition(Identifier identifier, Test test) {
+			this.identifier = identifier;
+			this.test = test;
+		}
+
+		public JsonObject toJson() {
+			JsonObject json = new JsonObject();
+			json.addProperty("type", identifier.toString());
+			return json;
+		}
+
+		public boolean test(LivingEntity entity, ItemStack bundle) {
+			return test.test(entity, bundle);
+		}
+
+		public @NotNull String toString() {
+			return "BasicCondition[]";
+		}
+
+		public interface Test {
+			boolean test(LivingEntity entity, ItemStack bundle);
+		}
+	}
+
+	public static class SneakingCondition extends BasicCondition {
+		public SneakingCondition() {
+			super(ConditionTypes.sneaking, (entity, bundle) -> entity.isSneaking());
+		}
+
+		public static SneakingCondition fromJson(JsonElement jsonElement) {
+			return new SneakingCondition();
+		}
+	}
+
+	public static class SwimmingCondition extends BasicCondition {
+		public SwimmingCondition() {
+			super(ConditionTypes.swimming, (entity, bundle) -> entity.isSwimming());
+		}
+
+		public static SwimmingCondition fromJson(JsonElement jsonElement) {
+			return new SwimmingCondition();
+		}
+	}
+
+	public static class SubmergedInWaterCondition extends BasicCondition {
+		public SubmergedInWaterCondition() {
+			super(ConditionTypes.submergedInWater, (entity, bundle) -> entity.isSubmergedInWater());
+		}
+
+		public static SubmergedInWaterCondition fromJson(JsonElement jsonElement) {
+			return new SubmergedInWaterCondition();
+		}
+	}
+
 	public static class ActionTypes {
 		public static final Identifier statusEffect = Data.idOf("status_effect");
 	}
@@ -486,6 +544,9 @@ public class Relic {
 		public static final Identifier inDayRelicBundle = Data.idOf("in_day_relic_bundle");
 		public static final Identifier inRelicBundle = Data.idOf("in_relic_bundle");
 		public static final Identifier inActiveRelicBundle = Data.idOf("in_active_relic_bundle");
+		public static final Identifier sneaking = Data.idOf("sneaking");
+		public static final Identifier swimming = Data.idOf("swimming");
+		public static final Identifier submergedInWater = Data.idOf("submerged_in_water");
 	}
 
 	public static boolean testConditions(List<RelicCondition> conditions, LivingEntity entity, ItemStack bundle) {
@@ -527,6 +588,9 @@ public class Relic {
 		RelicCondition.register(ConditionTypes.inDayRelicBundle, InDayRelicBundleCondition::build);
 		RelicCondition.register(ConditionTypes.inRelicBundle, InRelicBundleCondition::build);
 		RelicCondition.register(ConditionTypes.inActiveRelicBundle, InActiveRelicBundleCondition::build);
+		RelicCondition.register(ConditionTypes.sneaking, SneakingCondition::fromJson);
+		RelicCondition.register(ConditionTypes.swimming, SwimmingCondition::fromJson);
+		RelicCondition.register(ConditionTypes.submergedInWater, SubmergedInWaterCondition::fromJson);
 	}
 
 	public @NotNull String toString() {

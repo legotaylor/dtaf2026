@@ -8,6 +8,7 @@
 package dev.dannytaylor.dtaf2026.common.registry.item;
 
 import dev.dannytaylor.dtaf2026.client.data.ClientData;
+import dev.dannytaylor.dtaf2026.common.data.Data;
 import dev.dannytaylor.dtaf2026.common.registry.entity.fleecifer.FleeciferEyeEntity;
 import dev.dannytaylor.dtaf2026.common.registry.sound.SoundEventRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.tagkey.TagRegistry;
@@ -42,7 +43,7 @@ public class FleeciferEyeItem extends Item {
 		user.setCurrentHand(hand);
 		if (world instanceof ServerWorld) {
 			if (!world.getBiome(user.getBlockPos()).isIn(TagRegistry.WorldGen.Biome.theTerrorlands)) {
-				user.sendMessage(ClientData.getText("fleecifer_eye.not_in_biome").formatted(Formatting.RED), true);
+				user.sendMessage(Data.getText("fleecifer_eye.not_in_biome").formatted(Formatting.RED), true);
 				return ActionResult.PASS;
 			}
 			BlockPos blockPos = BlockPos.ofFloored(user.getPos().add(user.getRotationVec(1.0F).multiply(48)).add(0, 32, 0));

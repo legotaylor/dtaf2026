@@ -3,14 +3,26 @@
 		"dtaf2026:stone",
 		"dtaf2026:stone_stairs",
 		"dtaf2026:stone_slab",
+		"dtaf2026:aerostone_ore",
+		"dtaf2026:amber_ore",
+		"dtaf2026:colosine_ore",
 		"dtaf2026:jasper_ore",
+		"dtaf2026:quarite_ore",
+		"dtaf2026:ruby_ore",
 		"dtaf2026:cobblestone",
 		"dtaf2026:cobblestone_stairs",
 		"dtaf2026:cobblestone_slab",
 		"dtaf2026:cobblestone_wall",
 		"dtaf2026:deepslate",
+		"dtaf2026:deepslate_aerostone_ore",
+		"dtaf2026:deepslate_amber_ore",
+		"dtaf2026:deepslate_colosine_ore",
 		"dtaf2026:deepslate_jasper_ore",
+		"dtaf2026:deepslate_quarite_ore",
+		"dtaf2026:deepslate_ruby_ore",
 		"dtaf2026:cobbled_deepslate",
-		"dtaf2026:cobbled_deepslate_wall"
+		"dtaf2026:cobbled_deepslate_wall",
+		"dtaf2026:extractor",
+		"dtaf2026:aerostone_lantern"
 	]
 }

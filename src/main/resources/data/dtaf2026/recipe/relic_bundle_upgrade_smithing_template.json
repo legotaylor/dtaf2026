@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "misc",
+	"key": {
+		"#": "#dtaf2026:relic",
+		"C": "dtaf2026:fleecifer_wool",
+		"S": "dtaf2026:relic_bundle_upgrade_smithing_template"
+	},
+	"pattern": [
+		"#S#",
+		"#C#",
+		"###"
+	],
+	"result": {
+		"count": 2,
+		"id": "dtaf2026:relic_bundle_upgrade_smithing_template"
+	}
+}

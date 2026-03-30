@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "dtaf2026:item/terrorlands_compass/compass_18"
+	}
+}

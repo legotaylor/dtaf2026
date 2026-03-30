@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "equipment",
+	"group": "relic_bundle",
+	"key": {
+		"S": "minecraft:string",
+		"L": "minecraft:leather",
+		"R": "dtaf2026:relic_dust"
+	},
+	"pattern": [
+		"RSR",
+		"RLR",
+		"RRR"
+	],
+	"result": {
+		"count": 1,
+		"id": "dtaf2026:night_relic_bundle"
+	}
+}

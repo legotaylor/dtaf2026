@@ -4,7 +4,7 @@
 		{
 			"type": "minecraft:resistance",
 			"value": {
-				"amplifier": 0,
+				"amplifier": 1,
 				"show_particles": false,
 				"show_icon": true
 			}
