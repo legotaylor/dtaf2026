@@ -3,10 +3,9 @@ package dev.dannytaylor.dtaf2026.common.registry.item;
 import dev.dannytaylor.dtaf2026.common.registry.block.BlockRegistry;
 import dev.dannytaylor.dtaf2026.common.registry.block.TerrorlandsPortalFrameBlock;
 import dev.dannytaylor.dtaf2026.common.registry.tagkey.TagRegistry;
+import dev.dannytaylor.dtaf2026.common.registry.worldgen.DimensionRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.EndPortalFrameBlock;
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.LodestoneTrackerComponent;
@@ -35,7 +34,7 @@ public class TerrorlandsCompassItem extends Item {
 	public void inventoryTick(ItemStack stack, ServerWorld world, Entity entity, @Nullable EquipmentSlot slot) {
 		super.inventoryTick(stack, world, entity, slot);
 		if (world instanceof ServerWorld serverWorld) {
-			if (serverWorld.getRegistryKey() == World.OVERWORLD && stack.get(DataComponentTypes.LODESTONE_TRACKER) == null) {
+			if (serverWorld.getRegistryKey() == DimensionRegistry.somniumReale.world() && stack.get(DataComponentTypes.LODESTONE_TRACKER) == null) {
 				stack.set(DataComponentTypes.LODESTONE_TRACKER, new LodestoneTrackerComponent(getLocation(serverWorld, entity.getBlockPos()), false));
 			}
 		}
@@ -49,7 +48,7 @@ public class TerrorlandsCompassItem extends Item {
 	@Override
 	public ActionResult use(World world, PlayerEntity user, Hand hand) {
 		if (world instanceof ServerWorld serverWorld) {
-			if (serverWorld.getRegistryKey() == World.OVERWORLD) {
+			if (serverWorld.getRegistryKey() == DimensionRegistry.somniumReale.world()) {
 				ItemStack stack = hand.equals(Hand.MAIN_HAND) ? user.getEquippedStack(EquipmentSlot.MAINHAND) : user.getEquippedStack(EquipmentSlot.OFFHAND);
 				Optional<GlobalPos> pos = getLocation(serverWorld, user.getBlockPos());
 				stack.set(DataComponentTypes.LODESTONE_TRACKER, new LodestoneTrackerComponent(pos, false));

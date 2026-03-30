@@ -14,6 +14,8 @@
 		"dtaf2026:cobblestone_slab",
 		"dtaf2026:cobblestone_wall",
 		"dtaf2026:deepslate",
+		"dtaf2026:deepslate_stairs",
+		"dtaf2026:deepslate_slab",
 		"dtaf2026:deepslate_aerostone_ore",
 		"dtaf2026:deepslate_amber_ore",
 		"dtaf2026:deepslate_colosine_ore",
@@ -21,6 +23,8 @@
 		"dtaf2026:deepslate_quarite_ore",
 		"dtaf2026:deepslate_ruby_ore",
 		"dtaf2026:cobbled_deepslate",
+		"dtaf2026:cobbled_deepslate_stairs",
+		"dtaf2026:cobbled_deepslate_slab",
 		"dtaf2026:cobbled_deepslate_wall",
 		"dtaf2026:extractor",
 		"dtaf2026:aerostone_lantern"

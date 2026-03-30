@@ -151,6 +151,24 @@
 			],
 			"conditions": [
 				{
+					"condition": "minecraft:inverted",
+					"term": {
+						"condition": "minecraft:match_tool",
+						"predicate": {
+							"predicates": {
+								"minecraft:enchantments": [
+									{
+										"enchantments": "minecraft:silk_touch",
+										"levels": {
+											"min": 1
+										}
+									}
+								]
+							}
+						}
+					}
+				},
+				{
 					"condition": "minecraft:block_state_property",
 					"block": "dtaf2026:cerulean_log",
 					"properties": {
@@ -189,6 +207,24 @@
 				}
 			],
 			"conditions": [
+				{
+					"condition": "minecraft:inverted",
+					"term": {
+						"condition": "minecraft:match_tool",
+						"predicate": {
+							"predicates": {
+								"minecraft:enchantments": [
+									{
+										"enchantments": "minecraft:silk_touch",
+										"levels": {
+											"min": 1
+										}
+									}
+								]
+							}
+						}
+					}
+				},
 				{
 					"condition": "minecraft:block_state_property",
 					"block": "dtaf2026:cerulean_log",

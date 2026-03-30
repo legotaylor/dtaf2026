@@ -25,10 +25,4 @@ some ways feel more real than ever.
 We use a customized version of [Lezzlebit](https://bsky.app/profile/jamiemakes.art)'s [Gradient Clouds](https://modrinth.com/resourcepack/gradient-clouds) shader.  
 We use [Kaleido](https://github.com/sisby-folk/kaleido-config)'s [Quilt Config](https://github.com/QuiltMC/quilt-config) implementation for config.
 
-![Made for April Fools 2026](https://raw.githubusercontent.com/legotaylor/dtaf2026/refs/heads/master/assets/badge/svg/cozy.svg)  
-
-//todo
-
-- check recipes and loot tables (VERY IMPORTANT)
-- advancements (if i have time!!!!)
-- recipe book (probably will in future version, add important ones!)
+![Made for April Fools 2026](https://raw.githubusercontent.com/legotaylor/dtaf2026/refs/heads/master/assets/badge/svg/cozy.svg)
