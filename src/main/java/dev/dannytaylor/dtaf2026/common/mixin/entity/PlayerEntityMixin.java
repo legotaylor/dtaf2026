@@ -59,7 +59,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 		if (this.isSleeping() && this.sleepTimer == 100) {
 			RegistryKey<World> currentWorld = this.getWorld().getRegistryKey();
 			TeleportTarget teleportTarget = null;
-			System.out.println(currentWorld.getValue());
 			if (currentWorld.equals(World.OVERWORLD)) {
 				teleportTarget = dtaf2026$createTeleportTarget(DimensionRegistry.somniumReale.world(), false);
 			} else if (currentWorld.equals(DimensionRegistry.somniumReale.world()) || currentWorld.equals(DimensionRegistry.theTerrorlands.world())) {
@@ -118,7 +117,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 				BlockPos blockPos = serverWorld.getSpawnPos();
 				if (toRespawnPos) {
 					Optional<BlockPos> lastBedPos = this.dataTracker.get(PlayerEntityMixin.lastBedPos);
-					if (lastBedPos.isPresent()) {
+					if (lastBedPos.isPresent() && serverWorld.getBlockState(lastBedPos.get()).getBlock() instanceof BedBlock) {
 						Optional<Vec3d> wakeUpPos = BedBlock.findWakeUpPosition(this.getType(), serverWorld, lastBedPos.get(), serverWorld.getBlockState(lastBedPos.get()).get(BedBlock.FACING), serverWorld.getSpawnAngle());
 						blockPos = wakeUpPos.isPresent() ? BlockPos.ofFloored(wakeUpPos.get()) : DimensionRegistry.toHighestBlockPos(serverWorld, blockPos);
 					}

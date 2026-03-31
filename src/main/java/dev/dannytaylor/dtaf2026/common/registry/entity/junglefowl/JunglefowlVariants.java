@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.mojang.datafixers.DataFixUtils;
 import com.mojang.serialization.JsonOps;
+import dev.dannytaylor.dtaf2026.client.registry.entity.ClientVariantRegistries;
 import dev.dannytaylor.dtaf2026.common.data.Data;
 import dev.dannytaylor.dtaf2026.common.util.JsonResourceLoader;
 import dev.dannytaylor.dtaf2026.common.util.RegistryTypes;
@@ -32,7 +33,11 @@ import java.util.*;
 import java.util.stream.Stream;
 
 public class JunglefowlVariants extends JsonResourceLoader implements IdentifiableResourceReloadListener {
-	public static final RegistryTypes.VariantRegistry<Identifier, JunglefowlVariant> variants;
+	private static final RegistryTypes.VariantRegistry<Identifier, JunglefowlVariant> variants;
+
+	public static RegistryTypes.VariantRegistry<Identifier, JunglefowlVariant> getVariants(boolean isClient) {
+		return isClient ? ClientVariantRegistries.instance.junglefowlVariants : variants;
+	}
 
 	static {
 		variants = new RegistryTypes.VariantRegistry<>(Data.idOf("red"));
@@ -101,23 +106,17 @@ public class JunglefowlVariants extends JsonResourceLoader implements Identifiab
 
 	@Override
 	protected void apply(Map<Identifier, JsonElement> prepared, ResourceManager manager, Profiler profiler) {
-		if (!variants.getFrozen()) {
-			Map<Identifier, JunglefowlVariant> variants = getDefault();
-			for (Map.Entry<Identifier, JsonElement> entry : prepared.entrySet()) {
-				Identifier resourceId = entry.getKey();
-				try {
-					JunglefowlVariant variant = JunglefowlVariant.codec.parse(JsonOps.INSTANCE, entry.getValue()).result().orElseThrow(() -> new IllegalStateException("Failed to decode junglefowl variant: " + resourceId));
-					variants.put(resourceId, variant);
-				} catch (Exception error) {
-					Data.getLogger().error("Failed to parse junglefowl variant {}: ", resourceId, error);
-				}
+		Map<Identifier, JunglefowlVariant> variants = getDefault();
+		for (Map.Entry<Identifier, JsonElement> entry : prepared.entrySet()) {
+			Identifier resourceId = entry.getKey();
+			try {
+				JunglefowlVariant variant = JunglefowlVariant.codec.parse(JsonOps.INSTANCE, entry.getValue()).result().orElseThrow(() -> new IllegalStateException("Failed to decode junglefowl variant: " + resourceId));
+				variants.put(resourceId, variant);
+			} catch (Exception error) {
+				Data.getLogger().error("Failed to parse junglefowl variant {}: ", resourceId, error);
 			}
-			setRegistry(variants);
 		}
-	}
-
-	private void setRegistry(Map<Identifier, JunglefowlVariant> variants) {
-		if (JunglefowlVariants.variants.setRegistry(variants)) JunglefowlVariants.variants.freeze();
+		JunglefowlVariants.variants.setRegistry(variants);
 	}
 
 	@Override

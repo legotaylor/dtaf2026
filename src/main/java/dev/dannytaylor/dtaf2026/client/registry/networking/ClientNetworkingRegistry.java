@@ -10,11 +10,10 @@ package dev.dannytaylor.dtaf2026.client.registry.networking;
 import dev.dannytaylor.dtaf2026.client.data.ClientData;
 import dev.dannytaylor.dtaf2026.client.gui.screen.CreditsScreen;
 import dev.dannytaylor.dtaf2026.client.registry.entity.ClientVariantRegistries;
+import dev.dannytaylor.dtaf2026.common.data.Data;
 import dev.dannytaylor.dtaf2026.common.registry.item.ItemRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.networking.CreditsScreenS2CPacket;
-import dev.dannytaylor.dtaf2026.common.registry.networking.EventS2CPacket;
-import dev.dannytaylor.dtaf2026.common.registry.networking.Events;
-import dev.dannytaylor.dtaf2026.common.registry.networking.VariantsS2CPacket;
+import dev.dannytaylor.dtaf2026.common.registry.networking.*;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
@@ -22,12 +21,18 @@ import net.minecraft.network.packet.c2s.play.ClientStatusC2SPacket;
 import net.minecraft.particle.ItemStackParticleEffect;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
 
 public class ClientNetworkingRegistry {
+	private static boolean sentRequest;
+
 	public static void bootstrap() {
-		ClientPlayNetworking.registerGlobalReceiver(VariantsS2CPacket.id, (payload, context) -> ClientData.getMinecraft().execute(() -> ClientVariantRegistries.instance.setAll(payload.junglefowl(), payload.boar())));
+		ClientPlayNetworking.registerGlobalReceiver(VariantsS2CPacket.id, (payload, context) -> {
+			Data.getLogger().info("Received entity variants!");
+			ClientVariantRegistries.instance.setAll(payload.junglefowl(), payload.boar());
+		});
 		ClientPlayNetworking.registerGlobalReceiver(CreditsScreenS2CPacket.id, (payload, context) -> {
 			if (!payload.seenScreen()) ClientData.getMinecraft().setScreen(new CreditsScreen("somnium_reale", () -> {
 				if (ClientData.getMinecraft().player != null)
@@ -36,6 +41,22 @@ public class ClientNetworkingRegistry {
 			}, payload.time()));
 		});
 		ClientPlayNetworking.registerGlobalReceiver(EventS2CPacket.id, (payload, context) -> processEvent(context.client(), payload.eventId(), payload.pos(), payload.data(), payload.global()));
+		ClientTickEvents.END_CLIENT_TICK.register((client) -> {
+			if (client.world != null && !sentRequest) {
+				sendRequest(NetworkingRegistry.variants);
+				sentRequest = true;
+			}
+			if (client.world == null && sentRequest) sentRequest = false;
+		});
+	}
+
+	public static void sendRequest(Identifier identifier) {
+		try {
+			Data.getLogger().info("Sending request to the server for '{}'!", identifier);
+			ClientPlayNetworking.send(new RequestC2SPacket(identifier));
+		} catch (Exception error) {
+			Data.getLogger().warn("Caught error in request packet: {}", String.valueOf(error));
+		}
 	}
 
 	public static void processEvent(MinecraftClient client, int eventId, BlockPos pos, int data, boolean global) {

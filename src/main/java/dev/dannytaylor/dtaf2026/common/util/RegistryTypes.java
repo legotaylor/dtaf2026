@@ -15,7 +15,6 @@ import java.util.Map;
 public class RegistryTypes {
 	public static class GenericRegistry<A, B> {
 		protected final Map<A, B> registry;
-		protected boolean frozen;
 
 		public GenericRegistry(Map<A, B> defaultRegistry) {
 			registry = defaultRegistry;
@@ -30,19 +29,9 @@ public class RegistryTypes {
 		}
 
 		public boolean setRegistry(Map<A, B> updatedRegistry) {
-			if (!this.frozen) {
-				this.registry.clear();
-				this.registry.putAll(updatedRegistry);
-				return true;
-			} else return false;
-		}
-
-		public void freeze() {
-			this.frozen = true;
-		}
-
-		public boolean getFrozen() {
-			return this.frozen;
+			this.registry.clear();
+			this.registry.putAll(updatedRegistry);
+			return true;
 		}
 
 		public B get(A id) {
@@ -93,11 +82,9 @@ public class RegistryTypes {
 		}
 
 		public boolean setRegistry(A updatedDefaultId, Map<A, B> updatedRegistry) {
-			if (!this.frozen) {
-				setDefaultId(updatedDefaultId);
-				setRegistry(updatedRegistry);
-				return true;
-			} else return false;
+			setDefaultId(updatedDefaultId);
+			setRegistry(updatedRegistry);
+			return true;
 		}
 	}
 }

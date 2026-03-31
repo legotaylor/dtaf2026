@@ -120,7 +120,7 @@ public class BoarEntity extends AnimalEntity implements ItemSteerable {
 
 	public void readCustomData(ReadView view) {
 		super.readCustomData(view);
-		setVariant(BoarVariants.variants.getOrDefaultId(Identifier.of(view.getString("Variant", Data.idOf("temperate").toString()))));
+		setVariant(BoarVariants.getVariants(this.getWorld().isClient).getOrDefaultId(Identifier.of(view.getString("Variant", Data.idOf("temperate").toString()))));
 	}
 
 	public void writeCustomData(WriteView view) {
@@ -137,7 +137,7 @@ public class BoarEntity extends AnimalEntity implements ItemSteerable {
 	}
 
 	public BoarVariant getVariantData() {
-		return BoarVariants.variants.getOrDefault(getVariant(), BoarVariants.variants.getDefault());
+		return BoarVariants.getVariants(this.getWorld().isClient).getOrDefault(getVariant(), BoarVariants.getVariants(this.getWorld().isClient).getDefault());
 	}
 
 	@Nullable

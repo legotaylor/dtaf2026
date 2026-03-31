@@ -158,7 +158,7 @@ public class JunglefowlEntity extends AnimalEntity {
 
 	public void readCustomData(ReadView view) {
 		super.readCustomData(view);
-		setVariant(JunglefowlVariants.variants.getOrDefaultId(Identifier.of(view.getString("Variant", Data.idOf("red").toString()))));
+		setVariant(JunglefowlVariants.getVariants(this.getWorld().isClient).getOrDefaultId(Identifier.of(view.getString("Variant", Data.idOf("red").toString()))));
 	}
 
 	public void writeCustomData(WriteView view) {
@@ -175,7 +175,7 @@ public class JunglefowlEntity extends AnimalEntity {
 	}
 
 	public JunglefowlVariant getVariantData() {
-		return JunglefowlVariants.variants.getOrDefault(getVariant(), JunglefowlVariants.variants.getDefault());
+		return JunglefowlVariants.getVariants(this.getWorld().isClient).getOrDefault(getVariant(), JunglefowlVariants.getVariants(this.getWorld().isClient).getDefault());
 	}
 
 	@Nullable

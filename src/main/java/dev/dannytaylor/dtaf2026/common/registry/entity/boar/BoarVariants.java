@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.mojang.datafixers.DataFixUtils;
 import com.mojang.serialization.JsonOps;
+import dev.dannytaylor.dtaf2026.client.registry.entity.ClientVariantRegistries;
 import dev.dannytaylor.dtaf2026.common.data.Data;
 import dev.dannytaylor.dtaf2026.common.util.JsonResourceLoader;
 import dev.dannytaylor.dtaf2026.common.util.RegistryTypes;
@@ -32,7 +33,11 @@ import java.util.*;
 import java.util.stream.Stream;
 
 public class BoarVariants extends JsonResourceLoader implements IdentifiableResourceReloadListener {
-	public static final RegistryTypes.VariantRegistry<Identifier, BoarVariant> variants;
+	private static final RegistryTypes.VariantRegistry<Identifier, BoarVariant> variants;
+
+	public static RegistryTypes.VariantRegistry<Identifier, BoarVariant> getVariants(boolean isClient) {
+		return isClient ? ClientVariantRegistries.instance.boarVariants : variants;
+	}
 
 	static {
 		variants = new RegistryTypes.VariantRegistry<>(Data.idOf("temperate"));
@@ -97,23 +102,17 @@ public class BoarVariants extends JsonResourceLoader implements IdentifiableReso
 
 	@Override
 	protected void apply(Map<Identifier, JsonElement> prepared, ResourceManager manager, Profiler profiler) {
-		if (!variants.getFrozen()) {
-			Map<Identifier, BoarVariant> variants = getDefault();
-			for (Map.Entry<Identifier, JsonElement> entry : prepared.entrySet()) {
-				Identifier resourceId = entry.getKey();
-				try {
-					BoarVariant variant = BoarVariant.codec.parse(JsonOps.INSTANCE, entry.getValue()).result().orElseThrow(() -> new IllegalStateException("Failed to decode boar variant: " + resourceId));
-					variants.put(resourceId, variant);
-				} catch (Exception error) {
-					Data.getLogger().error("Failed to parse boar variant {}: ", resourceId, error);
-				}
+		Map<Identifier, BoarVariant> variants = getDefault();
+		for (Map.Entry<Identifier, JsonElement> entry : prepared.entrySet()) {
+			Identifier resourceId = entry.getKey();
+			try {
+				BoarVariant variant = BoarVariant.codec.parse(JsonOps.INSTANCE, entry.getValue()).result().orElseThrow(() -> new IllegalStateException("Failed to decode boar variant: " + resourceId));
+				variants.put(resourceId, variant);
+			} catch (Exception error) {
+				Data.getLogger().error("Failed to parse boar variant {}: ", resourceId, error);
 			}
-			setRegistry(variants);
 		}
-	}
-
-	private void setRegistry(Map<Identifier, BoarVariant> variants) {
-		if (BoarVariants.variants.setRegistry(variants)) BoarVariants.variants.freeze();
+		BoarVariants.variants.setRegistry(variants);
 	}
 
 	@Override

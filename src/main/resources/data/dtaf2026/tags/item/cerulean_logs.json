@@ -1,6 +1,10 @@
 {
 	"values": [
 		"dtaf2026:cerulean_log",
-		"dtaf2026:cerulean_wood"
+		"dtaf2026:stripped_cerulean_log",
+		"dtaf2026:twice_stripped_cerulean_log",
+		"dtaf2026:cerulean_wood",
+		"dtaf2026:stripped_cerulean_wood",
+		"dtaf2026:twice_stripped_cerulean_wood"
 	]
 }

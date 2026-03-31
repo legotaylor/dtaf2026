@@ -14,7 +14,6 @@ import dev.dannytaylor.dtaf2026.common.registry.entity.boar.BoarVariants;
 import dev.dannytaylor.dtaf2026.common.registry.entity.junglefowl.JunglefowlVariants;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -31,22 +30,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NetworkingRegistry {
+	public static final Identifier request;
 	public static final Identifier variants;
 	public static final Identifier creditsScreen;
 	public static final Identifier worldEvent;
 
 	static {
+		request = Data.idOf("request");
 		variants = Data.idOf("variants");
 		creditsScreen = Data.idOf("credits_screen");
 		worldEvent = Data.idOf("world_event");
 	}
 
 	public static void bootstrap() {
+		PayloadTypeRegistry.playC2S().register(RequestC2SPacket.id, RequestC2SPacket.packetCodec);
 		PayloadTypeRegistry.playS2C().register(VariantsS2CPacket.id, VariantsS2CPacket.packetCodec);
 		PayloadTypeRegistry.playS2C().register(CreditsScreenS2CPacket.id, CreditsScreenS2CPacket.packetCodec);
 		PayloadTypeRegistry.playS2C().register(EventS2CPacket.id, EventS2CPacket.packetCodec);
-		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> sendJunglefowlVariants(handler.player));
-		ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, manager, success) -> sendJunglefowlVariants(server));
+		ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, manager, success) -> sendVariants(server));
+
+		ServerPlayNetworking.registerGlobalReceiver(RequestC2SPacket.id, (payload, context) -> {
+			Data.getLogger().info("Received request from {} with identifier of '{}'!", context.player().getNameForScoreboard(), payload.requestId());
+			if (payload.requestId().equals(NetworkingRegistry.variants)) {
+				sendVariants(context.player());
+			}
+		});
 	}
 
 	public static void sendCreditsScreen(ServerPlayerEntity player, long ms) {
@@ -66,13 +74,13 @@ public class NetworkingRegistry {
 		}
 	}
 
-	public static void sendJunglefowlVariants(MinecraftServer server) {
-		server.getPlayerManager().getPlayerList().forEach(NetworkingRegistry::sendJunglefowlVariants);
+	public static void sendVariants(MinecraftServer server) {
+		server.getPlayerManager().getPlayerList().forEach(NetworkingRegistry::sendVariants);
 	}
 
-	public static void sendJunglefowlVariants(ServerPlayerEntity player) {
+	public static void sendVariants(ServerPlayerEntity player) {
 		try {
-			ServerPlayNetworking.send(player, new VariantsS2CPacket(JunglefowlVariants.variants.getRegistry(), BoarVariants.variants.getRegistry()));
+			ServerPlayNetworking.send(player, new VariantsS2CPacket(JunglefowlVariants.getVariants(false).getRegistry(), BoarVariants.getVariants(false).getRegistry()));
 		} catch (Exception error) {
 			Data.getLogger().warn("Caught error in junglefowl variants packet to {}: {}", player.getGameProfile().getName(), error);
 		}
