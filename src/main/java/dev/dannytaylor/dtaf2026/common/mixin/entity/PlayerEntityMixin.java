@@ -8,15 +8,12 @@
 package dev.dannytaylor.dtaf2026.common.mixin.entity;
 
 import dev.dannytaylor.dtaf2026.common.registry.effect.StatusEffectRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.entity.AttributeModifierRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.entity.SomniumRealeLivingEntity;
 import dev.dannytaylor.dtaf2026.common.registry.worldgen.DimensionRegistry;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -82,7 +79,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 				}
 			}
 		}
-		this.dtaf2026$updateSomniumReale();
 	}
 
 	@Unique
@@ -128,11 +124,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 			}
 		}
 		return null;
-	}
-
-	@Unique
-	private void dtaf2026$updateSomniumReale() {
-		((SomniumRealeLivingEntity)this).dtaf2026$updateAttribute(EntityAttributes.SCALE, AttributeModifierRegistry.somniumRealeScale, () -> ((SomniumRealeLivingEntity)this).dtaf2026$isInAbstractSomniumReale());
 	}
 
 	@ModifyVariable(method = "applyEnchantmentCosts", at = @At("HEAD"), index = 2, argsOnly = true)

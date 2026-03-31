@@ -129,7 +129,6 @@ public class FleeciferFight {
 				this.cachedEntity = null;
 				this.bossBar.setVisible(false);
 			}
-			this.showBossBarPredicate = EntityPredicates.VALID_ENTITY.and(EntityPredicates.maxDistance(this.cachedEntity.getX(), this.cachedEntity.getY(), this.cachedEntity.getZ(), 192.0F));
 			this.updateCriteria();
 			this.updateTicks = 0;
 		}
@@ -186,10 +185,15 @@ public class FleeciferFight {
 	}
 
 	public void updateFight(FleeciferBossEntity fleecifer) {
-		if (fleecifer.getUuid().equals(this.getUuid())) {
-			this.bossBar.setPercent(fleecifer.getHealth() / fleecifer.getMaxHealth());
-			validatePhases();
-		}
+		this.cachedEntity = fleecifer;
+		this.uuid = fleecifer.getUuid();
+		updateLocation(fleecifer);
+		this.bossBar.setPercent(fleecifer.getHealth() / fleecifer.getMaxHealth());
+		validatePhases();
+	}
+
+	public void updateLocation(FleeciferBossEntity fleecifer) {
+		this.showBossBarPredicate = EntityPredicates.VALID_ENTITY.and(EntityPredicates.maxDistance(fleecifer.getX(), fleecifer.getY(), fleecifer.getZ(), 192.0F));
 	}
 
 	public UUID getUuid() {

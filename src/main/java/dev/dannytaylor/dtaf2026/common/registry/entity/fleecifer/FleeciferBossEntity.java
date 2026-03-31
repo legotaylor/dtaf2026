@@ -82,7 +82,7 @@ public class FleeciferBossEntity extends HostileEntity {
 	}
 
 	public static int getPhase(FleeciferBossEntity fleecifer) {
-		return fleecifer.dataTracker.get(phase);
+		return fleecifer != null ? fleecifer.dataTracker.get(phase) : 0;
 	}
 
 	public boolean hasBeamTarget() {

@@ -8,17 +8,14 @@
 package dev.dannytaylor.dtaf2026.common.mixin.entity;
 
 import dev.dannytaylor.dtaf2026.common.registry.effect.StatusEffectRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.entity.AttributeModifierRegistry;
-import dev.dannytaylor.dtaf2026.common.registry.entity.SomniumRealeLivingEntity;
 import dev.dannytaylor.dtaf2026.common.registry.tagkey.TagRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -27,11 +24,10 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin extends Entity implements SomniumRealeLivingEntity {
+public abstract class LivingEntityMixin extends Entity {
 	@Shadow public abstract boolean hasStatusEffect(RegistryEntry<StatusEffect> effect);
 	@Shadow protected abstract void playBlockFallSound();
 	@Shadow @Nullable public abstract EntityAttributeInstance getAttributeInstance(RegistryEntry<EntityAttribute> attribute);
@@ -48,38 +44,31 @@ public abstract class LivingEntityMixin extends Entity implements SomniumRealeLi
 		}
 	}
 
-	@Inject(method = "tick", at = @At("RETURN"))
-	public void dtaf2026$tick(CallbackInfo ci) {
-		this.dtaf2026$updateStatusEffects();
+	@Inject(method = "getScale", at = @At("RETURN"), cancellable = true)
+	public void dtaf2026$getScale(CallbackInfoReturnable<Float> cir) {
+		cir.setReturnValue(this.dtaf2026$updateScales(cir.getReturnValue()));
 	}
 
 	@Unique
-	private void dtaf2026$updateStatusEffects() {
-		dtaf2026$updateAttribute(EntityAttributes.SCALE, AttributeModifierRegistry.growth, StatusEffectRegistry.growth);
-		dtaf2026$updateAttribute(EntityAttributes.SCALE, AttributeModifierRegistry.shrink, StatusEffectRegistry.shrink);
+	private float dtaf2026$updateScales(float scale) {
+		scale = dtaf2026$updateScale(scale, -0.35F, ((LivingEntity) (Object) this) instanceof PlayerEntity && this.dtaf2026$isInAbstractSomniumReale());
+		scale = dtaf2026$updateScale(scale, 0.35F, StatusEffectRegistry.growth);
+		scale = dtaf2026$updateScale(scale, -0.35F, StatusEffectRegistry.shrink);
+		return scale;
 	}
 
-	public void dtaf2026$updateAttribute(RegistryEntry<EntityAttribute> attribute, EntityAttributeModifier modifier, ShouldApply shouldApply) {
-		EntityAttributeInstance entityAttributeInstance = this.getAttributeInstance(attribute);
-		if (entityAttributeInstance != null) {
-			entityAttributeInstance.removeModifier(modifier.id());
-			if (shouldApply.get()) entityAttributeInstance.addTemporaryModifier(modifier);
-		}
+	@Unique
+	public float dtaf2026$updateScale(float scale, float add, boolean shouldApply) {
+		return shouldApply ? scale + add : scale;
 	}
 
-	public void dtaf2026$updateAttribute(RegistryEntry<EntityAttribute> attribute, EntityAttributeModifier modifier, RegistryEntry<StatusEffect> statusEffect) {
-		dtaf2026$updateAttribute(attribute, modifier, () -> this.hasStatusEffect(statusEffect));
+	@Unique
+	public float dtaf2026$updateScale(float scale, float add, RegistryEntry<StatusEffect> statusEffect) {
+		return dtaf2026$updateScale(scale, add, this.hasStatusEffect(statusEffect));
 	}
 
+	@Unique
 	public boolean dtaf2026$isInAbstractSomniumReale() {
 		return TagRegistry.WorldGen.Biome.isIn(this.getWorld(), this.getBlockPos(), TagRegistry.WorldGen.Biome.abstractSomniumReale);
-	}
-
-	public boolean dtaf2026$isInSomniumReale() {
-		return TagRegistry.WorldGen.Biome.isIn(this.getWorld(), this.getBlockPos(), TagRegistry.WorldGen.Biome.somniumReale);
-	}
-
-	public boolean dtaf2026$isInTheTerrorlands() {
-		return TagRegistry.WorldGen.Biome.isIn(this.getWorld(), this.getBlockPos(), TagRegistry.WorldGen.Biome.theTerrorlands);
 	}
 }
