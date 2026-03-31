@@ -23,6 +23,10 @@
 - Added Fleecifer Boss Fight
 	- You will need to prepare for this...
 
+> **Note:** When you are locating the portal, you may need to dig around after you get the achievement.  
+> It's probably a few blocks down, and offset on the x/z.  
+> This will be fixed in future, I just didn't have time to make it perfect.
+
 ## Technical Features
 
 - Added two new sizes of stars, and updated the star shader for the new dimensions.
