@@ -1,0 +1,32 @@
+{
+	"parent": "minecraft:recipes/root",
+	"criteria": {
+		"has_fleecifer_wool": {
+			"conditions": {
+				"items": [
+					{
+						"items": "dtaf2026:fleecifer_wool"
+					}
+				]
+			},
+			"trigger": "minecraft:inventory_changed"
+		},
+		"has_the_recipe": {
+			"conditions": {
+				"recipe": "dtaf2026:fleecifer_eye"
+			},
+			"trigger": "minecraft:recipe_unlocked"
+		}
+	},
+	"requirements": [
+		[
+			"has_the_recipe",
+			"has_fleecifer_wool"
+		]
+	],
+	"rewards": {
+		"recipes": [
+			"dtaf2026:fleecifer_eye"
+		]
+	}
+}

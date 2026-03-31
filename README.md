@@ -15,8 +15,8 @@ some ways feel more real than ever.
 
 ## Requirements  
 - Minecraft 1.21.8
-- Fabric Loader >=0.18.4
-- Fabric API >=0.136.1+1.21.8
+- Fabric Loader
+- Fabric API
 
 > The current release doesn't have every recipe findable in the Recipe Book before crafting them. This will be added in
 > the future. In the meantime I suggest using a recipe search mod such as [REI](https://modrinth.com/mod/rei).

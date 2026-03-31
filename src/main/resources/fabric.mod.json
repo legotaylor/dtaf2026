@@ -19,7 +19,7 @@
 	"icon": "assets/${modId}/icon.png",
 	"depends": {
 		"minecraft": "${mc}",
-		"fabric-api": ">=${fapi}"
+		"fabric-api": "*"
 	},
 	"suggests": {
 	},
