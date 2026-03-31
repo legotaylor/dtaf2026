@@ -11,24 +11,25 @@ import com.mojang.authlib.GameProfile;
 import dev.dannytaylor.dtaf2026.client.contributor.Contributor;
 import dev.dannytaylor.dtaf2026.client.contributor.ContributorPlayerEntity;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.world.ClientWorld;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ClientPlayerEntity.class)
-public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity implements ContributorPlayerEntity {
+@Mixin(AbstractClientPlayerEntity.class)
+public abstract class ClientPlayerEntityMixin extends PlayerEntity implements ContributorPlayerEntity {
 	@Unique
 	private boolean isBlinking;
 	@Unique
 	private int prevBlink;
 
-	public ClientPlayerEntityMixin(ClientWorld world, GameProfile profile) {
+	public ClientPlayerEntityMixin(World world, GameProfile profile) {
 		super(world, profile);
 	}
+
 
 	@Override
 	public boolean dtaf2026$getBlinking() {
