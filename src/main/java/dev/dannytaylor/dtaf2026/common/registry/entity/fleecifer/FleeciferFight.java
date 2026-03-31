@@ -119,19 +119,17 @@ public class FleeciferFight {
 	public void tick() {
 		if (this.updateTicks++ >= 20) {
 			this.updatePlayers();
-			if (this.cachedEntity == null) {
-				if (this.world.getEntity(this.getUuid()) instanceof FleeciferBossEntity fleecifer) {
-					this.cachedEntity = fleecifer;
-					int phase = FleeciferBossEntity.getPhase(fleecifer);
-					this.bossBar.setName(Text.translatable("entity.dtaf2026.fleecifer_boss" + (phase > 0 ? "." + phase : ""), Text.translatable("entity.dtaf2026.fleecifer_boss")));
-					this.bossBar.setColor(Arrays.stream(BossBar.Color.values()).toList().get(Math.min(phase, BossBar.Color.values().length - 1)));
-					this.bossBar.setVisible(true);
-				} else {
-					this.cachedEntity = null;
-					this.bossBar.setVisible(false);
-				}
+			if (this.world.getEntity(this.getUuid()) instanceof FleeciferBossEntity fleecifer) {
+				this.cachedEntity = fleecifer;
+				int phase = FleeciferBossEntity.getPhase(fleecifer);
+				this.bossBar.setName(Text.translatable("entity.dtaf2026.fleecifer_boss" + (phase > 0 ? "." + phase : ""), Text.translatable("entity.dtaf2026.fleecifer_boss")));
+				this.bossBar.setColor(Arrays.stream(BossBar.Color.values()).toList().get(Math.min(phase, BossBar.Color.values().length - 1)));
+				this.bossBar.setVisible(true);
+			} else {
+				this.cachedEntity = null;
+				this.bossBar.setVisible(false);
 			}
-			this.showBossBarPredicate = EntityPredicates.VALID_ENTITY.and(EntityPredicates.maxDistance(cachedEntity.getX(), cachedEntity.getY(), cachedEntity.getZ(), 192.0F));
+			this.showBossBarPredicate = EntityPredicates.VALID_ENTITY.and(EntityPredicates.maxDistance(this.cachedEntity.getX(), this.cachedEntity.getY(), this.cachedEntity.getZ(), 192.0F));
 			this.updateCriteria();
 			this.updateTicks = 0;
 		}
